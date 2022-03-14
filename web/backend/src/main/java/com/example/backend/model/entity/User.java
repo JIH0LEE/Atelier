@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Data
@@ -24,9 +25,25 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
+
     private String password;
+
     private String role;
+
+    private String nickname;
+
+    private String profile;
+
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<OnlineExhibition> onlineExhibitions = new ArrayList<>();
+
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<Like> likes = new ArrayList<>();
 
     private boolean enabled;
     @Override
