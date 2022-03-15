@@ -1,10 +1,7 @@
 package com.example.backend.model.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -40,12 +37,17 @@ public class OnlineExhibition {
 
     private String theme;
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    @ToString.Exclude
+    private User user;
+
+    @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
-    private List<Like> likes = new ArrayList<>();
+    @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<Good> likes = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Content> contents = new ArrayList<>();
 }

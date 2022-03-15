@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name="user")
 public class User implements UserDetails {
 
 
@@ -36,14 +37,14 @@ public class User implements UserDetails {
 
     private String profile;
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
-    private List<OnlineExhibition> onlineExhibitions = new ArrayList<>();
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<OnlineExhibition> onlineExhibition = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
-    private List<Like> likes = new ArrayList<>();
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<Good> likes = new ArrayList<>();
 
     private boolean enabled;
     @Override

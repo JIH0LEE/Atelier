@@ -20,10 +20,12 @@ public class Comment {
     private LocalDateTime description;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="online_exhibition_id")
     @ToString.Exclude
     private OnlineExhibition onlineExhibition;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id")
     @ToString.Exclude
     private User user;
 }

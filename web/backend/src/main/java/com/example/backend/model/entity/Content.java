@@ -19,9 +19,12 @@ public class Content {
 
     private String image;
 
+
     private String description;
 
+
     @ManyToOne(fetch=FetchType.LAZY,cascade = { CascadeType.ALL})
+    @JoinColumn(name="online_exhibition_id")
     @ToString.Exclude
     private OnlineExhibition onlineExhibition;
 }
