@@ -28,19 +28,25 @@ public class UserService implements UserDetailsService {
 
     public User makeUser(RegisterDto registerDto){
 
+        System.out.println(registerDto);
         String username= registerDto.getUsername();
+        String nickname= registerDto.getNickname();
         String password1= registerDto.getPassword1();
         String password2=registerDto.getPassword2();
 
         if(userRepository.existsUserByUsername(username)){
             throw new IllegalArgumentException("이미 가입된 이메일 입니다.");
         }
+        if(userRepository.existsUserByNickname(nickname)){
+            throw new IllegalArgumentException("이미 존재하는 닉네임 입니다.");
+        }
         if(!passwordEncoder.matches(password1, password2)){
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         User newUser=User.builder()
-                .username(registerDto.getUsername())
-                .password(passwordEncoder.encode(registerDto.getPassword1()))
+                .username(username)
+                .nickname(nickname)
+                .password(passwordEncoder.encode(password1))
                 .role("ROLE_USER")
                 .enabled(true)
                 .build();

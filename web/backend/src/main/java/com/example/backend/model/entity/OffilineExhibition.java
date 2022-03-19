@@ -6,11 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,13 +28,10 @@ public class OffilineExhibition {
 
     private LocalDateTime endDate;
 
-    private String key1;
-
-    private String key2;
-
-    private String key3;
-
     private String image;
 
     private String link;
+
+    @OneToMany(mappedBy = "offlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    private List<Keyword> keywords = new ArrayList<>();
 }

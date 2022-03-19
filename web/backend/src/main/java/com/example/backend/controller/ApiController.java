@@ -49,8 +49,8 @@ public class ApiController {
         }
     }
 
-    @GetMapping("/test")
-    private User test(Principal principal){
+    @GetMapping("/user/user-info")
+    private User UserInfo(Principal principal){
         return userService.getUser(principal.getName());
     }
 }

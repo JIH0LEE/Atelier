@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String username;
 
     private String password;
@@ -36,6 +38,8 @@ public class User implements UserDetails {
     private String nickname;
 
     private String profile;
+
+    private boolean emailAuth=false;
 
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<OnlineExhibition> onlineExhibition = new ArrayList<>();
