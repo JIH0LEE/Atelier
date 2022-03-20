@@ -9,12 +9,28 @@ spring:
         format_sql: true
     generate-ddl: false
     hibernate:
-#      ddl-auto: create
+      ddl-auto: create
   datasource:
     url: jdbc:mysql://atelier.caejnedfdhpl.ap-northeast-2.rds.amazonaws.com/atelier
     username: admin
     password: dltmddusqkqh12
     initialization-mode: always
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: caucse.atelier@gmail.com
+    password: dltmddusqkqh12@
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK

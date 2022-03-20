@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.dto.LoginDto;
 import com.example.backend.model.dto.RegisterDto;
+import com.example.backend.model.entity.EmailConfirmationToken;
 import com.example.backend.model.entity.User;
 import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailConfirmationTokenService emailConfirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,13 +30,18 @@ public class UserService implements UserDetailsService {
 
     public User makeUser(RegisterDto registerDto){
 
-        System.out.println(registerDto);
         String username= registerDto.getUsername();
         String nickname= registerDto.getNickname();
         String password1= registerDto.getPassword1();
         String password2=registerDto.getPassword2();
 
         if(userRepository.existsUserByUsername(username)){
+            User user=userRepository.getUserByUsername(username);
+
+            if(!user.getEmailAuth()){
+                emailConfirmationTokenService.createEmailConfirmationToken(user.getId(), user.getUsername());
+                throw new IllegalArgumentException("이메일 인증이 완료되지 않았습니다.새로운 인증 메일을 보냅니다.");
+            }
             throw new IllegalArgumentException("이미 가입된 이메일 입니다.");
         }
         if(userRepository.existsUserByNickname(nickname)){
@@ -50,8 +57,11 @@ public class UserService implements UserDetailsService {
                 .role("ROLE_USER")
                 .enabled(true)
                 .build();
+
         return userRepository.save(newUser);
     }
+
+
     public User getValidUser(LoginDto loginDto){
         String username= loginDto.getUsername();
         String password=loginDto.getPassword();
@@ -60,10 +70,27 @@ public class UserService implements UserDetailsService {
         if (!passwordEncoder.matches(password, target.getPassword())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
+        if(!target.getEmailAuth()){
+            emailConfirmationTokenService.createEmailConfirmationToken(target.getId(), target.getUsername());
+            throw new IllegalArgumentException("이메일 인증이 완료되지 않았습니다.새로운 인증 메일을 보냅니다.");
+        }
         return target;
 
     }
-
+    public boolean confirmEmail(String token) {
+        try{
+            EmailConfirmationToken findConfirmationToken = emailConfirmationTokenService.findByIdAndExpirationDateAfterAndExpired(token);
+            System.out.println(findConfirmationToken);
+            User target = userRepository.findUserById(findConfirmationToken.getUserId());
+            findConfirmationToken.useToken();	// 토큰 만료 로직을 구현해주면 된다. ex) expired 값을 true로 변경
+            target.setEmailAuth(true);	// 유저의 이메일 인증 값 변경 로직을 구현해주면 된다. ex) emailVerified 값을 true로 변경
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
     public User getUser(String username){
         return userRepository.getUserByUsername(username);
     }

@@ -41,6 +41,13 @@ public class User implements UserDetails {
 
     private boolean emailAuth=false;
 
+    public boolean getEmailAuth(){
+        return emailAuth;
+    }
+    public void setEmailAuth(boolean auth){
+        this.emailAuth=auth;
+    }
+
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<OnlineExhibition> onlineExhibition = new ArrayList<>();
 
