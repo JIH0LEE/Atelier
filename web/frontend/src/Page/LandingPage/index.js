@@ -6,31 +6,35 @@ import { useState } from "react";
 const LandingPage = () => {
 
 
-  const[num,setNum]=useState(0);
-  const logout=()=>{
-      window.localStorage.setItem('isLogin', false);
-      
-      window.localStorage.removeItem('token');
-      removeToken();
-      setNum(num+1);
-      
-      
-      
+  const [num, setNum] = useState(0);
+  const logout = () => {
+    window.localStorage.setItem('isLogin', false);
+
+    window.localStorage.removeItem('token');
+    removeToken();
+    setNum(num + 1);
+
+
+
 
   }
 
   return (
-    <>
-          <Button href='/sign-up'>회원가입 페이지</Button>
-          <Button href='/sign-in'>로그인 페이지</Button>
-          <Button href='/user-info'>유저 정보</Button>
-          {
-            isLogin()
-        ? <Button onClick={logout}>로그아웃</Button>
-        : <div></div>
-      }
-         
-    </>
+    <div >
+      <div style={{ fontSize: "50px" }}>Atelier</div>
+      <div style={{ display: "inline-block", float: "right" }}>
+        <Button href='/sign-up' variant="outline-primary" style={{ margin: "10px" }}>Sign-up</Button>
+        <Button href='/sign-in' variant="outline-primary" style={{ margin: "10px" }}>Sign-in</Button>
+        <Button href='/user-info' variant="outline-primary" style={{ margin: "10px" }}>유저 정보</Button>
+        {
+          isLogin()
+            ? <Button onClick={logout} style={{ margin: "10px" }}>로그아웃</Button>
+            : <div></div>
+        }
+      </div>
+
+
+    </div>
   );
 };
 
