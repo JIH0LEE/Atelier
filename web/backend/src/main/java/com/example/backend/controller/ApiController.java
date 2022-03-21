@@ -54,12 +54,6 @@ public class ApiController {
         }
     }
 
-//    @PostMapping("/email-test")
-//    private String EmailSend(@RequestBody EmailConfirmDto emailConfirmDto){
-//
-//        emailConfirmationTokenService.createEmailConfirmationToken(emailConfirmDto.getUserId(),emailConfirmDto.getEmail());
-//        return "ok";
-//    }
 
     @GetMapping("/confirm-email")
     public RedirectView viewConfirmEmail(@RequestParam  String token){
@@ -67,7 +61,7 @@ public class ApiController {
         boolean result = userService.confirmEmail(token);
         if (result){
             RedirectView redirectView = new RedirectView();
-            redirectView.setUrl("http://localhost:3000/");
+            redirectView.setUrl("http://localhost:3000/welcome");
             return redirectView;
         }
         else{
