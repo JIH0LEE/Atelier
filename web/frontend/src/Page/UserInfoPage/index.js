@@ -13,8 +13,10 @@ const UserInfoPage = () => {
         if(isLogin()){
             //로컬 storage를 이용한 방법
             // axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-            axios.get("/api/test",header).then(
-            (res)=>setUsername(res.data.username)
+            axios.get("/api/user/user-info",header).then(
+            (res)=>{
+              setUsername(res.data.username)
+            }
         );
         }
       }, []);
