@@ -8,6 +8,8 @@ import LandingPage from './Page/LandingPage';
 import LoginPage from './Page/LoginPage';
 import UserInfoPage from './Page/UserInfoPage';
 import RegisterPage from './Page/RegisterPage'
+import Header from './Component/Header';
+import Navigation from './Component/Navigation';
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -18,6 +20,8 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <Header></Header>
+      <Navigation></Navigation>
       <Routes>
         <Route exact path="/" element={<LandingPage/>} />
         <Route path="/sign-in" element={<LoginPage/>} />

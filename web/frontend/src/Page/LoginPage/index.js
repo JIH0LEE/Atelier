@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setCookie } from "../../utils/cookies";
 import "./style.css"
 const LoginPage = (props) => {
