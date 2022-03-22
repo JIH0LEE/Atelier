@@ -58,7 +58,6 @@ const LoginPage = () => {
 
 
         <Container className="LoginContainer">
-            <div>Atelier</div>
             <div>Sign-up</div>
             <input onChange={usernameChange} onKeyPress={autoPress} type='email' placeholder="User Name" style={{ margin: "10px" }} />
             <input onChange={nicknameChange} onKeyPress={autoPress} type='text' placeholder="Nick Name" style={{ margin: "10px" }} />
