@@ -1,46 +1,37 @@
 .UserInfo{
-    width: 1600px;
+
     display: block;
-    margin-top:50px;
-    height: 1300px;
+    height: 1000px;
     padding: 15px;
     border: 20px #0d6efd;
     border-style: ridge;
 }
 
 .UserInfo .inner1{
-    width: 1200px;
     display: block;
-    height: 450px;
     padding: 15px;
-    
-
 }
 .UserInfo .inner1 .row{
-    
-    width: 1200px;
-    height: 500px;
-
+    display: flex;
 }
 .UserInfo .inner1 .row .col1{
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
-
 }
 .UserInfo .inner1 .row .col2{
     margin:auto;
     justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
-
 }
 .UserInfo .inner2{
-    width: 1200px;
+
     display: block;
-    height: 700px;
-    padding: 15px;
+
+
     
 
 }

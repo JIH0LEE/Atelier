@@ -3,7 +3,7 @@ import React, { useState,useEffect } from "react";
 import { Navigate } from 'react-router-dom';
 import isLogin from "../../utils/isLogin";
 import { header } from "../../config";
-import { Col, Container, Figure, Row,Button } from "react-bootstrap";
+import { Col, Container, Figure, Row,Button, FormLabel } from "react-bootstrap";
 import "./style.css"
 const UserInfoPage = () => {
     const[username,setUsername]=useState("");
@@ -34,7 +34,7 @@ const UserInfoPage = () => {
       }
 
   return (    
-          <Container className="UserInfo" >
+          <Container className="mt-5 UserInfo" >
             <Container style={{ fontSize: "50px" }}>User Info</Container>
             <Container className="inner1">
               <Row className="row">
@@ -45,10 +45,15 @@ const UserInfoPage = () => {
                   height={300}
                   src="./logo192.png"/>
                 </Figure>
-                  <Button style={{width:"300"}}>사진 수정하기</Button>
+                  <Button style={{width:"300px"}}>사진 수정하기</Button>
                 </Col>
-                
-                <Col className="col2">
+                <Col className="my-3 col2">
+                  
+                    <FormLabel>email</FormLabel>
+                    <input className="mt-1 mb-5 h-10  w-75"></input>
+                  
+                  <FormLabel>nickname</FormLabel>
+                  <input style={{alignContent:"center"}} className="mt-1 mb-5 h-10 w-75"></input>
                 </Col>
               </Row>
               <Container style={{ fontSize: "50px" }}>My Gallery</Container>
