@@ -20,10 +20,10 @@ const LoginPage = () => {
 
             .then(
                 (res) => {
-                    if(res.data.success){
+                    if (res.data.success) {
                         navigate('/email-send');
                     }
-                    else{
+                    else {
                         alert(res.data.message);
                     }
                 }

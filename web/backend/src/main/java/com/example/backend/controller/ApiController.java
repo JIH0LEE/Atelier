@@ -74,4 +74,9 @@ public class ApiController {
     private User UserInfo(Principal principal){
         return userService.getUser(principal.getName());
     }
+
+    @PostMapping("/user/test")
+    private String Test(Principal principal){
+        return principal.getName();
+    }
 }
