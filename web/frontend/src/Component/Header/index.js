@@ -2,16 +2,15 @@ import { Button, Row, Col } from 'react-bootstrap'
 import React from 'react'
 import { removeToken } from '../../utils/cookies'
 import isLogin from '../../utils/isLogin'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { header_theme, button_theme } from '../../Style/theme'
 const Header = () => {
   const navigate = useNavigate()
-  const [num, setNum] = useState(0)
   const logout = () => {
     window.localStorage.setItem('isLogin', false)
     window.localStorage.removeItem('token')
     removeToken()
-    setNum(num + 1)
+    navigate('/')
   }
 
   const goToMain = () => {
@@ -19,11 +18,14 @@ const Header = () => {
   }
 
   return (
-    <div>
+    <div style={header_theme}>
       <Row>
         <Col />
         <Col>
-          <div onClick={goToMain} style={{ fontSize: '50px' }}>
+          <div
+            onClick={goToMain}
+            style={{ fontSize: '50px', color: '#F3CA4D' }}
+          >
             Atelier
           </div>
         </Col>
@@ -31,31 +33,19 @@ const Header = () => {
           <div style={{ display: 'inline-block', float: 'right' }}>
             {isLogin() ? (
               <>
-                <Button
-                  href="/user-info"
-                  variant="outline-primary"
-                  style={{ margin: '10px' }}
-                >
-                  유저 정보
+                <Button href="/user-info" variant="lg" style={button_theme}>
+                  User Info
                 </Button>
-                <Button onClick={logout} style={{ margin: '10px' }}>
-                  로그아웃
+                <Button onClick={logout} variant="lg" style={button_theme}>
+                  logout
                 </Button>
               </>
             ) : (
               <>
-                <Button
-                  href="/sign-up"
-                  variant="outline-primary"
-                  style={{ margin: '10px' }}
-                >
+                <Button href="/sign-up" variant="lg" style={button_theme}>
                   Sign-up
                 </Button>
-                <Button
-                  href="/sign-in"
-                  variant="outline-primary"
-                  style={{ margin: '10px' }}
-                >
+                <Button href="/sign-in" variant="lg" style={button_theme}>
                   Sign-in
                 </Button>
               </>

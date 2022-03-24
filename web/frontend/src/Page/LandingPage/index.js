@@ -1,8 +1,11 @@
 import React from 'react'
-import { removeToken } from '../../utils/cookies'
-import { useState } from 'react'
+import { Container } from 'react-bootstrap'
 const LandingPage = () => {
-  return <div>메인 페이지</div>
+  return (
+    <Container className="main-container">
+      <div>메인 페이지</div>
+    </Container>
+  )
 }
 
 export default LandingPage

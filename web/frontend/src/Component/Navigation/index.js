@@ -1,24 +1,23 @@
-import { Row, Col, Nav, Navbar, Container } from 'react-bootstrap'
+import { Row, Col, Nav, Navbar } from 'react-bootstrap'
 import React from 'react'
+
 const Navigation = () => {
   return (
     <Row>
-      <Navbar style={{ placeContent: 'center' }} bg="primary" variant="dark">
+      <Navbar style={{ placeContent: 'center', backgroundColor: '#F3CA4D' }}>
         <Col className="d-flex justify-content-center">
           <Nav>
-            <Nav.Link href="#home">메뉴1</Nav.Link>
+            <Nav.Link href="#home">Nav 1</Nav.Link>
           </Nav>
         </Col>
-
         <Col className="d-flex justify-content-center">
           <Nav>
-            <Nav.Link href="#home">메뉴2</Nav.Link>
+            <Nav.Link href="#home">Nav 2</Nav.Link>
           </Nav>
         </Col>
-
         <Col className="d-flex justify-content-center">
           <Nav>
-            <Nav.Link href="#home">메뉴3</Nav.Link>
+            <Nav.Link href="#home">Nav 3</Nav.Link>
           </Nav>
         </Col>
       </Navbar>

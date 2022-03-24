@@ -13,7 +13,7 @@ import Header from './Component/Header'
 import Navigation from './Component/Navigation'
 
 import TestPage from './Page/Test/TestPage'
-
+import background from './images/background.jpg'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -24,9 +24,15 @@ function App() {
     }
   }, [])
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
       <Header></Header>
       <Navigation></Navigation>
+
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/sign-in" element={<LoginPage />} />
