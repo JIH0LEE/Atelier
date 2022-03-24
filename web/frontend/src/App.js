@@ -1,17 +1,16 @@
-
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
-import LandingPage from './Page/LandingPage';
-import LoginPage from './Page/LoginPage';
-import UserInfoPage from './Page/UserInfoPage';
-import RegisterPage from './Page/RegisterPage';
-import EmailSend from './Page/EmailSend';
-import EmailOk from './Page/EmailOk';
-import Header from './Component/Header';
-import Navigation from './Component/Navigation';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { Route, Routes } from 'react-router-dom'
+import LandingPage from './Page/LandingPage'
+import LoginPage from './Page/LoginPage'
+import UserInfoPage from './Page/UserInfoPage'
+import RegisterPage from './Page/RegisterPage'
+import EmailSend from './Page/EmailSend'
+import EmailOk from './Page/EmailOk'
+import Header from './Component/Header'
+import Navigation from './Component/Navigation'
 
 import TestPage from './Page/Test/TestPage'
 
@@ -19,10 +18,11 @@ function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
       if (JSON.parse(window.localStorage.getItem('isLogin'))) {
-        axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
+        axios.defaults.headers.common['Authorization'] =
+          window.localStorage.getItem('token')
       }
     }
-  }, []);
+  }, [])
   return (
     <div className="App">
       <Header></Header>
@@ -37,7 +37,7 @@ function App() {
         <Route path="/test" element={<TestPage></TestPage>}></Route>
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
