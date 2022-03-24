@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
 import { useNavigate, Link } from 'react-router-dom'
 import './style.css'
 const LoginPage = () => {
@@ -44,8 +44,10 @@ const LoginPage = () => {
   }
 
   const autoPress = e => {
-    if (e.key === 'Enter') {
-      register()
+    if (!buttonCondition) {
+      if (e.key === 'Enter') {
+        register()
+      }
     }
   }
 
@@ -55,41 +57,43 @@ const LoginPage = () => {
       : false
 
   return (
-    <Container className="LoginContainer">
-      <div>Sign-up</div>
-      <input
-        onChange={usernameChange}
-        onKeyPress={autoPress}
-        type="email"
-        placeholder="Email Address"
-        style={{ margin: '10px' }}
-      />
-      <input
-        onChange={nicknameChange}
-        onKeyPress={autoPress}
-        type="text"
-        placeholder="Nick Name"
-        style={{ margin: '10px' }}
-      />
-      <input
-        onChange={passwordChange1}
-        onKeyPress={autoPress}
-        type="password"
-        placeholder="Password"
-        style={{ margin: '10px' }}
-      />
-      <input
-        onChange={passwordChange2}
-        onKeyPress={autoPress}
-        type="password"
-        placeholder="Confirm Password"
-        style={{ margin: '10px' }}
-      />
-      <Button
-        onClick={register}
-        style={{ margin: '10px' }}
-        disabled={buttonCondition}
-      >
+    <Container className="RegisterContainer">
+      <Form.Label>Sign-up</Form.Label>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            onKeyPress={autoPress}
+            onChange={usernameChange}
+            placeholder="Email Address"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Control
+            type="text"
+            onKeyPress={autoPress}
+            onChange={nicknameChange}
+            placeholder="Nick Name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword1">
+          <Form.Control
+            onChange={passwordChange1}
+            onKeyPress={autoPress}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword2">
+          <Form.Control
+            onChange={passwordChange2}
+            onKeyPress={autoPress}
+            type="password"
+            placeholder="Confirm Password"
+          />
+        </Form.Group>
+      </Form>
+      <Button onClick={register} disabled={buttonCondition}>
         Sign Up
       </Button>
       <Link to="/sign-in">이미 계정이 있으신가요?</Link>

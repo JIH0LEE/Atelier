@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
 import { useNavigate, Link } from 'react-router-dom'
 import { setCookie } from '../../utils/cookies'
 import './style.css'
@@ -23,7 +23,7 @@ const LoginPage = props => {
             `Bearer ${res.headers.auth_token}`
           )
           setCookie(`Bearer ${res.headers.auth_token}`)
-          navigate(-1)
+          navigate('/')
         } else {
           alert(res.data.message)
         }
@@ -37,35 +37,36 @@ const LoginPage = props => {
     setPassword(e.target.value)
   }
   const autoPress = e => {
-    if (e.key === 'Enter') {
-      login()
+    if (!buttonCondition) {
+      if (e.key === 'Enter') {
+        login()
+      }
     }
   }
   // console.log(username === "" || password === "" ? "isempty" : "notempty")
   const buttonCondition = username === '' || password === '' ? true : false
   return (
     <Container className="LoginContainer">
-      <div>Sign-In</div>
-      <input
-        onChange={usernameChange}
-        onKeyPress={autoPress}
-        type="email"
-        placeholder="Email Address"
-        style={{ margin: '10px' }}
-      />
-      <input
-        onChange={passwordChange}
-        onKeyPress={autoPress}
-        type="password"
-        placeholder="Password"
-        style={{ margin: '10px' }}
-      />
-      <Button
-        variant="success"
-        onClick={login}
-        style={{ margin: '10px' }}
-        disabled={buttonCondition}
-      >
+      <Form.Label>Sign-In</Form.Label>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            onKeyPress={autoPress}
+            onChange={usernameChange}
+            placeholder="Email Address"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Control
+            onChange={passwordChange}
+            onKeyPress={autoPress}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+      </Form>
+      <Button variant="success" onClick={login} disabled={buttonCondition}>
         Sign In
       </Button>
       <Link to="/sign-up">아직 계정이 없으신가요?</Link>
