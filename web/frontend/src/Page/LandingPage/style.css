@@ -1,10 +1,11 @@
 .landing-container {
   background-color: white;
-  margin-top: 10%;
-  height: 90%;
+  height: 100%;
+  width: 90%;
+  max-width: 3000px;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.75;
+  opacity: 0.8;
   border-radius: 50px;
 }

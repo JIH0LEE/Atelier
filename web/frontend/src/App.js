@@ -33,7 +33,9 @@ function App() {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         width: '100vw',
-        height: '1500px',
+        height: '2000px',
+        justifyContent: 'center',
+        alignItems:'center'
       }}
     >
       <Header></Header>

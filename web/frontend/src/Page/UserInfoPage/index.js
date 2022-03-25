@@ -14,10 +14,12 @@ import {
   FormControl,
 } from 'react-bootstrap'
 import './style.css'
-import { button_theme_long, button_theme_small_right } from '../../Style/theme'
+import { button_theme_long } from '../../Style/theme'
+import ModalButton from './ModalButton'
 const UserInfoPage = () => {
   const [username, setUsername] = useState('')
   const [nickname, setNickname] = useState('')
+  const [profile, setProfile] = useState(null)
   useEffect(() => {
     if (isLogin()) {
       //로컬 storage를 이용한 방법
@@ -42,6 +44,9 @@ const UserInfoPage = () => {
       />
     )
   }
+  const changeNickname = newNickname => {
+    setNickname(newNickname)
+  }
 
   return (
     <Container className="mt-5 UserInfo">
@@ -50,7 +55,11 @@ const UserInfoPage = () => {
         <Row className="row">
           <Col className="col1">
             <Figure>
-              <Figure.Image width={300} height={300} src="./logo192.png" />
+              <Figure.Image
+                width={300}
+                height={300}
+                src={profile ? profile : './logo192.png'}
+              />
             </Figure>
             <Button style={button_theme_long}>Edit Profile Image</Button>
           </Col>
@@ -84,7 +93,7 @@ const UserInfoPage = () => {
               />
             </InputGroup>
             <div>
-              <Button style={button_theme_small_right}>Edit</Button>
+              <ModalButton func={changeNickname}></ModalButton>
             </div>
           </Col>
         </Row>

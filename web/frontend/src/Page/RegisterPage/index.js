@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Container, Button, Form } from 'react-bootstrap'
 import { useNavigate, Link } from 'react-router-dom'
+
 import './style.css'
 const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -32,7 +33,6 @@ const LoginPage = () => {
   }
 
   const nicknameChange = e => {
-    //console.log(e.target.value)
     setNickname(e.target.value)
   }
 
