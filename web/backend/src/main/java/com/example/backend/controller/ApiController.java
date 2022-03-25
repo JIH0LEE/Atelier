@@ -11,10 +11,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 
@@ -77,17 +79,24 @@ public class ApiController {
     }
 
     @PostMapping("/user/user-info")
-    public String UserInfoChange(@RequestBody NicknameConfirmDto nicknameConfirmDto, Principal principal){
+    public NicknameChangeSuccessDto UserInfoChange(@RequestBody NicknameConfirmDto nicknameConfirmDto, Principal principal){
         String nickname= nicknameConfirmDto.getNickname();
         if(userService.existNickname(nickname)){
-            return "이미 있음";
+            return new NicknameChangeSuccessDto(false);//"이미 있음";
         }
         User user=userService.getUser(principal.getName());
         userService.changeNickname(nickname, user.getNickname());
         if(userService.existNickname(nickname)){
-            return "닉네임 바꾸기 성공";
+            return new NicknameChangeSuccessDto(true);//"닉네임 바꾸기 성공";
         }
-        return "안 바뀜";
+        return new NicknameChangeSuccessDto(false);
+    }
+
+    @PostMapping("/user/change-profile")
+    public String UserProfileChange(MultipartHttpServletRequest profile){
+        System.out.println("hihi");
+        //System.out.println(newProfile);
+        return profile.toString();
     }
 
 
