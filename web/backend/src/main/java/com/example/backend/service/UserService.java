@@ -94,4 +94,15 @@ public class UserService implements UserDetailsService {
     public User getUser(String username){
         return userRepository.getUserByUsername(username);
     }
+
+    public boolean existNickname(String nickname){
+
+        return userRepository.existsUserByNickname(nickname);
+
+    }
+
+    public void changeNickname(String newNickname){
+
+    }
+
 }

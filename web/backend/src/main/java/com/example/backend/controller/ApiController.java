@@ -12,6 +12,7 @@ import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -70,13 +71,21 @@ public class ApiController {
 
 
     }
+
+
     @GetMapping("/user/user-info")
     private User UserInfo(Principal principal){
+        //System.out.println(principal.getName());
         return userService.getUser(principal.getName());
     }
 
-    @PostMapping("/user/test")
-    private String Test(Principal principal){
-        return principal.getName();
+    @PostMapping("/user/user-info")
+    public String UserInfoChange(@RequestBody String nickname, Principal principal){
+        if(userService.existNickname(nickname)){
+            return "이미 있음";
+        }
+        return nickname;
     }
+
+
 }
