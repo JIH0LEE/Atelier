@@ -2,10 +2,7 @@ package com.example.backend.controller;
 
 
 import com.example.backend.config.JWTUtil;
-import com.example.backend.model.dto.EmailConfirmDto;
-import com.example.backend.model.dto.LoginDto;
-import com.example.backend.model.dto.LoginFailDto;
-import com.example.backend.model.dto.RegisterDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.User;
 import com.example.backend.service.EmailConfirmationTokenService;
 import com.example.backend.service.UserService;
@@ -80,11 +77,17 @@ public class ApiController {
     }
 
     @PostMapping("/user/user-info")
-    public String UserInfoChange(@RequestBody String nickname, Principal principal){
+    public String UserInfoChange(@RequestBody NicknameConfirmDto nicknameConfirmDto, Principal principal){
+        String nickname= nicknameConfirmDto.getNickname();
         if(userService.existNickname(nickname)){
             return "이미 있음";
         }
-        return nickname;
+        User user=userService.getUser(principal.getName());
+        userService.changeNickname(nickname, user.getNickname());
+        if(userService.existNickname(nickname)){
+            return "닉네임 바꾸기 성공";
+        }
+        return "안 바뀜";
     }
 
 

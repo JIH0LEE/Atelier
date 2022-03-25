@@ -101,7 +101,11 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public void changeNickname(String newNickname){
+    public void changeNickname(String newNickname, String originalNickname){
+        User user=userRepository.findUserByNickname(originalNickname);
+        user.setNickname(newNickname);
+
+        userRepository.save(user);
 
     }
 
