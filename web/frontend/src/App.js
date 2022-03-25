@@ -14,6 +14,7 @@ import Navigation from './Component/Navigation'
 
 import TestPage from './Page/Test/TestPage'
 import background from './images/background.jpg'
+import { Container } from 'react-bootstrap'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -28,20 +29,26 @@ function App() {
       className="App"
       style={{
         backgroundImage: `url(${background})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100vw',
+        height: '1500px',
       }}
     >
       <Header></Header>
       <Navigation></Navigation>
-
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route path="/sign-in" element={<LoginPage />} />
-        <Route path="/sign-up" element={<RegisterPage />} />
-        <Route path="/email-send" element={<EmailSend />} />
-        <Route path="/welcome" element={<EmailOk />} />
-        <Route exact path="/user-info" element={<UserInfoPage />} />
-        <Route path="/test" element={<TestPage></TestPage>}></Route>
-      </Routes>
+      <Container className="main-container">
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route path="/sign-in" element={<LoginPage />} />
+          <Route path="/sign-up" element={<RegisterPage />} />
+          <Route path="/email-send" element={<EmailSend />} />
+          <Route path="/welcome" element={<EmailOk />} />
+          <Route exact path="/user-info" element={<UserInfoPage />} />
+          <Route path="/test" element={<TestPage></TestPage>}></Route>
+        </Routes>
+      </Container>
     </div>
   )
 }
