@@ -13,11 +13,18 @@ const ModalButton = props => {
     setCurNick(e.target.value.trim())
   }
   const submitNickname = () => {
-    // axios.get('/api/user/user-info', header).then(res => {
-
-    // })
-    props.func(curNick)
-    handleClose()
+    const body = {
+      nickname: curNick,
+    }
+    axios.post('/api/user/user-info', body, header).then(res => {
+      console.log(res.data)
+      if (res.data.success) {
+        props.func(curNick)
+        handleClose()
+      } else {
+        alert('이미 존재하는 닉네임 입니다')
+      }
+    })
   }
   const buttonCondition = curNick.trim() === '' ? true : false
   return (

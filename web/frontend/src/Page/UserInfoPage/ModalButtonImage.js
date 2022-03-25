@@ -1,53 +1,46 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Button, Modal, Form } from 'react-bootstrap'
-import { button_theme_mid, button_theme_small_right } from '../../Style/theme'
+import { Button, Modal, Figure, Form } from 'react-bootstrap'
+import { button_theme_mid, button_theme_long } from '../../Style/theme'
 import { header } from '../../config'
 
-const ModalButton = props => {
+const ModalButtonImage = props => {
   const [show, setShow] = useState(false)
-  const [curNick, setCurNick] = useState('')
+  const [curImage, setcurImage] = useState(props.profile)
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
-  const nicknameChange = e => {
-    setCurNick(e.target.value.trim())
+  const handleShow = () => {
+    setcurImage(props.profile)
+    setShow(true)
   }
-  const submitNickname = () => {
-    // axios.get('/api/user/user-info', header).then(res => {
+  const saveFileImage = e => {
+    setcurImage(URL.createObjectURL(e.target.files[0]))
+  }
 
-    // })
-    props.func(curNick)
-    handleClose()
-  }
-  const buttonCondition = curNick.trim() === '' ? true : false
   return (
     <>
-      <Button style={button_theme_small_right} onClick={handleShow}>
-        Edit
+      <Button style={button_theme_long} onClick={handleShow}>
+        Change Profile Image
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>닉네임 변경</Modal.Title>
+          <Modal.Title>프로필 이미지 변경</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form.Control
-            type="text"
-            onChange={nicknameChange}
-            placeholder="새로운 닉네임을 입력하세요"
-          />
+        <Modal.Body style={{ margin: 'Auto' }}>
+          <Figure>
+            <Figure.Image
+              width={300}
+              height={300}
+              src={curImage ? curImage : './logo192.png'}
+            />
+          </Figure>
+          <Form.Control type="file" accept="image/*" onChange={saveFileImage} />
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            style={button_theme_mid}
-            onClick={submitNickname}
-            disabled={buttonCondition}
-          >
-            Save Changes
-          </Button>
+          <Button style={button_theme_mid}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
     </>
   )
 }
-export default ModalButton
+export default ModalButtonImage

@@ -16,6 +16,7 @@ import {
 import './style.css'
 import { button_theme_long } from '../../Style/theme'
 import ModalButton from './ModalButton'
+import ModalButtonImage from './ModalButtonImage'
 const UserInfoPage = () => {
   const [username, setUsername] = useState('')
   const [nickname, setNickname] = useState('')
@@ -47,6 +48,9 @@ const UserInfoPage = () => {
   const changeNickname = newNickname => {
     setNickname(newNickname)
   }
+  const changeProfile = newProfile => {
+    setProfile(newProfile)
+  }
 
   return (
     <Container className="mt-5 UserInfo">
@@ -61,7 +65,11 @@ const UserInfoPage = () => {
                 src={profile ? profile : './logo192.png'}
               />
             </Figure>
-            <Button style={button_theme_long}>Edit Profile Image</Button>
+            <ModalButtonImage
+              style={button_theme_long}
+              profile={profile}
+              func={changeProfile}
+            ></ModalButtonImage>
           </Col>
           <Col className="my-3 col2">
             <FormLabel
