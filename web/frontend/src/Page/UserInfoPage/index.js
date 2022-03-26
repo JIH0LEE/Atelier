@@ -66,7 +66,6 @@ const UserInfoPage = () => {
               />
             </Figure>
             <ModalButtonImage
-              style={button_theme_long}
               profile={profile}
               func={changeProfile}
             ></ModalButtonImage>
