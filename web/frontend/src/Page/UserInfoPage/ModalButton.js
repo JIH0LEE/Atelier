@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Modal, Form } from 'react-bootstrap'
 import { button_theme_mid, button_theme_small_right } from '../../Style/theme'
+import { useNavigate } from 'react-router-dom'
 import { header } from '../../config'
 
 const ModalButton = props => {
@@ -9,13 +10,17 @@ const ModalButton = props => {
   const [curNick, setCurNick] = useState('')
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const navigate = useNavigate()
+
   const nicknameChange = e => {
     setCurNick(e.target.value.trim())
   }
+
   const submitNickname = () => {
     const body = {
       nickname: curNick,
     }
+
     axios.post('/api/user/user-info', body, header).then(res => {
       console.log(res.data)
       if (res.data.success) {
@@ -26,7 +31,9 @@ const ModalButton = props => {
       }
     })
   }
+
   const buttonCondition = curNick.trim() === '' ? true : false
+
   return (
     <>
       <Button style={button_theme_small_right} onClick={handleShow}>

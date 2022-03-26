@@ -21,11 +21,11 @@ const ModalButtonImage = props => {
   const submit = () => {
     const formData = new FormData()
     formData.append('profile', uploadFile)
-    console.log(uploadFile)
     axios.post('/api/user/change-profile', formData, header).then(res => {
-      console.log(res)
+      if (uploadFile.name === res.data) {
+        console.log(res)
+      }
     })
-    console.log(uploadFile)
   }
   return (
     <>
