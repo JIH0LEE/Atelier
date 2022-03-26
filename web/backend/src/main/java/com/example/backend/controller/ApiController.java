@@ -8,10 +8,13 @@ import com.example.backend.service.EmailConfirmationTokenService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -92,11 +96,12 @@ public class ApiController {
         return new NicknameChangeSuccessDto(false);
     }
 
-    @PostMapping("/user/change-profile")
-    public String UserProfileChange(MultipartHttpServletRequest profile){
+    @PostMapping(value = "/user/change-profile")
+    public String UserProfileChange(@RequestParam MultipartFile profile) throws Exception{
         System.out.println("hihi");
         //System.out.println(newProfile);
-        return profile.toString();
+        //UUID uuid=UUID.randomUUID();
+        return profile.getOriginalFilename();
     }
 
 
