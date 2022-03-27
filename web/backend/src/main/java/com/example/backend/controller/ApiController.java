@@ -120,7 +120,7 @@ public class ApiController {
         String newProfileURL=userService.changeImage(user, fileName, path.toString());
 
         if (newProfileURL==null){
-            return return new ProfileChangeSuccessDto(false, null);
+            return new ProfileChangeSuccessDto(false, null);
         }
         return new ProfileChangeSuccessDto(true, newProfileURL);
     }

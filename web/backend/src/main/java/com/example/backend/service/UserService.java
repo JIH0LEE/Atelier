@@ -118,6 +118,8 @@ public class UserService implements UserDetailsService {
         String profileURL=hostURL+"/static/profile/"+filename;
         if(user.getProfile()==null){
             user.setProfile(profileURL);
+            userRepository.save(user);
+            return profileURL;
         }else{
             String existProfileURL=user.getProfile();
             String existFilename=existProfileURL.substring(existProfileURL.lastIndexOf("/")+1);
