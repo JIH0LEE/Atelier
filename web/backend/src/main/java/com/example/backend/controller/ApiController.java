@@ -101,6 +101,7 @@ public class ApiController {
         System.out.println("hihi");
         //System.out.println(newProfile);
         //UUID uuid=UUID.randomUUID();
+        profile.transferTo(new File("/Users/iseung-yeon/Desktop/images/"+profile.getOriginalFilename()));
         return profile.getOriginalFilename();
     }
 
