@@ -15,6 +15,8 @@ const ModalButtonImage = props => {
   }
   const saveFileImage = e => {
     setcurImage(URL.createObjectURL(e.target.files[0]))
+    console.log(URL.createObjectURL(e.target.files[0]))
+    console.log(e.target.files[0])
     setuploadFile(e.target.files[0])
   }
 
@@ -22,8 +24,11 @@ const ModalButtonImage = props => {
     const formData = new FormData()
     formData.append('profile', uploadFile)
     axios.post('/api/user/change-profile', formData, header).then(res => {
-      if (uploadFile.name === res.data) {
-        console.log(res)
+      if (res.data.success) {
+        props.func(res.data.url)
+        handleClose()
+      } else {
+        alert('실패하였습니다!!')
       }
     })
   }
