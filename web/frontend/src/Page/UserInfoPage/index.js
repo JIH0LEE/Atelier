@@ -28,6 +28,7 @@ const UserInfoPage = () => {
       axios.get('/api/user/user-info', header).then(res => {
         setUsername(res.data.username)
         setNickname(res.data.nickname)
+        setProfile(res.data.profile)
       })
     }
   }, [])
