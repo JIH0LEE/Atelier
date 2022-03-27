@@ -111,8 +111,11 @@ public class ApiController {
 
         System.out.println(path);
 
-        profile.transferTo(new File(path.toString()+'/'+profile.getOriginalFilename()));
-        return profile.getOriginalFilename();
+        UUID uuid=UUID.randomUUID();
+        String fileName=uuid.toString()+"_"+profile.getOriginalFilename();
+
+        profile.transferTo(new File(path.toString()+'/'+fileName));
+        return fileName;
     }
 
 
