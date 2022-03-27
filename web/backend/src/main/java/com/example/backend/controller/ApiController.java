@@ -7,6 +7,9 @@ import com.example.backend.model.entity.User;
 import com.example.backend.service.EmailConfirmationTokenService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +23,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.UUID;
 
@@ -32,6 +38,7 @@ public class ApiController {
     private final UserService userService;
     private final JWTUtil jwtUtil;
     private final EmailConfirmationTokenService emailConfirmationTokenService;
+
     @PostMapping("/sign-up")
     private Object signUp(@RequestBody RegisterDto registerDto){
 
@@ -98,10 +105,13 @@ public class ApiController {
 
     @PostMapping(value = "/user/change-profile")
     public String UserProfileChange(@RequestParam MultipartFile profile) throws Exception{
-        System.out.println("hihi");
-        //System.out.println(newProfile);
-        //UUID uuid=UUID.randomUUID();
-        profile.transferTo(new File("/Users/iseung-yeon/Desktop/images/"+profile.getOriginalFilename()));
+
+        ClassPathResource resource=new ClassPathResource("static/");
+        Path path= Paths.get(resource.getURI());
+
+        System.out.println(path);
+
+        profile.transferTo(new File(path.toString()+'/'+profile.getOriginalFilename()));
         return profile.getOriginalFilename();
     }
 
