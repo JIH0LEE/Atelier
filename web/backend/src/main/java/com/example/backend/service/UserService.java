@@ -6,12 +6,14 @@ import com.example.backend.model.entity.EmailConfirmationToken;
 import com.example.backend.model.entity.User;
 import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.io.File;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,9 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailConfirmationTokenService emailConfirmationTokenService;
+
+    @Value("${server.host}")
+    private String hostURL;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -106,6 +111,29 @@ public class UserService implements UserDetailsService {
         user.setNickname(newNickname);
 
         userRepository.save(user);
+
+    }
+
+    public String changeImage(User user, String filename, String filepath){
+        String profileURL=hostURL+"/static/profile/"+filename;
+        if(user.getProfile()==null){
+            user.setProfile(profileURL);
+        }else{
+            String existProfileURL=user.getProfile();
+            String existFilename=existProfileURL.substring(existProfileURL.lastIndexOf("/")+1);
+            File file=new File(filepath+"/profile/"+existFilename);
+            if(file.exists()){
+                if(file.delete()){
+
+                }else{
+                    return null;
+                }
+            }
+            user.setProfile(profileURL);
+            userRepository.save(user);
+            return profileURL;
+        }
+
 
     }
 

@@ -104,7 +104,7 @@ public class ApiController {
     }
 
     @PostMapping(value = "/user/change-profile")
-    public String UserProfileChange(@RequestParam MultipartFile profile) throws Exception{
+    public ProfileChangeSuccessDto UserProfileChange(@RequestParam MultipartFile profile, Principal principal) throws Exception{
 
         ClassPathResource resource=new ClassPathResource("static/");
         Path path= Paths.get(resource.getURI());
@@ -113,9 +113,16 @@ public class ApiController {
 
         UUID uuid=UUID.randomUUID();
         String fileName=uuid.toString()+"_"+profile.getOriginalFilename();
+        profile.transferTo(new File(path.toString()+"/profile/"+fileName));
 
-        profile.transferTo(new File(path.toString()+'/'+fileName));
-        return fileName;
+        User user=userService.getUser(principal.getName());
+
+        String newProfileURL=userService.changeImage(user, fileName, path.toString());
+
+        if (newProfileURL==null){
+            return return new ProfileChangeSuccessDto(false, null);
+        }
+        return new ProfileChangeSuccessDto(true, newProfileURL);
     }
 
 
