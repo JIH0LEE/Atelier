@@ -1,10 +1,20 @@
 import React from 'react'
 import { Container, Figure, } from 'react-bootstrap'
 import './style.css'
+import { useNavigate, Link } from 'react-router-dom'
+import axios from 'axios'
 
-const Exhibition = () => {
+
+const Exhibition = ({ title, date, keyword }) => {
+    const navigate = useNavigate()
+    const onClick = () => {
+
+        navigate("/")
+    }
+
+
     return (
-        <Container className="exhibition-container" >
+        <Container className="exhibition-container" onClick={onClick} >
             <Figure>
                 <Figure.Image
                     width={50}
@@ -13,11 +23,11 @@ const Exhibition = () => {
                 />
             </Figure>
             <ul style={{ textAlign: 'left' }}>
-                <div>전시 제목</div>
-                <div>전시 일자</div>
-                <div>#키워드1 #키워드2 #키워드3</div>
+                <div>{title}</div>
+                <div>{date}</div>
+                <div>#{keyword[0]} #{keyword[1]} #{keyword[2]}</div>
             </ul>
-        </Container>
+        </Container >
     )
 }
 

@@ -1,0 +1,9 @@
+.main-comment {
+    text-align: 'left'
+}
+.community-main {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 3000px;
+}
