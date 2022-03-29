@@ -7,7 +7,7 @@ const Navigation = () => {
       <Navbar style={{ placeContent: 'center', backgroundColor: '#F3CA4D' }}>
         <Col className="d-flex justify-content-center">
           <Nav>
-            <Nav.Link href="#home">Nav 1</Nav.Link>
+            <Nav.Link href="/community-home">Exhibition Info</Nav.Link>
           </Nav>
         </Col>
         <Col className="d-flex justify-content-center">
