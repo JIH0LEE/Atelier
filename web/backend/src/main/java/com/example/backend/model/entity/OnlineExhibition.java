@@ -1,6 +1,7 @@
 package com.example.backend.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,6 +37,11 @@ public class OnlineExhibition {
     private String bgm;
 
     private String theme;
+
+    private String poster;
+
+    @JsonProperty("like_count")
+    private int likeCount=0;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
