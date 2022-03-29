@@ -44,3 +44,15 @@ jwt:
 
 server:
   host: http://localhost:8080
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA3NPWIAX7OJ7IF7DK
+      secretKey: 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
+    s3:
+      bucket: atelierbucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

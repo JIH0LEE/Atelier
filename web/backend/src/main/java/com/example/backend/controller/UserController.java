@@ -5,26 +5,19 @@ import com.example.backend.config.JWTUtil;
 import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.User;
 import com.example.backend.service.EmailConfirmationTokenService;
+import com.example.backend.service.S3Service;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
@@ -33,11 +26,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-public class ApiController {
+public class UserController {
 
     private final UserService userService;
     private final JWTUtil jwtUtil;
     private final EmailConfirmationTokenService emailConfirmationTokenService;
+
 
     @PostMapping("/sign-up")
     private Object signUp(@RequestBody RegisterDto registerDto){
@@ -106,22 +100,25 @@ public class ApiController {
     @PostMapping(value = "/user/change-profile")
     public ProfileChangeSuccessDto UserProfileChange(@RequestParam MultipartFile profile, Principal principal) throws Exception{
 
-        ClassPathResource resource=new ClassPathResource("static/");
-        Path path= Paths.get(resource.getURI());
-
-        System.out.println(path);
-
-        UUID uuid=UUID.randomUUID();
-        String fileName=uuid.toString()+"_"+profile.getOriginalFilename();
-        profile.transferTo(new File(path.toString()+"/profile/"+fileName));
-
         User user=userService.getUser(principal.getName());
 
-        String newProfileURL=userService.changeImage(user, fileName, path.toString());
-
-        if (newProfileURL==null){
-            return new ProfileChangeSuccessDto(false, null);
-        }
+        String newProfileURL =userService.changeImage(user,profile);
+//        ClassPathResource resource=new ClassPathResource("static/");
+//        Path path= Paths.get(resource.getURI());
+//
+//        System.out.println(path);
+//
+//        UUID uuid=UUID.randomUUID();
+//        String fileName=uuid.toString()+"_"+profile.getOriginalFilename();
+//        profile.transferTo(new File(path.toString()+"/profile/"+fileName));
+//
+//        User user=userService.getUser(principal.getName());
+//
+//        String newProfileURL=userService.changeImage(user, fileName, path.toString());
+//
+//        if (newProfileURL==null){
+//            return new ProfileChangeSuccessDto(false, null);
+//        }
         return new ProfileChangeSuccessDto(true, newProfileURL);
     }
 

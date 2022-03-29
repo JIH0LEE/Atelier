@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //토큰을 검증
                 .addFilterAt(checkFilter, BasicAuthenticationFilter.class)
-
+                .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/user").hasRole("USER");

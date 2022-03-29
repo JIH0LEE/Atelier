@@ -3,7 +3,7 @@ import '../LandingPage/style.css'
 import { Container } from 'react-bootstrap'
 const EmailSend = () => {
   return (
-    <Container className="main-container">
+    <Container className="landing-container">
       <div>인증 메일을 보냈습니다. 확인해주세요</div>
     </Container>
   )

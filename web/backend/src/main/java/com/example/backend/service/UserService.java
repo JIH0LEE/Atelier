@@ -12,8 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.transaction.Transactional;
 import java.io.File;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +26,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailConfirmationTokenService emailConfirmationTokenService;
-
+    private final S3Service s3Service;
     @Value("${server.host}")
     private String hostURL;
 
@@ -113,7 +116,20 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
     }
+    //s3
+    public  String changeImage(User user, MultipartFile file) throws IOException {
 
+        String profileURL =s3Service.upload(file,"profile");
+        if (user.getProfile()!=null){
+            String existProfileURL=user.getProfile();
+            s3Service.deleteS3File(existProfileURL);
+        }
+        user.setProfile(profileURL);
+        userRepository.save(user);
+        return profileURL;
+
+    }
+    //local
     public String changeImage(User user, String filename, String filepath){
         String profileURL=hostURL+"/static/profile/"+filename;
         if(user.getProfile()==null){

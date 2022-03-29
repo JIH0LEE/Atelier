@@ -45,7 +45,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         }
         else {
             String token = bearer.substring("Bearer ".length());
-//        VerifyResult result = JWTUtil.verify(token);
+
             try {
                 VerifyResult result = JWTUtil.verify(token);
                 User user = (User) userService.loadUserByUsername(result.getUsername());
@@ -62,16 +62,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 response.getWriter().println("{ \"success\" :" + false + "}");
             }
         }
-//        if(result.isSuccess()){
-//            User user = (User) userService.loadUserByUsername(result.getUsername());
-//            UsernamePasswordAuthenticationToken userToken = new UsernamePasswordAuthenticationToken(
-//                    user.getUsername(), null, user.getAuthorities()
-//            );
-//            SecurityContextHolder.getContext().setAuthentication(userToken);
-//            chain.doFilter(request, response);
-//        }else{
-//            throw new TokenExpiredException("Token is not valid");
-//        }
+
     }
 
 }

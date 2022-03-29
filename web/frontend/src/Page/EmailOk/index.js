@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import '../LandingPage/style.css'
 const EmailOk = () => {
   return (
-    <Container className="main-container">
+    <Container className="landing-container">
       <div>환영합니다!</div>
     </Container>
   )
