@@ -1,5 +1,6 @@
 package com.example.backend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
         this.emailAuth=auth;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<OnlineExhibition> onlineExhibition = new ArrayList<>();
 
