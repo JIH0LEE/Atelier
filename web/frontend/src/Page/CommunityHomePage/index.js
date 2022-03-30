@@ -30,14 +30,14 @@ const CommunityHomePage = () => {
                             <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </div>
-                    <ul>
+                    <ul className="align-text">
                         <Exhibition id={1} title={"title1"} date={"22.3.30"} keyword={["봄", "사과", "글로벌"]}></Exhibition>
                         <Exhibition id={2} title={"title1"} date={"22.3.30"} keyword={["방송", "아시아", "휴대폰"]}></Exhibition>
                         <Exhibition id={3} title={"title1"} date={"22.3.30"} keyword={["펜싱", "마스크", "잔디"]}></Exhibition>
                     </ul>
                 </div>
             </Container>
-        </div >
+        </div>
 
     )
 }

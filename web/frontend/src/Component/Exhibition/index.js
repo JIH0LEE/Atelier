@@ -21,7 +21,7 @@ const Exhibition = ({ id, title, date, keyword }) => {
                     src='./logo192.png'
                 />
             </Figure>
-            <ul style={{ textAlign: 'left' }}>
+            <ul style={{ textAlign: "left" }}>
                 <div>{title}</div>
                 <div>{date}</div>
                 <div>#{keyword[0]} #{keyword[1]} #{keyword[2]}</div>
