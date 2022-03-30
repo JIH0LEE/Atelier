@@ -5,11 +5,10 @@ import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 
 
-const Exhibition = ({ title, date, keyword }) => {
+const Exhibition = ({ id, title, date, keyword }) => {
     const navigate = useNavigate()
     const onClick = () => {
-
-        navigate("/")
+        navigate(`/exhibition/${id}`, { state: { title: title, date: date, keyword: keyword }, }) // { state: title }
     }
 
 

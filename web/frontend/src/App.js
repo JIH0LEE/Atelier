@@ -16,6 +16,7 @@ import TestPage from './Page/Test/TestPage'
 import background from './images/background.jpg'
 import { Container } from 'react-bootstrap'
 import CommunityHomePage from './Page/CommunityHomePage'
+import ExhibitionInfo from './Page/ExhibitionInfo'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/user-info" element={<UserInfoPage />} />
           <Route path="/test" element={<TestPage></TestPage>}></Route>
           <Route path="/community-home" element={<CommunityHomePage></CommunityHomePage>} />
+          <Route path="/exhibition/:key" element={<ExhibitionInfo></ExhibitionInfo>}></Route>
         </Routes>
       </Container>
     </div>
