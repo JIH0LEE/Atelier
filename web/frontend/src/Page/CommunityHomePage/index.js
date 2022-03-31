@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Container,
@@ -7,11 +7,19 @@ import {
   Col,
   FormLabel,
 } from 'react-bootstrap'
+import axios from 'axios'
 import Exhibition from '../../Component/Exhibition'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import './style.css'
 const CommunityHomePage = () => {
+  const [onlineExhibition, setOnlineExhibition] = useState([])
+  useEffect(() => {
+    axios.get('/api/online-exhibition').then(res => {
+      setOnlineExhibition(res.data)
+    })
+  }, [])
+  console.log(onlineExhibition)
   return (
     <>
       <Container className="communityPage">
@@ -64,6 +72,16 @@ const CommunityHomePage = () => {
             </Col>
           </Row>
           <Container>
+            {onlineExhibition.map(exhibition => (
+              <Exhibition
+                id={exhibition.id}
+                title={exhibition.title}
+                date={exhibition.startDate}
+                keyword={[exhibition.tag1, exhibition.tag2, exhibition.tag3]}
+              ></Exhibition>
+            ))}
+          </Container>
+          <Container>
             <Exhibition
               id={1}
               title={'title1'}
@@ -83,26 +101,6 @@ const CommunityHomePage = () => {
               keyword={['펜싱', '마스크', '잔디']}
             ></Exhibition>
           </Container>
-          {/* <ul className="align-text">
-            <Exhibition
-              id={1}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['봄', '사과', '글로벌']}
-            ></Exhibition>
-            <Exhibition
-              id={2}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['방송', '아시아', '휴대폰']}
-            ></Exhibition>
-            <Exhibition
-              id={3}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['펜싱', '마스크', '잔디']}
-            ></Exhibition>
-          </ul> */}
         </Container>
       </Container>
     </>
