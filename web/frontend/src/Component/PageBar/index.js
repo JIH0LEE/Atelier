@@ -50,7 +50,7 @@ const PageBar = ({ lastIndex, activePage, changePage }) => {
           />
           <Pagination.Prev
             onClick={() => {
-              changePage(start - 10)
+              changePage(start - 1)
             }}
           />
         </>

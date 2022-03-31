@@ -4,6 +4,7 @@ import { removeToken } from '../../utils/cookies'
 import isLogin from '../../utils/isLogin'
 import { useNavigate } from 'react-router-dom'
 import { header_theme, button_theme } from '../../Style/theme'
+import './style.css'
 const Header = () => {
   const navigate = useNavigate()
   const logout = () => {
@@ -22,10 +23,7 @@ const Header = () => {
       <Row>
         <Col />
         <Col>
-          <div
-            onClick={goToMain}
-            style={{ fontSize: '50px', color: '#F3CA4D' }}
-          >
+          <div onClick={goToMain} className="header-font">
             Atelier
           </div>
         </Col>
