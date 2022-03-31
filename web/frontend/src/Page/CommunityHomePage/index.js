@@ -6,12 +6,15 @@ import {
   Row,
   Col,
   FormLabel,
+  Pagination,
 } from 'react-bootstrap'
 import axios from 'axios'
 import Exhibition from '../../Component/Exhibition'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Post from './Post'
 import './style.css'
+import PageBar from '../../Component/PageBar'
 const CommunityHomePage = () => {
   const [onlineExhibition, setOnlineExhibition] = useState([])
   useEffect(() => {
@@ -19,7 +22,17 @@ const CommunityHomePage = () => {
       setOnlineExhibition(res.data)
     })
   }, [])
-  console.log(onlineExhibition)
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(5)
+
+  const totalPage = onlineExhibition.length / postPerPage
+  const indexOfLastPost = currentPage * postPerPage //1*10 = 10번 포스트
+  const indexOfFirstPost = indexOfLastPost - postPerPage //10-10 = 0번 포스트
+  const currentPosts = onlineExhibition.slice(indexOfFirstPost, indexOfLastPost) //0~10번까지 포스트
+  const changeCurrentPage = num => {
+    setCurrentPage(num)
+  }
   return (
     <>
       <Container className="communityPage">
@@ -71,36 +84,12 @@ const CommunityHomePage = () => {
               </NavDropdown>
             </Col>
           </Row>
-          <Container>
-            {onlineExhibition.map(exhibition => (
-              <Exhibition
-                id={exhibition.id}
-                title={exhibition.title}
-                date={exhibition.startDate}
-                keyword={[exhibition.tag1, exhibition.tag2, exhibition.tag3]}
-              ></Exhibition>
-            ))}
-          </Container>
-          <Container>
-            <Exhibition
-              id={1}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['봄', '사과', '글로벌']}
-            ></Exhibition>
-            <Exhibition
-              id={2}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['방송', '아시아', '휴대폰']}
-            ></Exhibition>
-            <Exhibition
-              id={3}
-              title={'title1'}
-              date={'22.3.30'}
-              keyword={['펜싱', '마스크', '잔디']}
-            ></Exhibition>
-          </Container>
+          <Post posts={currentPosts}></Post>
+          <PageBar
+            lastIndex={totalPage}
+            activePage={currentPage}
+            changePage={changeCurrentPage}
+          ></PageBar>
         </Container>
       </Container>
     </>
