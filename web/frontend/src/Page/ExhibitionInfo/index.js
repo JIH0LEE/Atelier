@@ -50,6 +50,10 @@ const ExhibitionInfo = () => {
         </Row>
         <Row>
           <Comment></Comment>
+          <Comment></Comment>
+          <Comment></Comment>
+          <Comment></Comment>
+          <Comment></Comment>
         </Row>
       </Container>
     </Container>
