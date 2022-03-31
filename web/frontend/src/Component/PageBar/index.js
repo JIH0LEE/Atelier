@@ -42,8 +42,16 @@ const PageBar = ({ lastIndex, activePage, changePage }) => {
         <></>
       ) : (
         <>
-          <Pagination.First />
-          <Pagination.Prev />
+          <Pagination.First
+            onClick={() => {
+              changePage(1)
+            }}
+          />
+          <Pagination.Prev
+            onClick={() => {
+              changePage(start - 10)
+            }}
+          />
         </>
       )}
       {items}
@@ -51,8 +59,17 @@ const PageBar = ({ lastIndex, activePage, changePage }) => {
         <></>
       ) : (
         <>
-          <Pagination.Next />
-          <Pagination.Last />
+          <Pagination.Next
+            onClick={() => {
+              console.log(start + 10)
+              changePage(start + 10)
+            }}
+          />
+          <Pagination.Last
+            onClick={() => {
+              changePage(lastIndex + 10)
+            }}
+          />
         </>
       )}
     </Pagination>
