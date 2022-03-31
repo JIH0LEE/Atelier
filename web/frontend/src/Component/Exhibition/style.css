@@ -18,6 +18,22 @@
   display: flex;
   flex-direction: column;
 }
+.image-container1 {
+  width: 200px;
+  height: 200px;
+  border-style: ridge;
+  border-color: black;
+  border-width: 10px;
+  overflow: hidden;
+}
+.image-container1 .img {
+  display: inline-block;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 5px;
+}
 /* 
 .community-main .align-text {
   margin: 30px;

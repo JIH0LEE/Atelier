@@ -59,10 +59,9 @@ const UserInfoPage = () => {
       <Container className="inner1">
         <Row className="row">
           <Col className="col1">
-            <Figure>
+            <Figure className="image-container">
               <Figure.Image
-                width={300}
-                height={300}
+                className="img"
                 src={profile ? profile : './logo192.png'}
               />
             </Figure>

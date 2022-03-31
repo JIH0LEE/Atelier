@@ -68,7 +68,7 @@ const PageBar = ({ lastIndex, activePage, changePage }) => {
           />
           <Pagination.Last
             onClick={() => {
-              changePage(lastIndex + 10)
+              changePage(lastIndex)
             }}
           />
         </>

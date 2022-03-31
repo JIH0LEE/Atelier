@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Modal, Figure, Form, Container } from 'react-bootstrap'
 import { button_theme_mid, button_theme_long } from '../../Style/theme'
-import { header, header_media } from '../../config'
+import { header } from '../../config'
+import './style.css'
 
 const ModalButtonImage = props => {
   const [show, setShow] = useState(false)
@@ -43,10 +44,10 @@ const ModalButtonImage = props => {
           <Modal.Title>프로필 이미지 변경</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ margin: 'Auto' }}>
-          <Container style={{ border: 'solid' }}>
-            <Figure>
+          <Container>
+            <Figure className="image-container">
               <Figure.Image
-                width={300}
+                className="img"
                 src={curImage ? curImage : './logo192.png'}
               />
             </Figure>
