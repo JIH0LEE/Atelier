@@ -1,5 +1,6 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap'
+import './style.css'
 
 const PageBar = ({ lastIndex, activePage, changePage }) => {
   let items = []
