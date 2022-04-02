@@ -32,3 +32,5 @@ export const button_theme_small_right = {
   display: 'inline-block',
   float: 'right',
 }
+
+export const testColor = '#F3CA4D'
