@@ -6,7 +6,7 @@ import {
   Row,
   Col,
   FormLabel,
-  Badge,
+  Dropdown,
 } from 'react-bootstrap'
 import axios from 'axios'
 import NavDropdown from 'react-bootstrap/NavDropdown'
@@ -24,11 +24,27 @@ const CommunityHomePage = () => {
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(5)
-
+  const [sortMethod, setSortMethod] = useState('최신순')
   const totalPage = onlineExhibition.length / postPerPage
   const indexOfLastPost = currentPage * postPerPage //1*10 = 10번 포스트
   const indexOfFirstPost = indexOfLastPost - postPerPage //10-10 = 0번 포스트
   const currentPosts = onlineExhibition.slice(indexOfFirstPost, indexOfLastPost) //0~10번까지 포스트
+
+  const sortByLike = () => {
+    const _onlineExhibition = [...onlineExhibition]
+    _onlineExhibition.sort((a, b) => (a.like_count <= b.like_count ? 1 : -1))
+    setSortMethod('좋아요 순')
+    setOnlineExhibition(_onlineExhibition)
+    setCurrentPage(1)
+  }
+  const sortByDatetime = () => {
+    const _onlineExhibition = [...onlineExhibition]
+
+    _onlineExhibition.sort((a, b) => (a.startDate <= b.startDate ? 1 : -1))
+    setSortMethod('최신순')
+    setOnlineExhibition(_onlineExhibition)
+    setCurrentPage(1)
+  }
   const changeCurrentPage = num => {
     setCurrentPage(num)
   }
@@ -65,23 +81,24 @@ const CommunityHomePage = () => {
             <Row>
               <Col></Col>
               <Col>
-                <NavDropdown
-                  title="Dropdown"
-                  id="nav-dropdown"
-                  style={{ float: 'right' }}
+                <Dropdown
+                  style={{
+                    float: 'right',
+                    marginTop: '10px',
+                  }}
                 >
-                  <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.3">
-                    Something else here
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item eventKey="4.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
+                  <Dropdown.Toggle id="dropdown-basic">
+                    {sortMethod}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={sortByDatetime} value="최신순">
+                      최신순
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={sortByLike} value="좋아요 순">
+                      좋아요 순
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </Col>
             </Row>
           </Container>

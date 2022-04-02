@@ -14,3 +14,7 @@
   align-items: center;
   justify-items: center;
 }
+#dropdown-basic {
+  background-color: #daa520;
+  border-color: #daa520;
+}
