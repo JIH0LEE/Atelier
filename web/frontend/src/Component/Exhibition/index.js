@@ -19,7 +19,7 @@ const Exhibition = ({
   const navigate = useNavigate()
   const onClick = () => {
     navigate(`/exhibition/${id}`, {
-      state: { title: title, date: date, keyword: keyword, poaster: poaster, description: description, like: likes },
+      state: { id: id, title: title, date: date, keyword: keyword, poaster: poaster, description: description, like: likes },
     }) // { state: title }
   }
 
