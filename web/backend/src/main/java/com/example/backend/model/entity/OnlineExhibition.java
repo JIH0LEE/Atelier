@@ -1,6 +1,7 @@
 package com.example.backend.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -46,6 +47,7 @@ public class OnlineExhibition {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     @ToString.Exclude
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})

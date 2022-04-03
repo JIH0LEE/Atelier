@@ -8,11 +8,9 @@ import com.example.backend.repository.OnlineExhibitionRepository;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.service.OnlineExhibitionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,5 +27,12 @@ public class OnlineController {
     @GetMapping("/online-exhibition")
     private List<OnlineExhibitionDto> showOnlineExhibitions(){
         return onlineExhibitionService.showAllOnlineExhibition();
+    }
+    @GetMapping("/user/likes")
+    private Boolean isHeart(@RequestParam String id, Principal principal){
+        System.out.println("1");
+        Long onlineId=Long.parseLong(id);
+        System.out.println("2");
+        return onlineExhibitionService.isHeartClicked(onlineId,principal);
     }
 }

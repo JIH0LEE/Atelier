@@ -1,13 +1,16 @@
 package com.example.backend.service;
 
 import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.entity.Good;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.repository.OnlineExhibitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -34,9 +37,16 @@ public class OnlineExhibitionService {
                     .build());
         });
         return result;
-
-
-
+    }
+    public Boolean isHeartClicked(Long onlineExhibitionId, Principal user){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
+        List<Good> goods=onlineExhibition.getLikes();
+        for (Good good : goods) {
+            if(good.getUser()==user){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
