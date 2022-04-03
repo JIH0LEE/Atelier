@@ -20,6 +20,13 @@ const CommunityHomePage = () => {
     axios.get('/api/online-exhibition').then(res => {
       setOnlineExhibition(res.data)
       //console.log(res.data)
+      setSortMethod(localStorage.getItem('filter'))
+      if (sortMethod === "최신순") {
+        sortByDatetime()
+      }
+      if (sortMethod === "좋아요 순") {
+        sortByLike()
+      }
     })
   }, [])
   const [loading, setLoading] = useState(false)
@@ -37,6 +44,7 @@ const CommunityHomePage = () => {
     setSortMethod('좋아요 순')
     setOnlineExhibition(_onlineExhibition)
     setCurrentPage(1)
+    localStorage.setItem('filter', "좋아요 순")
   }
   const sortByDatetime = () => {
     const _onlineExhibition = [...onlineExhibition]
@@ -45,6 +53,7 @@ const CommunityHomePage = () => {
     setSortMethod('최신순')
     setOnlineExhibition(_onlineExhibition)
     setCurrentPage(1)
+    localStorage.setItem('filter', "최신순")
   }
   const changeCurrentPage = num => {
     console.log(num)
