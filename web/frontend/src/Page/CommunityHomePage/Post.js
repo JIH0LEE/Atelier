@@ -16,9 +16,10 @@ const Post = ({ posts, loading }) => {
           title={exhibition.title}
           date={exhibition.startDate}
           keyword={[exhibition.tag1, exhibition.tag2, exhibition.tag3]}
+          likes={exhibition.like_count}
+          author={exhibition.author}
           poaster={exhibition.poster}
           description={exhibition.description}
-          like={exhibition.like_count}
         ></Exhibition>
       ))}
     </Container>

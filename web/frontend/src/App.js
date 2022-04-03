@@ -35,9 +35,9 @@ function App() {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         width: '100vw',
-        height: '2000px',
+        height: '3000px',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <Header></Header>
@@ -51,8 +51,14 @@ function App() {
           <Route path="/welcome" element={<EmailOk />} />
           <Route exact path="/user-info" element={<UserInfoPage />} />
           <Route path="/test" element={<TestPage></TestPage>}></Route>
-          <Route path="/community-home" element={<CommunityHomePage></CommunityHomePage>} />
-          <Route path="/exhibition/:key" element={<ExhibitionInfo></ExhibitionInfo>}></Route>
+          <Route
+            path="/community-home"
+            element={<CommunityHomePage></CommunityHomePage>}
+          />
+          <Route
+            path="/exhibition/:key"
+            element={<ExhibitionInfo></ExhibitionInfo>}
+          ></Route>
         </Routes>
       </Container>
     </div>
