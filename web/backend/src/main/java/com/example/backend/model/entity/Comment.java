@@ -17,7 +17,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime description;
+    private String description;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="online_exhibition_id")
