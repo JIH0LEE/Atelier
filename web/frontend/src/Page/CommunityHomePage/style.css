@@ -14,3 +14,17 @@
   align-items: center;
   justify-items: center;
 }
+
+
+
+.nav-item.dropdown.show a {
+  color: #a7831a !important; /* #daa520 #f3ca4d */
+}
+
+.nav-link{
+  color: #a7831a;
+}
+
+#navbarDropdown {
+  color: #a7831a;
+}

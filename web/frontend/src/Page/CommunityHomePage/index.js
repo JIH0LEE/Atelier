@@ -20,6 +20,7 @@ const CommunityHomePage = () => {
   useEffect(() => {
     axios.get('/api/online-exhibition').then(res => {
       setOnlineExhibition(res.data)
+      //console.log(res.data)
     })
   }, [])
   const [loading, setLoading] = useState(false)
@@ -31,7 +32,41 @@ const CommunityHomePage = () => {
   const indexOfFirstPost = indexOfLastPost - postPerPage //10-10 = 0번 포스트
   const currentPosts = onlineExhibition.slice(indexOfFirstPost, indexOfLastPost) //0~10번까지 포스트
   const changeCurrentPage = num => {
+    console.log(num)
     setCurrentPage(num)
+  }
+  const [sortBy, setSortBy] = useState(localStorage.getItem('filter') ? localStorage.getItem('filter') : "최신순")
+  //localStorage.setItem('filter', sortBy)
+  console.log(sortBy)
+  if (sortBy === "인기순") {
+    onlineExhibition.sort(function (a, b) {
+      return b.like_count - a.like_count
+    })
+    console.log(1)
+  }
+
+  const keyInput = (selectedKey) => {
+    console.log(selectedKey)
+    if (selectedKey === "최신순") {
+      //setSortBy("최신순")
+      onlineExhibition.sort(function (a, b) {
+        return a.startDate < b.startDate
+      })
+      //console.log(onlineExhibition[0].startDate)
+      localStorage.setItem('filter', "최신순")
+      setSortBy("최신순")
+      console.log(2)
+    }
+    if (selectedKey === "인기순") {
+      //setSortBy("인기순")
+      onlineExhibition.sort(function (a, b) {
+        return b.like_count - a.like_count
+      })
+      //console.log(onlineExhibition[0].like_count)
+      localStorage.setItem('filter', "인기순")
+      setSortBy("인기순")
+      console.log(3)
+    }
   }
   return (
     <>
@@ -66,20 +101,16 @@ const CommunityHomePage = () => {
             <Col></Col>
             <Col>
               <NavDropdown
-                title="Dropdown"
+                title={sortBy}
                 id="nav-dropdown"
                 style={{ float: 'right' }}
+                onSelect={(selectedKey) => keyInput(selectedKey)}
               >
-                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.2">
-                  Another action
+                <NavDropdown.Item eventKey="최신순">
+                  최신순
                 </NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.3">
-                  Something else here
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item eventKey="4.4">
-                  Separated link
+                <NavDropdown.Item eventKey="인기순">
+                  인기순
                 </NavDropdown.Item>
               </NavDropdown>
             </Col>

@@ -6,6 +6,8 @@ const Post = ({ posts, loading }) => {
   if (loading) {
     return <h2>...loading</h2>
   }
+
+
   return (
     <Container>
       {posts.map(exhibition => (
@@ -15,6 +17,8 @@ const Post = ({ posts, loading }) => {
           date={exhibition.startDate}
           keyword={[exhibition.tag1, exhibition.tag2, exhibition.tag3]}
           poaster={exhibition.poster}
+          description={exhibition.description}
+          like={exhibition.like_count}
         ></Exhibition>
       ))}
     </Container>
