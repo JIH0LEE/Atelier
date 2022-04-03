@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Figure, Row, Col } from 'react-bootstrap'
+import { Button, Container, Figure, Row, Col, Form } from 'react-bootstrap'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import HeartImg from './heart.png'
 import EmptyHeartImg from './heart-2.png'
@@ -10,17 +10,14 @@ import { header } from '../../config'
 
 const ExhibitionInfo = () => {
   const { id, title, date, keyword, poaster, description, like } = useLocation().state //state
-  useEffect(() => {
-    if (isLogin()) {
-      axios.get('/api/User/likes', { params: { id: id } }, header).then(res => {
-        console.log(res.data)
-      })
-    }
-  }, [])
   const { key } = useParams()
   //const { id, title, date, keyword, poaster, description, like } = useLocation().state //state
   //console.log(title + " " + date + " " + keyword)
   const [favorite, setFavorite] = React.useState(false)
+  const [comment, setComment] = React.useState("")
+  const commentChange = e => {
+    setComment(e.target.value)
+  }
   const onHeartClick = () => {
     //if (heart == HeartImg) {
     //    setHeart(EmptyHeartImg)
@@ -29,7 +26,44 @@ const ExhibitionInfo = () => {
     //}
     setFavorite(!favorite)
     console.log('clicked')
+
+    var body = {
+      isClicked: favorite
+    }
+    axios
+      .post('/api/sign-up', body)
+      .then(res => {
+        if (res.data.success) {
+          console.log("update success")
+        } else {
+          console.log("update fail")
+        }
+      })
   }
+
+  const onCommentClick = () => {
+    var body = {
+      comment: comment
+    }
+    axios
+      .post('', body)
+      .then(res => {
+        if (res.data.success) {
+
+        } else {
+
+        }
+      })
+  }
+
+  useEffect(() => {
+    if (isLogin()) {
+      axios.get('/api/user/likes', { params: { id: id } }, header).then(res => {
+        console.log(res.data)
+      })
+    }
+  }, [])
+
   return (
     //console.log(parms.key)
     <Container>
@@ -83,7 +117,7 @@ const ExhibitionInfo = () => {
             </Row>
             <Row>
               <Container>
-                <input placeholder="댓글을 남겨보세요" type="text" style={{ width: "70%" }}></input>
+                <input placeholder="댓글을 남겨보세요" type="text" style={{ width: "70%" }} onChange={commentChange}></input>
                 <Button style={{ background: "#daa520", border: "#daa520" }}>게시</Button>
               </Container>
             </Row>
