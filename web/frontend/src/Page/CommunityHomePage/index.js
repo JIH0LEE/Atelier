@@ -16,19 +16,25 @@ import './style.css'
 import PageBar from '../../Component/PageBar'
 const CommunityHomePage = () => {
   const [onlineExhibition, setOnlineExhibition] = useState([])
+  const [change, setChange] = useState(false)
   useEffect(() => {
-    axios.get('/api/online-exhibition').then(res => {
+    const fetchData = async () => {
+      const res = await axios.get('/api/online-exhibition')
+
       setOnlineExhibition(res.data)
-      //console.log(res.data)
-      setSortMethod(localStorage.getItem('filter'))
-      if (sortMethod === "최신순") {
-        sortByDatetime()
-      }
-      if (sortMethod === "좋아요 순") {
-        sortByLike()
-      }
-    })
+      const _change = !change
+      setChange(_change)
+    }
+
+    fetchData()
   }, [])
+  useEffect(() => {
+    if (localStorage.getItem('filter') === '좋아요 순') {
+      sortByLike()
+    } else {
+      sortByDatetime()
+    }
+  }, [change])
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(5)
@@ -44,7 +50,7 @@ const CommunityHomePage = () => {
     setSortMethod('좋아요 순')
     setOnlineExhibition(_onlineExhibition)
     setCurrentPage(1)
-    localStorage.setItem('filter', "좋아요 순")
+    localStorage.setItem('filter', '좋아요 순')
   }
   const sortByDatetime = () => {
     const _onlineExhibition = [...onlineExhibition]
@@ -53,43 +59,38 @@ const CommunityHomePage = () => {
     setSortMethod('최신순')
     setOnlineExhibition(_onlineExhibition)
     setCurrentPage(1)
-    localStorage.setItem('filter', "최신순")
+    localStorage.setItem('filter', '최신순')
   }
   const changeCurrentPage = num => {
-    console.log(num)
     setCurrentPage(num)
   }
-  const [sortBy, setSortBy] = useState(localStorage.getItem('filter') ? localStorage.getItem('filter') : "최신순")
+  const [sortBy, setSortBy] = useState(
+    localStorage.getItem('filter') ? localStorage.getItem('filter') : '최신순'
+  )
   //localStorage.setItem('filter', sortBy)
-  console.log(sortBy)
-  if (sortBy === "인기순") {
+
+  if (sortBy === '인기순') {
     onlineExhibition.sort(function (a, b) {
       return b.like_count - a.like_count
     })
-    console.log(1)
   }
 
-  const keyInput = (selectedKey) => {
-    console.log(selectedKey)
-    if (selectedKey === "최신순") {
-      //setSortBy("최신순")
+  const keyInput = selectedKey => {
+    if (selectedKey === '최신순') {
       onlineExhibition.sort(function (a, b) {
         return a.startDate < b.startDate
       })
-      //console.log(onlineExhibition[0].startDate)
-      localStorage.setItem('filter', "최신순")
-      setSortBy("최신순")
-      console.log(2)
+
+      localStorage.setItem('filter', '최신순')
+      setSortBy('최신순')
     }
-    if (selectedKey === "인기순") {
-      //setSortBy("인기순")
+    if (selectedKey === '인기순') {
       onlineExhibition.sort(function (a, b) {
         return b.like_count - a.like_count
       })
-      //console.log(onlineExhibition[0].like_count)
-      localStorage.setItem('filter', "인기순")
-      setSortBy("인기순")
-      console.log(3)
+
+      localStorage.setItem('filter', '인기순')
+      setSortBy('인기순')
     }
   }
   return (
