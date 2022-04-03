@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import isLogin from '../../utils/isLogin'
 import { header } from '../../config'
+import Exhibition from '../../Component/Exhibition'
 import {
   Col,
   Container,
   Figure,
   Row,
-  Button,
+  Carousel,
   FormLabel,
   InputGroup,
   FormControl,
@@ -21,6 +22,7 @@ const UserInfoPage = () => {
   const [username, setUsername] = useState('')
   const [nickname, setNickname] = useState('')
   const [profile, setProfile] = useState(null)
+  const [onlineExhibition, setOnlineExhibition] = useState([])
   useEffect(() => {
     if (isLogin()) {
       //로컬 storage를 이용한 방법
@@ -29,6 +31,8 @@ const UserInfoPage = () => {
         setUsername(res.data.username)
         setNickname(res.data.nickname)
         setProfile(res.data.profile)
+        console.log(res.data.id)
+        setOnlineExhibition(res.data.onlineExhibition)
       })
     }
   }, [])
@@ -108,7 +112,24 @@ const UserInfoPage = () => {
           My Gallery
         </div>
       </Container>
-      <Container className="inner2"></Container>
+      <Container className="inner2">
+        <Carousel>
+          {onlineExhibition.map(data => (
+            <Carousel.Item>
+              <Exhibition
+                id={data.id}
+                title={data.title}
+                date={data.startDate}
+                keyword={[data.tag1, data.tag2, data.tag3]}
+                poaster={data.poster}
+                author={nickname}
+                likes={data.like_count}
+                description={data.description}
+              ></Exhibition>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </Container>
     </Container>
   )
 }
