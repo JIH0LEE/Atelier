@@ -53,7 +53,7 @@ const ExhibitionInfo = () => {
         </Row>
         <Row>
           <Col></Col>
-          <Button style={{ width: "50vw", marginTop: "40px", marginBottom: "40px" }}>전시회 바로 이동</Button>
+          <Button style={{ width: "50vw", marginTop: "40px", marginBottom: "40px", background: "#daa520", border: "#daa520" }}>전시회 바로 이동</Button>
           <Col></Col>
         </Row>
         <Row>
