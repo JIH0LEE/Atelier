@@ -1,7 +1,9 @@
 package com.example.backend.controller;
 
 
+import com.example.backend.model.dto.CommentDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.entity.Comment;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
 import com.example.backend.repository.OnlineExhibitionRepository;
@@ -30,9 +32,13 @@ public class OnlineController {
     }
     @GetMapping("/user/likes")
     private Boolean isHeart(@RequestParam String id, Principal principal){
-        System.out.println("1");
         Long onlineId=Long.parseLong(id);
-        System.out.println("2");
+
         return onlineExhibitionService.isHeartClicked(onlineId,principal);
+    }
+    @GetMapping("/comment")
+    private List<CommentDto> getComments(@RequestParam Long id) {
+
+        return onlineExhibitionService.findAllComments(id);
     }
 }

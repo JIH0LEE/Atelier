@@ -49,10 +49,11 @@ public class User implements UserDetails {
         this.emailAuth=auth;
     }
 
-//    @JsonIgnore
+
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<OnlineExhibition> onlineExhibition = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Comment> comments = new ArrayList<>();
 

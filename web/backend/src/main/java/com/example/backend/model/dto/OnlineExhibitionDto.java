@@ -1,5 +1,6 @@
 package com.example.backend.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +20,10 @@ public class OnlineExhibitionDto {
 
     private String description;
 
-    private LocalDateTime startDate;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yy년 MM월 dd일 HH:mm",timezone = "Asia/Seoul")
+    private LocalDateTime startDate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yy년 MM월 dd일 HH:mm",timezone = "Asia/Seoul")
     private LocalDateTime endDate;
 
     private String tag1;
