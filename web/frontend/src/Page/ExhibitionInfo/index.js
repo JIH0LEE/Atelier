@@ -13,32 +13,13 @@ const ExhibitionInfo = () => {
   const { key } = useParams()
   //const { id, title, date, keyword, poaster, description, like } = useLocation().state //state
   //console.log(title + " " + date + " " + keyword)
-  const [favorite, setFavorite] = React.useState(false)
-  const [comment, setComment] = React.useState("")
+  const [favorite, setFavorite] = useState(false)
+  const [comment, setComment] = useState("")
   const commentChange = e => {
     setComment(e.target.value)
   }
   const onHeartClick = () => {
-    //if (heart == HeartImg) {
-    //    setHeart(EmptyHeartImg)
-    //} else {
-    //    setHeart(HeartImg)
-    //}
     setFavorite(!favorite)
-    console.log('clicked')
-
-    var body = {
-      isClicked: favorite
-    }
-    axios
-      .post('/api/sign-up', body)
-      .then(res => {
-        if (res.data.success) {
-          console.log("update success")
-        } else {
-          console.log("update fail")
-        }
-      })
   }
 
   const onCommentClick = () => {
@@ -59,10 +40,38 @@ const ExhibitionInfo = () => {
   useEffect(() => {
     if (isLogin()) {
       axios.get('/api/user/likes', { params: { id: id } }, header).then(res => {
-        console.log(res.data)
+        //console.log(res.data)
+        setFavorite(res.data)
       })
     }
   }, [])
+
+  useEffect(() => {
+    if (isLogin()) {
+      //console.log(favorite)
+      var body = {
+        id: id,
+        clicked: favorite
+      }
+      //console.log(body)
+
+
+      async function post() {
+        axios
+          .post('/api/user/likes', body, header)
+          .then(res => {
+            console.log(res.data)
+            if (res.data) {
+              console.log("update success")
+            } else {
+              console.log("update fail")
+            }
+          })
+      }
+
+      post()
+    }
+  }, [favorite])
 
   return (
     //console.log(parms.key)

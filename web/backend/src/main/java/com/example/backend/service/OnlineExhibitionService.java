@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.model.dto.OnlineExhibitionDto;
 import com.example.backend.model.entity.Good;
 import com.example.backend.model.entity.OnlineExhibition;
+import com.example.backend.model.entity.User;
 import com.example.backend.repository.OnlineExhibitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,39 @@ public class OnlineExhibitionService {
             if(good.getUser()==user){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public Boolean heartUpdate(Long onlineExhibitionId, Principal principal, boolean heartCondition){
+        try{
+            System.out.println(1);
+            OnlineExhibition onlineExhibition=onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
+            List<Good> goods=onlineExhibition.getLikes();
+            System.out.println(2);
+            if(heartCondition==true){
+                System.out.println(3);
+                User user=new User();
+                System.out.println(principal);
+                user.setUsername(principal.getName());
+                System.out.println(4);
+                onlineExhibition.getLikes().add(new Good(onlineExhibitionId, true, onlineExhibition, user));
+                //onlineExhibitionRepository.save(onlineExhibition);
+                System.out.println(5);
+                return true;
+            }else{
+                System.out.println(6);
+                for (Good good : goods) {
+                    if(good.getUser().getUsername() == principal.getName()){
+                        goods.remove(good);
+                        //onlineExhibitionRepository.save(onlineExhibition);
+                        return true;
+                    }
+                }
+            }
+            //onlineExhibitionRepository.save(onlineExhibition);
+        }catch (Exception e){
+            System.out.println("error: "+e.getMessage());
         }
         return false;
     }
