@@ -18,12 +18,18 @@ const ExhibitionInfo = () => {
   const [comment, setComment] = React.useState('')
   const [commentList, setCommentList] = useState([])
   const [commentLength, setCommentLength] = useState(0)
+  const [likecount, setLikecount] = useState(like)
   const commentChange = e => {
     setComment(e.target.value)
     setCommentLength(e.target.value.length)
   }
   const onHeartClick = () => {
     setFavorite(!favorite)
+    if (favorite === true) {
+      setLikecount(likecount - 1)
+    } else {
+      setLikecount(likecount + 1)
+    }
   }
   const addComment = newComment => {
     var _commentList = [...commentList]
@@ -60,7 +66,8 @@ const ExhibitionInfo = () => {
       window.localStorage.getItem('token')
     if (isLogin()) {
       axios.get('/api/user/likes', { params: { id: id } }).then(res => {
-        setFavorite(res.data)
+        setFavorite(res.data.clicked)
+        setLikecount(res.data.likeCount)
       })
     }
     //댓글 가져오기
@@ -77,17 +84,13 @@ const ExhibitionInfo = () => {
       var body = {
         id: id,
         clicked: favorite,
+        likeCount: likecount
       }
       //console.log(body)
 
       async function post() {
         axios.post('/api/user/likes', body, header).then(res => {
-          // console.log(res.data)
-          if (res.data) {
-            console.log('update success')
-          } else {
-            console.log('update fail')
-          }
+
         })
       }
 
@@ -120,7 +123,7 @@ const ExhibitionInfo = () => {
               ></img>
               <Row>
                 <div></div>
-                <div style={{ justifyItems: 'center' }}>{like}</div>
+                <div style={{ justifyItems: 'center' }}>{likecount}</div>
                 <div></div>
               </Row>
             </Container>

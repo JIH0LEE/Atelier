@@ -33,22 +33,14 @@ public class OnlineController {
         return onlineExhibitionService.showAllOnlineExhibition();
     }
     @GetMapping("/user/likes")
-    private Boolean isHeart(@RequestParam String id, Principal principal){
-//        System.out.println("isHeart: "+principal);
-        //System.out.println("1");
+    private HeartClickDto isHeart(@RequestParam String id, Principal principal){
         Long onlineId=Long.parseLong(id);
-        //System.out.println("2");
-        return onlineExhibitionService.isHeartClicked(onlineId,principal);
+        return new HeartClickDto(onlineId, onlineExhibitionService.isHeartClicked(onlineId,principal),onlineExhibitionService.getHeartCount(onlineId));//onlineExhibitionService.isHeartClicked(onlineId,principal);
     }
 
     @PostMapping("/user/likes")
-    public Boolean heartUpdate(@RequestBody HeartClickDto heartClickDto, Principal principal){
-//        System.out.println("heartClickDto: "+heartClickDto);
-//        System.out.println("principal: "+principal.);
-        return onlineExhibitionService.heartUpdate(heartClickDto.getId(), principal, heartClickDto.getClicked());
-//        Long onlineId=Long.parseLong(id);
-
-//        return onlineExhibitionService.isHeartClicked(onlineId,principal);
+    public boolean heartUpdate(@RequestBody HeartClickDto heartClickDto, Principal principal){
+        return onlineExhibitionService.heartUpdate(heartClickDto.getId(), principal, heartClickDto.getClicked(), heartClickDto.getLikeCount());
     }
     @GetMapping("/comment")
     private List<CommentDto> getComments(@RequestParam Long id) {

@@ -60,35 +60,32 @@ public class OnlineExhibitionService {
         return false;
     }
 
-    public Boolean heartUpdate(Long onlineExhibitionId, Principal principal, boolean heartCondition) {
+    public int getHeartCount(Long onlineExhibitionId){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
+        return onlineExhibition.getLikeCount();
+    }
+
+    public boolean heartUpdate(Long onlineExhibitionId, Principal principal, boolean heartCondition, int likeCount) {
         try {
-//            System.out.println(1);
             OnlineExhibition onlineExhibition = onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
             List<Good> goods = onlineExhibition.getLikes();
-//            System.out.println(2);
             if (heartCondition == true) {
-                System.out.println(3);
                 User user=userRepository.findUserByUsername(principal.getName()).get();
-//                User user = new User();
-                System.out.println(principal);
-//                user.setUsername(principal.getName());
-//                System.out.println(4);
                 onlineExhibition.getLikes().add(new Good(onlineExhibitionId, true, onlineExhibition, user));
+                onlineExhibition.setLikeCount(likeCount);
                 onlineExhibitionRepository.save(onlineExhibition);
-//                System.out.println(5);
                 return true;
             } else {
-                System.out.println(6);
                 for (Good good : goods) {
                     if (good.getUser().getUsername().equals( principal.getName())) {
                         goods.remove(good);
                         likeRepository.delete(good);
+                        onlineExhibition.setLikeCount(likeCount);
                         onlineExhibitionRepository.save(onlineExhibition);
                         return true;
                     }
                 }
             }
-            //onlineExhibitionRepository.save(onlineExhibition);
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
         }
