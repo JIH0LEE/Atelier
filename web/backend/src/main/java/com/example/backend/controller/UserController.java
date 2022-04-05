@@ -79,12 +79,12 @@ public class UserController {
 
     @GetMapping("/user/user-info")
     private User UserInfo(Principal principal){
-        //System.out.println(principal.getName());
+        System.out.println(principal);
         return userService.getUser(principal.getName());
     }
 
     @PostMapping("/user/user-info")
-    public NicknameChangeSuccessDto UserInfoChange(@RequestBody NicknameConfirmDto nicknameConfirmDto, Principal principal){
+    public NicknameChangeSuccessDto UserInfoChange(@RequestBody NicknameConfirmDto nicknameConfirmDto, Principal principal){;
         String nickname= nicknameConfirmDto.getNickname();
         if(userService.existNickname(nickname)){
             return new NicknameChangeSuccessDto(false);//"이미 있음";

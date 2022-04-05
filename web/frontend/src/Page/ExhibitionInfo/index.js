@@ -37,9 +37,12 @@ const ExhibitionInfo = () => {
   }
 
   useEffect(() => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
     if (isLogin()) {
-      axios.get('/api/user/likes', { params: { id: id } }, header).then(res => {
-        //console.log(res.data)
+      console.log(header)
+      axios.get('/api/user/likes', { params: { id: id } }).then(res => {
+        console.log(res.data)
         setFavorite(res.data)
       })
     }
@@ -50,26 +53,25 @@ const ExhibitionInfo = () => {
   }, [])
 
   useEffect(() => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
     if (isLogin()) {
       //console.log(favorite)
       var body = {
         id: id,
-        clicked: favorite
+        clicked: favorite,
       }
       //console.log(body)
 
-
       async function post() {
-        axios
-          .post('/api/user/likes', body, header)
-          .then(res => {
-            console.log(res.data)
-            if (res.data) {
-              console.log("update success")
-            } else {
-              console.log("update fail")
-            }
-          })
+        axios.post('/api/user/likes', body, header).then(res => {
+          // console.log(res.data)
+          if (res.data) {
+            console.log('update success')
+          } else {
+            console.log('update fail')
+          }
+        })
       }
 
       post()

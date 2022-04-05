@@ -56,7 +56,7 @@ public class User implements UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Comment> comments = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Good> likes = new ArrayList<>();
 

@@ -6,6 +6,7 @@ import com.example.backend.model.entity.Good;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
 import com.example.backend.repository.CommentRepository;
+import com.example.backend.repository.LikeRepository;
 import com.example.backend.repository.OnlineExhibitionRepository;
 import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class OnlineExhibitionService {
 
     private final OnlineExhibitionRepository onlineExhibitionRepository;
     private final CommentRepository commentRepository;
+    private final LikeRepository likeRepository;
     private final UserRepository userRepository;
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
@@ -47,46 +49,49 @@ public class OnlineExhibitionService {
     public Boolean isHeartClicked(Long onlineExhibitionId, Principal user){
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
         List<Good> goods=onlineExhibition.getLikes();
+
         for (Good good : goods) {
-            if(good.getUser()==user){
+            if(good.getUser().getUsername().equals(user.getName())){
                 return true;
             }
         }
         return false;
     }
 
-    public Boolean heartUpdate(Long onlineExhibitionId, Principal principal, boolean heartCondition){
-        try{
-            System.out.println(1);
-            OnlineExhibition onlineExhibition=onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
-            List<Good> goods=onlineExhibition.getLikes();
-            System.out.println(2);
-            if(heartCondition==true){
+    public Boolean heartUpdate(Long onlineExhibitionId, Principal principal, boolean heartCondition) {
+        try {
+//            System.out.println(1);
+            OnlineExhibition onlineExhibition = onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
+            List<Good> goods = onlineExhibition.getLikes();
+//            System.out.println(2);
+            if (heartCondition == true) {
                 System.out.println(3);
-                User user=new User();
+                User user=userRepository.findUserByUsername(principal.getName()).get();
+//                User user = new User();
                 System.out.println(principal);
-                user.setUsername(principal.getName());
-                System.out.println(4);
+//                user.setUsername(principal.getName());
+//                System.out.println(4);
                 onlineExhibition.getLikes().add(new Good(onlineExhibitionId, true, onlineExhibition, user));
-                //onlineExhibitionRepository.save(onlineExhibition);
-                System.out.println(5);
+                onlineExhibitionRepository.save(onlineExhibition);
+//                System.out.println(5);
                 return true;
-            }else{
+            } else {
                 System.out.println(6);
                 for (Good good : goods) {
-                    if(good.getUser().getUsername() == principal.getName()){
+                    if (good.getUser().getUsername().equals( principal.getName())) {
                         goods.remove(good);
-                        //onlineExhibitionRepository.save(onlineExhibition);
+                        likeRepository.delete(good);
+                        onlineExhibitionRepository.save(onlineExhibition);
                         return true;
                     }
                 }
             }
             //onlineExhibitionRepository.save(onlineExhibition);
-        }catch (Exception e){
-            System.out.println("error: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
         }
         return false;
-
+    }
     public List<CommentDto> findAllComments(Long id){
 
         Optional<OnlineExhibition> onlineExhibition=onlineExhibitionRepository.findById(id);
