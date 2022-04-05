@@ -15,7 +15,6 @@ import {
   FormControl,
 } from 'react-bootstrap'
 import './style.css'
-import { button_theme_long } from '../../Style/theme'
 import ModalButton from './ModalButton'
 import ModalButtonImage from './ModalButtonImage'
 const UserInfoPage = () => {

@@ -10,6 +10,7 @@ const Header = () => {
   const logout = () => {
     window.localStorage.setItem('isLogin', false)
     window.localStorage.removeItem('token')
+    window.localStorage.removeItem('username')
     removeToken()
     navigate('/')
   }

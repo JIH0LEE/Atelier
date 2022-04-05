@@ -1,14 +1,28 @@
+import axios from 'axios'
 import React from 'react'
-import { Container, Row, Col, Figure } from 'react-bootstrap'
+import { Container, Row, Col, Figure, CloseButton } from 'react-bootstrap'
 import './style.css'
-const Comment = ({ comment }) => {
+const Comment = ({ comment, deleteFunc }) => {
+  const isMyComment = comment.username === localStorage.getItem('username')
+
+  const deleteComment = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.delete(`/api/user/delete-comment/${comment.id}`).then(res => {
+      console.log(res.data)
+      if (res.data) {
+        deleteFunc(comment)
+      }
+    })
+    deleteFunc(comment)
+  }
   // #daa520 #f3ca4d
   return (
     <Container
       style={{
         width: '80%',
-        marginTop: '5px',
-        marginBottom: '5px',
+        marginTop: '0px',
+        marginBottom: '0px',
         borderBottom: '3px #daa520 solid',
         borderRadius: '0px',
         padding: '5px',
@@ -38,6 +52,9 @@ const Comment = ({ comment }) => {
               <Row>{comment.description}</Row>
             </Container>
           </Col>
+          <Container>
+            {isMyComment ? <CloseButton onClick={deleteComment} /> : <></>}
+          </Container>
         </Col>
       </Row>
     </Container>

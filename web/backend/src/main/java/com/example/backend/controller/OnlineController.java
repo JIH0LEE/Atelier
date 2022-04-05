@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 
 import com.example.backend.model.dto.CommentDto;
+import com.example.backend.model.dto.CommentReqDto;
 import com.example.backend.model.dto.HeartClickDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
 import com.example.backend.model.entity.OnlineExhibition;
@@ -22,6 +23,7 @@ import java.util.List;
 public class OnlineController {
 
     private final OnlineExhibitionService onlineExhibitionService;
+
 
 
 
@@ -50,7 +52,18 @@ public class OnlineController {
     }
     @GetMapping("/comment")
     private List<CommentDto> getComments(@RequestParam Long id) {
-
         return onlineExhibitionService.findAllComments(id);
+    }
+    @PostMapping("/user/comment")
+    private CommentDto makeComment(@RequestBody CommentReqDto commentReqDto,Principal principal){
+
+        System.out.println(commentReqDto);
+
+        return onlineExhibitionService.makeComment(commentReqDto,principal);
+    }
+    @DeleteMapping("/user/delete-comment/{id}")
+    private Boolean deleteComment(@PathVariable Long id,Principal principal){
+
+        return onlineExhibitionService.deleteComment(id);
     }
 }

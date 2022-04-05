@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Figure, Row, Col, Form } from 'react-bootstrap'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Button, Container, Figure, Row, Col } from 'react-bootstrap'
+import { useLocation, useParams } from 'react-router-dom'
 import HeartImg from './heart.png'
 import EmptyHeartImg from './heart-2.png'
 import Comment from '../../Component/Comment'
@@ -17,32 +17,49 @@ const ExhibitionInfo = () => {
   const [favorite, setFavorite] = React.useState(false)
   const [comment, setComment] = React.useState('')
   const [commentList, setCommentList] = useState([])
+  const [commentLength, setCommentLength] = useState(0)
   const commentChange = e => {
     setComment(e.target.value)
+    setCommentLength(e.target.value.length)
   }
   const onHeartClick = () => {
     setFavorite(!favorite)
+  }
+  const addComment = newComment => {
+    var _commentList = [...commentList]
+    _commentList.push(newComment)
+    setCommentList(_commentList)
   }
 
   //댓글 등록
   const onCommentClick = () => {
     var body = {
-      comment: comment,
+      description: comment,
+      online_exhibition_id: id,
     }
-    axios.post('', body).then(res => {
-      if (res.data.success) {
-      } else {
-      }
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.post('/api/user/comment', body).then(res => {
+      console.log(res.data)
+      addComment(res.data)
     })
+    //적었던 댓글 초기화
+    document.getElementById('commentArea').value = ''
+    setComment('')
+    setCommentLength(0)
+  }
+  const deleteComment = target => {
+    var _commentList = [...commentList]
+    var idx = _commentList.findIndex(comment => comment.id === target.id)
+    _commentList.splice(idx, 1)
+    setCommentList(_commentList)
   }
 
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     if (isLogin()) {
-      console.log(header)
       axios.get('/api/user/likes', { params: { id: id } }).then(res => {
-        console.log(res.data)
         setFavorite(res.data)
       })
     }
@@ -127,7 +144,7 @@ const ExhibitionInfo = () => {
         </Row>
         <Row>
           {commentList.map(comment => (
-            <Comment comment={comment}></Comment>
+            <Comment comment={comment} deleteFunc={deleteComment}></Comment>
           ))}
         </Row>
         <Row style={{ marginTop: '20px' }}>
@@ -139,19 +156,44 @@ const ExhibitionInfo = () => {
                 textAlign: 'left',
               }}
             >
-              <Container style={{ width: '70%' }}>
-                User name 사용자이름
+              <Container style={{ width: '80%' }}>
+                <Container
+                  style={{ width: '90%', marginLeft: '0px', padding: '0px' }}
+                >
+                  <div style={{ float: 'right' }}>{commentLength}/400</div>
+                </Container>
               </Container>
             </Row>
             <Row>
-              <Container>
-                <input
-                  placeholder="댓글을 남겨보세요"
-                  type="text"
-                  style={{ width: '70%' }}
-                  onChange={commentChange}
-                ></input>
-                <Button style={{ background: '#daa520', border: '#daa520' }}>
+              <Container style={{ width: '80%' }}>
+                {isLogin() ? (
+                  <textarea
+                    id="commentArea"
+                    maxLength={400}
+                    placeholder="댓글을 남겨보세요"
+                    style={{ width: '90%', height: '70px' }}
+                    onChange={commentChange}
+                  ></textarea>
+                ) : (
+                  <textarea
+                    maxLength={400}
+                    placeholder="로그인을 해주세요"
+                    style={{ width: '90%', height: '70px' }}
+                    onChange={commentChange}
+                    disabled={true}
+                  ></textarea>
+                )}
+                <Button
+                  style={{
+                    background: '#daa520',
+                    border: '#daa520',
+                    width: '10%',
+                    height: '70px',
+                    float: 'right',
+                  }}
+                  disabled={!isLogin()}
+                  onClick={onCommentClick}
+                >
                   게시
                 </Button>
               </Container>

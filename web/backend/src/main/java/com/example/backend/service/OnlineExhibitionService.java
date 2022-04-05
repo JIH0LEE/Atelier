@@ -1,7 +1,9 @@
 package com.example.backend.service;
 
 import com.example.backend.model.dto.CommentDto;
+import com.example.backend.model.dto.CommentReqDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.entity.Comment;
 import com.example.backend.model.entity.Good;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
@@ -102,9 +104,41 @@ public class OnlineExhibitionService {
                             .nickname(comment.getUser().getNickname())
                             .description(comment.getDescription())
                             .profile(comment.getUser().getProfile())
-                    .build());
+                            .id(comment.getId())
+                            .build());
         });
         return comments;
+    }
+
+    public CommentDto makeComment(CommentReqDto commentReqDto,Principal principal){
+
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(commentReqDto.getOnlineExhibitionId()).get();
+        User user=userRepository.findUserByUsername(principal.getName()).get();
+        Comment comment=Comment.builder()
+                .onlineExhibition(onlineExhibition)
+                .description(commentReqDto.getDescription())
+                .user(user)
+                .build();
+        onlineExhibition.getComments().add(comment);
+        onlineExhibitionRepository.save(onlineExhibition);
+        commentRepository.save(comment);
+        return CommentDto.builder()
+                .profile(user.getProfile())
+                .description(comment.getDescription())
+                .nickname(user.getNickname())
+                .username(user.getUsername())
+                .id(comment.getId()).build();
+    }
+
+    public Boolean deleteComment(Long id){
+
+        try{
+            commentRepository.deleteById(id);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 }

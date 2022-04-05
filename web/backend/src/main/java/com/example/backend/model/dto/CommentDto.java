@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class CommentDto {
+    private Long id;
     private String username;
     private String nickname;
     private String description;
