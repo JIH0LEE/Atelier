@@ -1,10 +1,13 @@
 package com.example.backend.service;
 
+import com.example.backend.model.dto.CommentDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
 import com.example.backend.model.entity.Good;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
+import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.OnlineExhibitionRepository;
+import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class OnlineExhibitionService {
 
     private final OnlineExhibitionRepository onlineExhibitionRepository;
+    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
         List<OnlineExhibitionDto> result=new ArrayList<>();
@@ -81,6 +86,20 @@ public class OnlineExhibitionService {
             System.out.println("error: "+e.getMessage());
         }
         return false;
+
+    public List<CommentDto> findAllComments(Long id){
+
+        Optional<OnlineExhibition> onlineExhibition=onlineExhibitionRepository.findById(id);
+        List<CommentDto> comments=new ArrayList<>();
+        onlineExhibition.get().getComments().forEach((comment)->{
+            comments.add(CommentDto.builder()
+                            .username(comment.getUser().getUsername())
+                            .nickname(comment.getUser().getNickname())
+                            .description(comment.getDescription())
+                            .profile(comment.getUser().getProfile())
+                    .build());
+        });
+        return comments;
     }
 
 }

@@ -50,12 +50,15 @@ public class OnlineExhibition {
     @JsonIgnore
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Comment> comments = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Good> likes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Content> contents = new ArrayList<>();
 

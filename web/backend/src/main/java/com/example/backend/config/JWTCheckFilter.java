@@ -35,6 +35,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 chain.doFilter(request, response);
                 return;
             }catch(Exception e){
+                System.out.println(e.getMessage());
                 response.setStatus(200);
                 response.setContentType("application/json;charset=UTF-8");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -56,6 +57,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 chain.doFilter(request, response);
 
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 response.setStatus(200);
                 response.setContentType("application/json;charset=UTF-8");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

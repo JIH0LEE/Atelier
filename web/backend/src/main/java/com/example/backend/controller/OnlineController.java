@@ -43,5 +43,13 @@ public class OnlineController {
         System.out.println("heartClickDto: "+heartClickDto);
         System.out.println("principal: "+principal);
         return onlineExhibitionService.heartUpdate(heartClickDto.getId(), principal, heartClickDto.getClicked());
+        Long onlineId=Long.parseLong(id);
+
+        return onlineExhibitionService.isHeartClicked(onlineId,principal);
+    }
+    @GetMapping("/comment")
+    private List<CommentDto> getComments(@RequestParam Long id) {
+
+        return onlineExhibitionService.findAllComments(id);
     }
 }
