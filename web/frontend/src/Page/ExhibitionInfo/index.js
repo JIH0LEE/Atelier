@@ -7,7 +7,7 @@ import Comment from '../../Component/Comment'
 import isLogin from '../../utils/isLogin'
 import axios from 'axios'
 import { header } from '../../config'
-
+import './style.css'
 const ExhibitionInfo = () => {
   const { id, title, date, keyword, poaster, description, like } =
     useLocation().state //state
@@ -84,14 +84,12 @@ const ExhibitionInfo = () => {
       var body = {
         id: id,
         clicked: favorite,
-        likeCount: likecount
+        likeCount: likecount,
       }
       //console.log(body)
 
       async function post() {
-        axios.post('/api/user/likes', body, header).then(res => {
-
-        })
+        axios.post('/api/user/likes', body, header).then(res => {})
       }
 
       post()
@@ -105,31 +103,35 @@ const ExhibitionInfo = () => {
         className="landing-container"
         style={{ padding: '5px', display: 'block' }}
       >
-        <Row style={{ marginTop: '20px' }}>
-          <Col>
-            <Figure.Image width={300} height={300} src={poaster} />
-          </Col>
-          <Col xs={6} style={{ textAlign: 'left', fontSize: '20px' }}>
-            <div style={{ margin: 'auto' }}>{title}</div>
-            <div style={{ marginTop: '5px' }}>{date}</div>
-            <div style={{ marginTop: '5px', fontStyle: 'italic' }}>
-              #{keyword[0]} #{keyword[1]} #{keyword[2]}
-            </div>
-            <Container style={{ display: 'flex', marginTop: '5px' }}>
-              <img
-                src={favorite ? HeartImg : EmptyHeartImg}
-                style={{ width: '3vw', padding: '5px' }}
-                onClick={onHeartClick}
-              ></img>
-              <Row>
-                <div></div>
-                <div style={{ justifyItems: 'center' }}>{likecount}</div>
-                <div></div>
-              </Row>
-            </Container>
-            <div style={{ marginTop: '20px' }}>{description}</div>
-          </Col>
-        </Row>
+        <Container style={{ width: '80%' }}>
+          <Row style={{ marginTop: '20px' }}>
+            <Col>
+              <Container className="exhibition-img-container">
+                <Figure.Image className="img" src={poaster} />
+              </Container>
+            </Col>
+            <Col xs={6} style={{ textAlign: 'left', fontSize: '20px' }}>
+              <div style={{ margin: 'auto' }}>{title}</div>
+              <div style={{ marginTop: '5px' }}>{date}</div>
+              <div style={{ marginTop: '5px', fontStyle: 'italic' }}>
+                #{keyword[0]} #{keyword[1]} #{keyword[2]}
+              </div>
+              <Container style={{ display: 'flex', marginTop: '5px' }}>
+                <img
+                  src={favorite ? HeartImg : EmptyHeartImg}
+                  style={{ width: '3vw', padding: '5px' }}
+                  onClick={onHeartClick}
+                ></img>
+                <Row>
+                  <div></div>
+                  <div style={{ justifyItems: 'center' }}>{likecount}</div>
+                  <div></div>
+                </Row>
+              </Container>
+              <div style={{ marginTop: '20px' }}>{description}</div>
+            </Col>
+          </Row>
+        </Container>
         <Row>
           <Col></Col>
           <Button
