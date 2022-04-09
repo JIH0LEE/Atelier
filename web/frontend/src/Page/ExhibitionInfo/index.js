@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Figure, Row, Col } from 'react-bootstrap'
+import {
+  Button,
+  Container,
+  Figure,
+  Row,
+  Col,
+  Badge,
+  FormLabel,
+} from 'react-bootstrap'
 import { useLocation, useParams } from 'react-router-dom'
 import HeartImg from './heart.png'
 import EmptyHeartImg from './heart-2.png'
@@ -9,7 +17,7 @@ import axios from 'axios'
 import { header } from '../../config'
 import './style.css'
 const ExhibitionInfo = () => {
-  const { id, title, date, keyword, poaster, description, like } =
+  const { id, title, date, keyword, poaster, description, like, author } =
     useLocation().state //state
   const { key } = useParams()
   //const { id, title, date, keyword, poaster, description, like } = useLocation().state //state
@@ -100,7 +108,7 @@ const ExhibitionInfo = () => {
     //console.log(parms.key)
     <Container>
       <Container
-        className="landing-container"
+        className="exhibitionInfo-container"
         style={{ padding: '5px', display: 'block' }}
       >
         <Container style={{ width: '80%' }}>
@@ -110,25 +118,44 @@ const ExhibitionInfo = () => {
                 <Figure.Image className="img" src={poaster} />
               </Container>
             </Col>
-            <Col xs={6} style={{ textAlign: 'left', fontSize: '20px' }}>
-              <div style={{ margin: 'auto' }}>{title}</div>
-              <div style={{ marginTop: '5px' }}>{date}</div>
-              <div style={{ marginTop: '5px', fontStyle: 'italic' }}>
-                #{keyword[0]} #{keyword[1]} #{keyword[2]}
-              </div>
-              <Container style={{ display: 'flex', marginTop: '5px' }}>
+            <Col xs={6}>
+              <Container className="title-container">
+                <Badge
+                  className="title-badge1"
+                  bg="None"
+                  style={{ margin: 'auto' }}
+                >
+                  {title}
+                </Badge>
+              </Container>
+              <Container className="author-container">
+                {author} 님의 작품
+              </Container>
+
+              <Container className="tag-label-container1">
+                <Badge className="tag-badge" bg="None" pill>
+                  #{keyword[0]}
+                </Badge>
+                <Badge className="tag-badge" bg="None" pill>
+                  #{keyword[1]}
+                </Badge>
+                <Badge className="tag-badge" bg="None" pill>
+                  #{keyword[2]}
+                </Badge>
+              </Container>
+              <Container className="description-container">
+                {description}
+              </Container>
+
+              <Container className="heart-container">
                 <img
                   src={favorite ? HeartImg : EmptyHeartImg}
-                  style={{ width: '3vw', padding: '5px' }}
+                  style={{ width: '20px' }}
                   onClick={onHeartClick}
                 ></img>
-                <Row>
-                  <div></div>
-                  <div style={{ justifyItems: 'center' }}>{likecount}</div>
-                  <div></div>
-                </Row>
+                {likecount} likes
               </Container>
-              <div style={{ marginTop: '20px' }}>{description}</div>
+              <Container className="date-container">{date}</Container>
             </Col>
           </Row>
         </Container>
