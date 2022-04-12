@@ -9,6 +9,7 @@ import UserInfoPage from './Page/UserInfoPage'
 import RegisterPage from './Page/RegisterPage'
 import EmailSend from './Page/EmailSend'
 import EmailOk from './Page/EmailOk'
+import ExhibitionMakePage from './Page/ExhibitionMakePage'
 import Header from './Component/Header'
 import Navigation from './Component/Navigation'
 
@@ -51,6 +52,10 @@ function App() {
           <Route path="/welcome" element={<EmailOk />} />
           <Route exact path="/user-info" element={<UserInfoPage />} />
           <Route path="/test" element={<TestPage></TestPage>}></Route>
+          <Route
+            path="/make-exhibition"
+            element={<ExhibitionMakePage></ExhibitionMakePage>}
+          ></Route>
           <Route
             path="/community-home"
             element={<CommunityHomePage></CommunityHomePage>}
