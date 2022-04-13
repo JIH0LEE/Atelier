@@ -62,4 +62,5 @@ public class OnlineExhibition {
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Content> contents = new ArrayList<>();
 
+    private int step;
 }

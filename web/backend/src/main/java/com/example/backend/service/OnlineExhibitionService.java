@@ -13,6 +13,7 @@ import com.example.backend.repository.OnlineExhibitionRepository;
 import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -136,6 +137,34 @@ public class OnlineExhibitionService {
             return false;
         }
         return true;
+    }
+
+    public OnlineExhibition makeOnlineExhibition(OnlineExhibitionDto onlineExhibitionDto){
+        int step=onlineExhibitionDto.getStep();
+        String title=onlineExhibitionDto.getTitle();
+        String tag1=onlineExhibitionDto.getTag1();
+        String tag2=onlineExhibitionDto.getTag2();
+        String tag3=onlineExhibitionDto.getTag3();
+        String poster=onlineExhibitionDto.getPoster();
+        String description=onlineExhibitionDto.getDescription();
+
+        OnlineExhibition onlineExhibition = OnlineExhibition.builder()
+                .step(step)
+                .title(title)
+                .tag1(tag1)
+                .tag2(tag2)
+                .tag3(tag3)
+                .poster(poster)
+                .description(description)
+                .build();
+        return onlineExhibitionRepository.save(onlineExhibition);
+    }
+
+    public Boolean saveCurrentExhibition(OnlineExhibition onlineExhibition, Principal principal){
+        User user=userRepository.findUserByUsername(principal.getName()).get(); // User 정보
+
+        //OnlineExhibition onlineExhibition
+        return false;
     }
 
 }
