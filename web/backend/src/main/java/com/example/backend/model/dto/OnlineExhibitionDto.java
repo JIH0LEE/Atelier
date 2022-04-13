@@ -2,10 +2,8 @@ package com.example.backend.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class OnlineExhibitionDto {
     private Long id;
 
@@ -38,4 +37,6 @@ public class OnlineExhibitionDto {
     private int likeCount=0;
 
     private String author;
+
+    private int step;
 }
