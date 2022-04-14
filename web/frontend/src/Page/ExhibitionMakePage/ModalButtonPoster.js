@@ -7,23 +7,23 @@ import './style.css'
 
 const ModalPosterButton = props => {
   const [show, setShow] = useState(false)
-  const [curImage, setcurImage] = useState(props.profile)
+  const [curImage, setcurImage] = useState(props.poster)
   const [uploadFile, setuploadFile] = useState()
   const handleClose = () => setShow(false)
   const handleShow = () => {
-    setcurImage(props.profile)
+    setcurImage(props.poster)
     setShow(true)
   }
   const saveFileImage = e => {
     setcurImage(URL.createObjectURL(e.target.files[0]))
-    console.log(URL.createObjectURL(e.target.files[0]))
-    console.log(e.target.files[0])
     setuploadFile(e.target.files[0])
   }
 
   const submit = () => {
-    const formData = new FormData()
-    formData.append('profile', uploadFile)
+    props.func(uploadFile, curImage)
+    handleClose()
+    // const formData = new FormData()
+    // formData.append('profile', uploadFile)
     // axios.post('/api/user/change-profile', formData, header).then(res => {
     //   if (res.data.success) {
     //     props.func(res.data.url)

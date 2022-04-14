@@ -93,7 +93,26 @@
 }
 
 .inner #elem3 > .col > .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 80%;
   width: 80%;
   border: solid 1px black;
+  margin: auto;
+}
+.inner #elem3 > .col > .image-container > .img1 {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 0px;
+}
+.inner #elem3 > .col > .image-container > .img2 {
+  display: inline-block;
+  height: 100%;
+
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 0px;
 }
