@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class OnlineExhibitionService {
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
+    private final S3Service s3Service;
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
         List<OnlineExhibitionDto> result=new ArrayList<>();
@@ -139,7 +141,7 @@ public class OnlineExhibitionService {
         return true;
     }
 
-    public OnlineExhibition makeOnlineExhibition(OnlineExhibitionDto onlineExhibitionDto, Principal principal){
+    public OnlineExhibition makeOnlineExhibition(OnlineExhibitionDto onlineExhibitionDto, Principal principal) throws IOException {
         int step=onlineExhibitionDto.getStep();
         String title=onlineExhibitionDto.getTitle();
         String tag1=onlineExhibitionDto.getTag1();
@@ -149,18 +151,23 @@ public class OnlineExhibitionService {
         String description=onlineExhibitionDto.getDescription();
         User user=userRepository.findUserByUsername(principal.getName()).get();
 
-
         OnlineExhibition onlineExhibition = OnlineExhibition.builder()
                 .step(step)
                 .title(title)
                 .tag1(tag1)
                 .tag2(tag2)
                 .tag3(tag3)
-                .poster(poster)
                 .description(description)
+                .poster(poster)
                 .user(user)
                 .build();
+
         return onlineExhibitionRepository.save(onlineExhibition);
+    }
+
+    public String savePoster(MultipartFile file) throws IOException {
+        String posterURL =s3Service.upload(file,"poster");
+        return posterURL;
     }
 
     public Boolean saveCurrentExhibition(OnlineExhibition onlineExhibition, Principal principal){

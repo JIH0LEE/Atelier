@@ -82,7 +82,7 @@ public class S3Service {
     //S3 파일 삭제
     public void deleteS3File(String imgURL){
         String fileName = imgURL.substring(S3_URL.length()+1);
-        deleteFile(fileName);
+        //deleteFile(fileName);
     }
 
     public void deleteFile(String fileName) {

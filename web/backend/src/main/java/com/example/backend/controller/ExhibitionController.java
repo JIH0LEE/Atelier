@@ -7,6 +7,7 @@ import com.example.backend.service.OnlineExhibitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @RequiredArgsConstructor
@@ -16,19 +17,24 @@ public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
 
     @PostMapping(value = "/user/make-exhibition")
-    private OnlineExhibition makeOnlineExhibition(MakeExhibitionDto makeExhibitionDto, Principal principal){
-        OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
+    private String makeOnlineExhibition(MakeExhibitionDto makeExhibitionDto, Principal principal){
+        try{
+            OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
 
-        onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
-        onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
-        onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
-        onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
-        onlineExhibitionDto.setTag3(makeExhibitionDto.getTag3());
-        onlineExhibitionDto.setPoster(makeExhibitionDto.getPoster().toString());
-        onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
+            onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
+            onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
+            onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
+            onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
+            onlineExhibitionDto.setTag3(makeExhibitionDto.getTag3());
+            String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
+            onlineExhibitionDto.setPoster(posterURL);
+            onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
 
-        OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
+            OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
 
-        return onlineExhibition;
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 }
