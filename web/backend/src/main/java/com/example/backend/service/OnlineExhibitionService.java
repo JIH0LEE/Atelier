@@ -139,7 +139,7 @@ public class OnlineExhibitionService {
         return true;
     }
 
-    public OnlineExhibition makeOnlineExhibition(OnlineExhibitionDto onlineExhibitionDto){
+    public OnlineExhibition makeOnlineExhibition(OnlineExhibitionDto onlineExhibitionDto, Principal principal){
         int step=onlineExhibitionDto.getStep();
         String title=onlineExhibitionDto.getTitle();
         String tag1=onlineExhibitionDto.getTag1();
@@ -147,6 +147,8 @@ public class OnlineExhibitionService {
         String tag3=onlineExhibitionDto.getTag3();
         String poster=onlineExhibitionDto.getPoster();
         String description=onlineExhibitionDto.getDescription();
+        User user=userRepository.findUserByUsername(principal.getName()).get();
+
 
         OnlineExhibition onlineExhibition = OnlineExhibition.builder()
                 .step(step)
@@ -156,6 +158,7 @@ public class OnlineExhibitionService {
                 .tag3(tag3)
                 .poster(poster)
                 .description(description)
+                .user(user)
                 .build();
         return onlineExhibitionRepository.save(onlineExhibition);
     }

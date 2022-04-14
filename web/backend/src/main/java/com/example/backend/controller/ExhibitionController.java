@@ -27,7 +27,7 @@ public class ExhibitionController {
         onlineExhibitionDto.setPoster(makeExhibitionDto.getPoster().toString());
         onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
 
-        OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto);
+        OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
 
         return onlineExhibition;
     }

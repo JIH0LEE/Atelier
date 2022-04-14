@@ -39,4 +39,5 @@ public class OnlineExhibitionDto {
     private String author;
 
     private int step;
+
 }
