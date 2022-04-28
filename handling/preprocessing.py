@@ -97,7 +97,8 @@ class Denoiser():
         text = int(text)
         text = str(text)
         if len(text) == 8: text = text[2:]
-        if text == '10101': return '999999'     # 상시운영
+        if text == '10101': text = '999999'     # 상시운영
+        return text
         
     
     # 텍스트(위치) 전처리
