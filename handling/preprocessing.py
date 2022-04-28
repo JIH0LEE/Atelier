@@ -2,7 +2,6 @@ import re
 import pandas as pd
 import warnings
 warnings.filterwarnings(action='ignore')
-
 from kss import split_sentences
 from hanspell import spell_checker
 
