@@ -92,13 +92,12 @@ class Denoiser():
     
     # 텍스트(날짜) 전처리
     def denoise_date(self, text):
-        if pd.isna(text): return '999998'      # 미정
-        if text == '런': return '999997'       # 오픈런 
+        if pd.isna(text): return '999998'       # 미정
+        if text == '런': return '999997'        # 오픈런 
         text = int(text)
         text = str(text)
         if len(text) == 8: text = text[2:]
-        if text == '10101': text = '999999'     # 상시운영
-        return text
+        if text == '10101': return '999999'     # 상시운영
         
     
     # 텍스트(위치) 전처리
