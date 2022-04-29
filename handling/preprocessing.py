@@ -3,6 +3,7 @@ import pandas as pd
 import warnings
 warnings.filterwarnings(action='ignore')
 from kss import split_sentences
+from pykospacing import spacing
 from hanspell import spell_checker
 
 
@@ -126,6 +127,7 @@ class Denoiser():
             text = Remover().remove_special_characters(text)
             text = Remover().remove_url(text)
             text = Remover().remove_chinese(text)
+            text = spacing(text)
         return text.strip()
         
         
@@ -138,6 +140,7 @@ class Denoiser():
                 text = Remover().clean_text(text)        
             except:
                 pass
+            text = spacing(text)
         return text.strip()
 
 
