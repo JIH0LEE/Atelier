@@ -10,10 +10,11 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
-const ExhibitionMakePage = () => {
+const ExhibitionMakeStartPage = () => {
   const [title, setTitle] = useState('')
   const [tag1, setTag1] = useState('')
   const [tag2, setTag2] = useState('')
@@ -23,7 +24,8 @@ const ExhibitionMakePage = () => {
   const [showingPoster, setShowingPoster] = useState(null)
   const [poster, setPoster] = useState(null)
   const [step, setStep] = useState(1)
-
+  let params = useParams()
+  let pageStep = params.step
   const isWider = src => {
     var img = new Image()
     img.src = src
@@ -79,20 +81,22 @@ const ExhibitionMakePage = () => {
     })
   }
   const save = () => {
-    const formData = new FormData()
-    formData.append('step', step + 1)
-    formData.append('title', title)
-    formData.append('tag1', tag1)
-    formData.append('tag2', tag2)
-    formData.append('tag3', tag3)
-    formData.append('poster', poster)
-    formData.append('description', description)
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/make-exhibition', formData).then(res => {
-      console.log(res)
-    })
+    console.log(pageStep)
+    // const formData = new FormData()
+    // formData.append('step', step + 1)
+    // formData.append('title', title)
+    // formData.append('tag1', tag1)
+    // formData.append('tag2', tag2)
+    // formData.append('tag3', tag3)
+    // formData.append('poster', poster)
+    // formData.append('description', description)
+    // axios.defaults.headers.common['Authorization'] =
+    //   window.localStorage.getItem('token')
+    // axios.post('/api/user/make-exhibition', formData).then(res => {
+    //   console.log(res)
+    // })
   }
+
   return (
     <Container className="exhibition_make-container">
       <Container className="inner">
@@ -177,4 +181,4 @@ const ExhibitionMakePage = () => {
   )
 }
 
-export default ExhibitionMakePage
+export default ExhibitionMakeStartPage

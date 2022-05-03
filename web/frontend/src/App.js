@@ -9,7 +9,7 @@ import UserInfoPage from './Page/UserInfoPage'
 import RegisterPage from './Page/RegisterPage'
 import EmailSend from './Page/EmailSend'
 import EmailOk from './Page/EmailOk'
-import ExhibitionMakePage from './Page/ExhibitionMakePage'
+import ExhibitionMakePage from './Page/ExhibitionMakeStartPage'
 import Header from './Component/Header'
 import Navigation from './Component/Navigation'
 
@@ -53,7 +53,7 @@ function App() {
           <Route exact path="/user-info" element={<UserInfoPage />} />
           <Route path="/test" element={<TestPage></TestPage>}></Route>
           <Route
-            path="/make-exhibition"
+            path="/make-exhibition-start"
             element={<ExhibitionMakePage></ExhibitionMakePage>}
           ></Route>
           <Route
