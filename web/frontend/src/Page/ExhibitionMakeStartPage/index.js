@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
-const ExhibitionMakeStartPage = () => {
+const ExhibitionMakePage = () => {
   const [title, setTitle] = useState('')
   const [tag1, setTag1] = useState('')
   const [tag2, setTag2] = useState('')
@@ -81,20 +81,19 @@ const ExhibitionMakeStartPage = () => {
     })
   }
   const save = () => {
-    console.log(pageStep)
-    // const formData = new FormData()
-    // formData.append('step', step + 1)
-    // formData.append('title', title)
-    // formData.append('tag1', tag1)
-    // formData.append('tag2', tag2)
-    // formData.append('tag3', tag3)
-    // formData.append('poster', poster)
-    // formData.append('description', description)
-    // axios.defaults.headers.common['Authorization'] =
-    //   window.localStorage.getItem('token')
-    // axios.post('/api/user/make-exhibition', formData).then(res => {
-    //   console.log(res)
-    // })
+    const formData = new FormData()
+    formData.append('step', step + 1)
+    formData.append('title', title)
+    formData.append('tag1', tag1)
+    formData.append('tag2', tag2)
+    formData.append('tag3', tag3)
+    formData.append('poster', poster)
+    formData.append('description', description)
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.post('/api/user/make-exhibition', formData).then(res => {
+      console.log(res)
+    })
   }
 
   return (
@@ -181,4 +180,4 @@ const ExhibitionMakeStartPage = () => {
   )
 }
 
-export default ExhibitionMakeStartPage
+export default ExhibitionMakePage

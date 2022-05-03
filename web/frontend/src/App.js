@@ -9,7 +9,8 @@ import UserInfoPage from './Page/UserInfoPage'
 import RegisterPage from './Page/RegisterPage'
 import EmailSend from './Page/EmailSend'
 import EmailOk from './Page/EmailOk'
-import ExhibitionMakePage from './Page/ExhibitionMakeStartPage'
+import ExhibitionMakeStartPage from './Page/ExhibitionMakeStartPage'
+import ExhibitionMakeBGMPage from './Page/ExhibitionMakeBGMPage'
 import Header from './Component/Header'
 import Navigation from './Component/Navigation'
 
@@ -54,7 +55,11 @@ function App() {
           <Route path="/test" element={<TestPage></TestPage>}></Route>
           <Route
             path="/make-exhibition-start"
-            element={<ExhibitionMakePage></ExhibitionMakePage>}
+            element={<ExhibitionMakeStartPage></ExhibitionMakeStartPage>}
+          ></Route>
+          <Route
+            path="/make-exhibition-bgm"
+            element={<ExhibitionMakeBGMPage></ExhibitionMakeBGMPage>}
           ></Route>
           <Route
             path="/community-home"
