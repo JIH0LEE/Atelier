@@ -121,7 +121,7 @@ public class OnlineExhibitionService {
                 .build();
         onlineExhibition.getComments().add(comment);
         onlineExhibitionRepository.save(onlineExhibition);
-        commentRepository.save(comment);
+//        commentRepository.save(comment);
         return CommentDto.builder()
                 .profile(user.getProfile())
                 .description(comment.getDescription())
