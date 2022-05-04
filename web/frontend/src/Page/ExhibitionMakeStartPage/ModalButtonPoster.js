@@ -22,16 +22,6 @@ const ModalPosterButton = props => {
   const submit = () => {
     props.func(uploadFile, curImage)
     handleClose()
-    // const formData = new FormData()
-    // formData.append('profile', uploadFile)
-    // axios.post('/api/user/change-profile', formData, header).then(res => {
-    //   if (res.data.success) {
-    //     props.func(res.data.url)
-    //     handleClose()
-    //   } else {
-    //     alert('실패하였습니다!!')
-    //   }
-    // })
   }
   return (
     <>

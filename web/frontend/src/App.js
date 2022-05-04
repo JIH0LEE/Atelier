@@ -19,6 +19,7 @@ import background from './images/background.jpg'
 import { Container } from 'react-bootstrap'
 import CommunityHomePage from './Page/CommunityHomePage'
 import ExhibitionInfo from './Page/ExhibitionInfo'
+import ExhibitionMake2stepPage from './Page/ExhibitionMake2stepPage'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -56,6 +57,10 @@ function App() {
           <Route
             path="/make-exhibition-start"
             element={<ExhibitionMakeStartPage></ExhibitionMakeStartPage>}
+          ></Route>
+          <Route
+            path="/make-exhibition-2step"
+            element={<ExhibitionMake2stepPage></ExhibitionMake2stepPage>}
           ></Route>
           <Route
             path="/make-exhibition-bgm"

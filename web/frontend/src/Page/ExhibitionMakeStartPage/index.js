@@ -10,7 +10,7 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
