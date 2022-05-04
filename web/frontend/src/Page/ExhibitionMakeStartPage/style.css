@@ -56,7 +56,14 @@
   font-size: 40px;
   margin: 10px;
 }
-
+.exhibition_make-container > .inner #elem5 {
+  height: 65%;
+  width: 100%;
+  max-width: 3000px;
+}
+.inner #elem5 > .row {
+  height: 90%;
+}
 .exhibition_make-container .inner .list-group-item.active {
   background-color: #daa520;
   border-color: #daa520;
