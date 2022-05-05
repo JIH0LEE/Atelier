@@ -45,6 +45,7 @@ jwt:
 server:
   host: http://localhost:8080
 
+
 cloud:
   aws:
     credentials:
@@ -56,3 +57,5 @@ cloud:
       static: ap-northeast-2
     stack:
       auto: false
+
+

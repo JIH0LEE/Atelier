@@ -2,11 +2,9 @@ package com.example.backend.service;
 
 import com.example.backend.model.dto.CommentDto;
 import com.example.backend.model.dto.CommentReqDto;
+import com.example.backend.model.dto.ContentDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
-import com.example.backend.model.entity.Comment;
-import com.example.backend.model.entity.Good;
-import com.example.backend.model.entity.OnlineExhibition;
-import com.example.backend.model.entity.User;
+import com.example.backend.model.entity.*;
 import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.LikeRepository;
 import com.example.backend.repository.OnlineExhibitionRepository;
@@ -175,6 +173,29 @@ public class OnlineExhibitionService {
 
         //OnlineExhibition onlineExhibition
         return false;
+    }
+
+    public OnlineExhibition saveStep2(Long id, List<ContentDto> contentDtos){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        List<Content> contents = new ArrayList<>();
+        for (int i=0;i<contentDtos.size();i++){
+            ContentDto contentDto = contentDtos.get(i);
+            Long contentId = contentDto.getId();
+            String link = contentDto.getLink();
+            String description = contentDto.getDescription();
+            ContentType contentType = contentDto.getContentType();
+
+            Content content = new Content();
+            content.setId(contentId);
+            content.setLink(link);
+            content.setDescription(description);
+            content.setContentType(contentType);
+
+            contents.add(content);
+        }
+        onlineExhibition.setContents(contents);
+        return onlineExhibitionRepository.save(onlineExhibition);
+
     }
 
 }

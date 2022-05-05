@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.dto.ContentDto;
 import com.example.backend.model.dto.MakeExhibitionDto;
 import com.example.backend.model.dto.OnlineExhibitionDto;
 import com.example.backend.model.entity.OnlineExhibition;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,5 +39,11 @@ public class ExhibitionController {
         }catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    @PostMapping(value = "/user/make-exhibition-step2")
+    private String makeOnlineExhibitionStep2(@RequestParam Long id, @RequestBody List<ContentDto> contents, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(id, contents);
+        return onlineExhibition.toString();
     }
 }
