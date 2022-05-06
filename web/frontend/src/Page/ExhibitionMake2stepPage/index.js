@@ -13,12 +13,13 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ExhibitionPosting from '../../Component/ExhibitionPosting'
 import PostList from './PostList'
+import './style.css'
 
 const ExhibitionMake2stepPage = () => {
-    const [postList, setPostList] = useState([{ post: "", description: "" }])
+    const [postList, setPostList] = useState([{ id: 0, post: "", description: "" }])
 
     return (
-        <Container className="exhibition_make-container">
+        <Container className="exhibition_make-container2">
             <Container className="inner">
                 <Container id="elem1">
                     <Col>
@@ -44,7 +45,7 @@ const ExhibitionMake2stepPage = () => {
                     <Button>Next</Button>
                 </Container>
             </Container>
-        </Container>
+        </Container >
     )
 }
 
