@@ -177,6 +177,7 @@ const ExhibitionMakeBGMPage = () => {
                       {cuteBGM.map(bgm => (
                         <ListGroup.Item
                           action
+                          active={bgm.src === currentBGM}
                           id={bgm.id}
                           onClick={changeCuteBGM}
                         >
@@ -191,6 +192,7 @@ const ExhibitionMakeBGMPage = () => {
                       {calmBGM.map(bgm => (
                         <ListGroup.Item
                           action
+                          active={bgm.src === currentBGM}
                           id={bgm.id}
                           onClick={changeCalmBGM}
                         >
@@ -205,6 +207,7 @@ const ExhibitionMakeBGMPage = () => {
                       {excitingBGM.map(bgm => (
                         <ListGroup.Item
                           action
+                          active={bgm.src === currentBGM}
                           id={bgm.id}
                           onClick={changeExcitingBGM}
                         >
@@ -219,6 +222,7 @@ const ExhibitionMakeBGMPage = () => {
                       {brightBGM.map(bgm => (
                         <ListGroup.Item
                           action
+                          active={bgm.src === currentBGM}
                           id={bgm.id}
                           onClick={changeBrightBGM}
                         >

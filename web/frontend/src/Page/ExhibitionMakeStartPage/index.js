@@ -82,7 +82,7 @@ const ExhibitionMakePage = () => {
   }
   const save = () => {
     const formData = new FormData()
-    formData.append('step', step + 1)
+    formData.append('step', step)
     formData.append('title', title)
     formData.append('tag1', tag1)
     formData.append('tag2', tag2)
