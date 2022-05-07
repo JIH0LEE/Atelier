@@ -18,7 +18,7 @@ const Navigation = () => {
         </Col>
         <Col className="nav-element">
           <Nav>
-            <Nav.Link href="/make-exhibition-start">Make Exhibition</Nav.Link>
+            <Nav.Link href="/make-exhibition-ready">Make Exhibition</Nav.Link>
           </Nav>
         </Col>
         <Col className="nav-element">

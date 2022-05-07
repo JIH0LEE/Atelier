@@ -20,6 +20,8 @@ import { Container } from 'react-bootstrap'
 import CommunityHomePage from './Page/CommunityHomePage'
 import ExhibitionInfo from './Page/ExhibitionInfo'
 import ExhibitionMake2stepPage from './Page/ExhibitionMake2stepPage'
+import ExhibitionMakeReadyPage from './Page/ExhibitionMakeReadyPage'
+import ExhibitionMakeSavedPage from './Page/ExhibitionMakeSavedPage'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -55,8 +57,16 @@ function App() {
           <Route exact path="/user-info" element={<UserInfoPage />} />
           <Route path="/test" element={<TestPage></TestPage>}></Route>
           <Route
+            path="/make-exhibition-ready"
+            element={<ExhibitionMakeReadyPage></ExhibitionMakeReadyPage>}
+          ></Route>
+          <Route
             path="/make-exhibition-start"
             element={<ExhibitionMakeStartPage></ExhibitionMakeStartPage>}
+          ></Route>
+          <Route
+            path="/saved-exhibition"
+            element={<ExhibitionMakeSavedPage></ExhibitionMakeSavedPage>}
           ></Route>
           <Route
             path="/make-exhibition-2step"
