@@ -29,9 +29,15 @@ const ExhibitionPosting = ({ postList }) => {
     }
 
     const getPost = (id, picture, description) => {
-        newPostList[id][post] = picture
-        newPostList[id][description] = description
-        console.log("here")
+        //newPostList[id][post] = picture
+        //newPostList[id][description] = description
+        const findIndex = newPostList.findIndex(element => element.id == id)
+        let arr = [...newPostList]
+        //console.log('hi')
+        //console.log(arr[findIndex])
+        arr[findIndex] = { id: id, post: picture, description: description }
+        setPostList(arr)
+        //console.log(newPostList)
     }
 
     return (
