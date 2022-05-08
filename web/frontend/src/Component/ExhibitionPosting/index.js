@@ -17,6 +17,7 @@ import { button_theme_mid, button_theme_small_right } from '../../Style/theme'
 import './style.css'
 import ModalButtonPosting from "./ModalButtonPosting"
 import Post from "./Post"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 const ExhibitionPosting = ({ postList }) => {
     const [post, setPost] = useState(null)
@@ -29,15 +30,19 @@ const ExhibitionPosting = ({ postList }) => {
     }
 
     const getPost = (id, picture, description) => {
-        //newPostList[id][post] = picture
-        //newPostList[id][description] = description
         const findIndex = newPostList.findIndex(element => element.id == id)
         let arr = [...newPostList]
-        //console.log('hi')
-        //console.log(arr[findIndex])
         arr[findIndex] = { id: id, post: picture, description: description }
         setPostList(arr)
-        //console.log(newPostList)
+    }
+
+    const handleChange = (result) => {
+        if (!result.destination) return
+        const arr = [...newPostList]
+        const [reorderedItem] = arr.splice(result.source.index, 1)
+        arr.splice(result.destination.index, 0, reorderedItem)
+
+        setPostList(arr)
     }
 
     return (
@@ -46,9 +51,27 @@ const ExhibitionPosting = ({ postList }) => {
                 <Col></Col>
                 <Button style={{ width: "10vw", marginBottom: "50px", button_theme_mid, background: "#daa520", borderColor: "#daa520" }} onClick={addPost}>추가하기</Button>
             </Row>
-            {newPostList.map((e) => (
-                <Post id={e.id} post={e.post} des={e.description} func={getPost}></Post>
-            ))}
+            <DragDropContext onDragEnd={handleChange}>
+                <Droppable droppableId="posts">
+                    {(provided) => (
+                        <div {...provided.droppableProps} ref={provided.innerRef}>
+                            {
+                                newPostList.map((e) => (
+                                    <Draggable key={e.id} draggableId={"draggable" + e.id} index={e.id}>
+                                        {(provided) =>
+                                            <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
+                                                <Post id={e.id} post={e.post} des={e.description} func={getPost}  ></Post>
+                                            </div>
+                                        }
+                                    </Draggable>
+                                ))
+                            }
+                            {provided.placeholder}
+                        </div>
+                    )
+                    }
+                </Droppable>
+            </DragDropContext>
         </Container>
     )
 }
