@@ -1,9 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.dto.ContentDto;
-import com.example.backend.model.dto.IdDto;
-import com.example.backend.model.dto.MakeExhibitionDto;
-import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
 import com.example.backend.service.OnlineExhibitionService;
@@ -48,6 +45,17 @@ public class ExhibitionController {
         return onlineExhibition.toString();
     }
 
+    @PostMapping(value = "/user/make-exhibition-step3")
+    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
+        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+    }
+
+    @GetMapping(value = "/user/make-exhibition-step3")
+    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
+        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+    }
 
     @GetMapping(value = "/user/get-saved-exhibition")
     private List<OnlineExhibitionDto> getSavedOnlineExhibition( Principal principal){

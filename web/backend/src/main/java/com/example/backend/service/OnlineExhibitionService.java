@@ -1,9 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.model.dto.CommentDto;
-import com.example.backend.model.dto.CommentReqDto;
-import com.example.backend.model.dto.ContentDto;
-import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.*;
 import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.LikeRepository;
@@ -214,6 +211,17 @@ public class OnlineExhibitionService {
         }
         onlineExhibition.setContents(contents);
         return onlineExhibitionRepository.save(onlineExhibition);
+
+    }
+    public OnlineExhibition saveStep3(Long id, BgmDto bgm){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        onlineExhibition.setBgm(bgm.getSrc());
+        return onlineExhibitionRepository.save(onlineExhibition);
+
+    }
+    public OnlineExhibition getStep3(Long id){
+
+        return onlineExhibitionRepository.findById(id).get();
 
     }
 
