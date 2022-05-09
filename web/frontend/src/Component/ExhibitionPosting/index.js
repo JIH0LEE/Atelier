@@ -36,6 +36,15 @@ const ExhibitionPosting = ({ postList }) => {
         setPostList(arr)
     }
 
+    const getDeletePost = (id) => {
+        const index = newPostList.findIndex(function (item) { return item.id === id })
+        let arr = [...newPostList]
+        if (index > -1) arr.splice(index, 1)
+        setPostList(arr)
+
+
+    }
+
     const handleChange = (result) => {
         if (!result.destination) return
         const arr = [...newPostList]
@@ -44,6 +53,8 @@ const ExhibitionPosting = ({ postList }) => {
 
         setPostList(arr)
     }
+
+
 
     return (
         <Container>
@@ -60,7 +71,7 @@ const ExhibitionPosting = ({ postList }) => {
                                     <Draggable key={e.id} draggableId={"draggable" + e.id} index={e.id}>
                                         {(provided) =>
                                             <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
-                                                <Post id={e.id} post={e.post} des={e.description} func={getPost}  ></Post>
+                                                <Post id={e.id} post={e.post} des={e.description} func={getPost} deleteFun={getDeletePost} ></Post>
                                             </div>
                                         }
                                     </Draggable>

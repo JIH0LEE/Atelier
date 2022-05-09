@@ -15,7 +15,7 @@ import {
 import { propTypes } from 'react-bootstrap/esm/Image'
 import { button_theme_long, button_theme_mid, button_theme_small_right } from '../../Style/theme'
 
-const Post = ({ id, post, des, func }) => {
+const Post = ({ id, post, des, func, deleteFun }) => {
     const [show, setShow] = useState(false)
     const [curImage, setcurImage] = useState(post ? post : './logo192.png')
     const [uploadFile, setuploadFile] = useState()
@@ -43,6 +43,10 @@ const Post = ({ id, post, des, func }) => {
 
     const passToUpComponent = (e) => {
         func(id, picture, description)
+    }
+
+    const passDelete = (e) => {
+        deleteFun(id)
     }
 
     return (
@@ -95,7 +99,7 @@ const Post = ({ id, post, des, func }) => {
                     <Row style={{ margin: "10px" }}>
                         <Col xs={8}></Col>
                         <Col><Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px" }} onClick={passToUpComponent}>save</Button></Col>
-                        <Col><Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px" }}>delete</Button></Col>
+                        <Col><Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px" }} onClick={passDelete}>delete</Button></Col>
                     </Row>
                 </Col>
             </Row>

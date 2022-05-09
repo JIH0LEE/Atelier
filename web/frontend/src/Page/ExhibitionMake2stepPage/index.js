@@ -22,6 +22,14 @@ const ExhibitionMake2stepPage = ({ id }) => {
         { id: 0, post: '', description: '' },
     ])
 
+    const save = () => {
+
+    }
+
+    const next = () => {
+
+    }
+
     return (
         <Container className="exhibition_make-container2">
             <Container className="inner">
@@ -44,8 +52,8 @@ const ExhibitionMake2stepPage = ({ id }) => {
                     <ExhibitionPosting postList={postList}></ExhibitionPosting>
                 </Container>
                 <Container id="elem4">
-                    <Button>Save</Button>
-                    <Button>Next</Button>
+                    <Button onClick={save}>Save</Button>
+                    <Button onClick={next}>Next</Button>
                 </Container>
             </Container>
         </Container>
