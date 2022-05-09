@@ -10,11 +10,12 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
 const ExhibitionMakePage = () => {
+  const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [tag1, setTag1] = useState('')
   const [tag2, setTag2] = useState('')
@@ -78,6 +79,11 @@ const ExhibitionMakePage = () => {
       window.localStorage.getItem('token')
     axios.post('/api/user/make-exhibition', formData).then(res => {
       console.log(res)
+      navigate(`/make-exhibition-2step`, {
+        state: {
+          id: id,
+        },
+      })
     })
   }
   const save = () => {
@@ -94,6 +100,7 @@ const ExhibitionMakePage = () => {
     axios.post('/api/user/make-exhibition', formData).then(res => {
       console.log(res)
     })
+
   }
 
   return (

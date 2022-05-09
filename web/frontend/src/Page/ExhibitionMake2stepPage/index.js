@@ -16,7 +16,8 @@ import PostList from './PostList'
 import './style.css'
 import { DragDropContext } from 'react-beautiful-dnd'
 
-const ExhibitionMake2stepPage = () => {
+const ExhibitionMake2stepPage = ({ id }) => {
+    console.log(id)
     const [postList, setPostList] = useState([
         { id: 0, post: '', description: '' },
     ])
