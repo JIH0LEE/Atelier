@@ -78,7 +78,9 @@ const ExhibitionMakePage = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     axios.post('/api/user/make-exhibition', formData).then(res => {
-      console.log(res)
+      if (res.data.success) {
+        setId(res.data.id)
+      }
       navigate(`/make-exhibition-2step`, {
         state: {
           id: id,
@@ -98,9 +100,10 @@ const ExhibitionMakePage = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     axios.post('/api/user/make-exhibition', formData).then(res => {
-      console.log(res)
+      if (res.data.success) {
+        setId(res.data.id)
+      }
     })
-
   }
 
   return (

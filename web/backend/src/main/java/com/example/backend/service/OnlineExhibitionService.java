@@ -32,7 +32,7 @@ public class OnlineExhibitionService {
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
         List<OnlineExhibitionDto> result=new ArrayList<>();
-        onlineExhibitionRepository.findAll().forEach((data)->{
+        onlineExhibitionRepository.findAllByStepGreaterThan(4).forEach((data)->{
             result.add(OnlineExhibitionDto.builder()
                             .id(data.getId())
                             .title(data.getTitle())
@@ -45,6 +45,25 @@ public class OnlineExhibitionService {
                             .poster(data.getPoster())
                             .likeCount(data.getLikeCount())
                             .author(data.getUser().getNickname())
+                    .build());
+        });
+        return result;
+    }
+    public List<OnlineExhibitionDto> showMySavedOnlineExhibition(User user){
+        List<OnlineExhibitionDto> result=new ArrayList<>();
+        onlineExhibitionRepository.findAllByUserAndStepLessThan(user,5).forEach((data)->{
+            result.add(OnlineExhibitionDto.builder()
+                    .id(data.getId())
+                    .title(data.getTitle())
+                    .description(data.getDescription())
+                    .startDate(data.getStartDate())
+                    .endDate(data.getEndDate())
+                    .tag1(data.getTag1())
+                    .tag2(data.getTag2())
+                    .tag3(data.getTag3())
+                    .poster(data.getPoster())
+                    .likeCount(data.getLikeCount())
+                    .author(data.getUser().getNickname())
                     .build());
         });
         return result;
