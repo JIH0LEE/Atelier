@@ -72,19 +72,37 @@ const ExhibitionMakePage = () => {
     formData.append('tag3', tag3)
     formData.append('poster', poster)
     formData.append('description', description)
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/make-exhibition', formData).then(res => {
-      if (res.data.success) {
-        setId(res.data.id)
-      }
-      navigate(`/make-exhibition-2step`, {
-        state: {
-          id: res.data.id,
-        },
+    if (id === null) {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.post('/api/user/make-exhibition', formData).then(res => {
+        if (res.data.success) {
+          setId(res.data.id)
+          navigate(`/make-exhibition-2step`, {
+            state: {
+              id: res.data.id,
+            },
+          })
+        }
       })
-    })
+    } else {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios
+        .post(`/api/user/save-exhibition-step1?id=${id}`, formData)
+        .then(res => {
+          if (res.data.success) {
+            setId(res.data.id)
+            navigate(`/make-exhibition-2step`, {
+              state: {
+                id: res.data.id,
+              },
+            })
+          }
+        })
+    }
   }
+
   const save = () => {
     const formData = new FormData()
     formData.append('step', step)
@@ -94,13 +112,26 @@ const ExhibitionMakePage = () => {
     formData.append('tag3', tag3)
     formData.append('poster', poster)
     formData.append('description', description)
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/make-exhibition', formData).then(res => {
-      if (res.data.success) {
-        setId(res.data.id)
-      }
-    })
+    if (id === null) {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+
+      axios.post('/api/user/make-exhibition', formData).then(res => {
+        if (res.data.success) {
+          setId(res.data.id)
+        }
+      })
+    } else {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios
+        .post(`/api/user/save-exhibition-step1?id=${id}`, formData)
+        .then(res => {
+          if (res.data.success) {
+            setId(res.data.id)
+          }
+        })
+    }
   }
 
   return (

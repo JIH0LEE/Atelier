@@ -38,6 +38,8 @@ spring:
     multipart:
       enabled: true
       location: /Users/iseung-yeon/Desktop/images
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK

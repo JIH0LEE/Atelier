@@ -235,4 +235,18 @@ public class OnlineExhibitionService {
 
     }
 
+    public OnlineExhibition saveStep1(Long id,OnlineExhibitionDto onlineExhibitionDto){
+        
+        OnlineExhibition target=onlineExhibitionRepository.findById(id).get();
+        int step=onlineExhibitionDto.getStep();
+        String title=onlineExhibitionDto.getTitle();
+        String tag1=onlineExhibitionDto.getTag1();
+        String tag2=onlineExhibitionDto.getTag2();
+        String tag3=onlineExhibitionDto.getTag3();
+        String poster=onlineExhibitionDto.getPoster();
+        String description=onlineExhibitionDto.getDescription();
+        target.setStep(st)
+        return onlineExhibitionRepository.findById(id).get();
+    }
+
 }

@@ -5,6 +5,4 @@ public enum ContentType {
     MUSIC,
     VIDEO,
     TEXT;
-
-
 }
