@@ -19,17 +19,23 @@ import { DragDropContext } from 'react-beautiful-dnd'
 
 const ExhibitionMake2stepPage = ({ id }) => {
     const location = useLocation()
-    console.log('state', location.state)
-    console.log(id)
-    const [postList, setPostList] = useState([
-        { id: 0, link: '', description: '', contentType: "1" },
-    ])
 
+    const [ID, setID] = useState(location.state.id)
+    const [postList, setPostList] = useState([
+        { id: 0, link: "./logo192.png", description: '', contentType: "0" },
+    ])
+    //console.log(postList)
     const getPostList = (posts) => {
         setPostList(posts)
     }
 
-    const save = () => { }
+    const save = () => {
+        axios.defaults.headers.common['Authorization'] =
+            window.localStorage.getItem('token')
+        axios.post('/api/user/make-exhibition-step2', { id: ID, contentList: postList }).then(res => {
+            console.log(res)
+        })
+    }
 
     const next = () => { }
 
