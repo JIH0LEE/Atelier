@@ -1,8 +1,15 @@
 import React from 'react'
-import { Container, Figure, Row, Col, FormLabel, Badge } from 'react-bootstrap'
+import {
+  Container,
+  Figure,
+  Row,
+  Col,
+  FormLabel,
+  Badge,
+  CloseButton,
+} from 'react-bootstrap'
 import './style.css'
-import { useNavigate, Link } from 'react-router-dom'
-import { testColor } from '../../Style/theme'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './style.css'
 
@@ -20,9 +27,15 @@ const SavedExhibition = ({
   const onClick = () => {
     alert('Hi')
   }
-
+  const onDelete = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.delete(`/api/user/delete-online?id=${id}`).then(res => {
+      console.log(res.data)
+    })
+  }
   return (
-    <Container className="exhibition-container" onClick={onClick}>
+    <Container className="exhibition-container">
       <Row>
         <Col className="row1-col2" xs={4}>
           <Figure className="img-container1">
@@ -34,6 +47,10 @@ const SavedExhibition = ({
             <Badge className="title-badge" bg="None">
               {title}
             </Badge>
+            <CloseButton
+              style={{ float: 'right' }}
+              onClick={onDelete}
+            ></CloseButton>
           </Container>
           <Container className="author-label-container">
             <FormLabel
