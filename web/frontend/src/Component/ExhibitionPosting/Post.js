@@ -92,14 +92,19 @@ const Post = ({ id, post, des, func, deleteFun }) => {
                             maxLength={400}
                             placeholder="Description"
                             style={{ width: '90%', height: "25vh" }}
-                            value={post.description}
+                            value={description}
                             onChange={onChangeDes}
                         ></input>
                     </Row>
                     <Row style={{ margin: "10px" }}>
                         <Col xs={8}></Col>
-                        <Col><Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px" }} onClick={passToUpComponent}>save</Button></Col>
-                        <Col><Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px" }} onClick={passDelete}>delete</Button></Col>
+                        <Col>
+                            <Container>
+                                <Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px", margin: "5px" }} onClick={passToUpComponent}>save</Button>
+                                <Button style={{ width: "100%", background: "#daa520", borderColor: "#daa520", fontSize: "20px", margin: "5px" }} onClick={passDelete}>delete</Button>
+                            </Container>
+
+                        </Col>
                     </Row>
                 </Col>
             </Row>

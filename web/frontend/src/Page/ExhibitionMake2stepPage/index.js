@@ -16,18 +16,25 @@ import PostList from './PostList'
 import './style.css'
 import { DragDropContext } from 'react-beautiful-dnd'
 
+
 const ExhibitionMake2stepPage = ({ id }) => {
-    console.log(id)
+    //onsole.log(id)
     const [postList, setPostList] = useState([
-        { id: 0, post: '', description: '' },
+        { id: 0, link: '', description: '', contentType: "1" },
     ])
-
-    const save = () => {
-
+    console.log(postList)
+    const save = () => { // DB로 postList 보내기
+        axios.post('/api/user/make-exhibition-step2', postList).then(res => {
+            console.log(res)
+        })
     }
 
     const next = () => {
 
+    }
+
+    const getList = (posts) => {
+        setPostList(posts)
     }
 
     return (
@@ -49,7 +56,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
                 </Container>
 
                 <Container id="elem3">
-                    <ExhibitionPosting postList={postList}></ExhibitionPosting>
+                    <ExhibitionPosting postList={postList} func={getList}></ExhibitionPosting>
                 </Container>
                 <Container id="elem4">
                     <Button onClick={save}>Save</Button>

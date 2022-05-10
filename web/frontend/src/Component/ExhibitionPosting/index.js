@@ -19,20 +19,20 @@ import ModalButtonPosting from "./ModalButtonPosting"
 import Post from "./Post"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
-const ExhibitionPosting = ({ postList }) => {
+const ExhibitionPosting = ({ postList, func }) => {
     const [post, setPost] = useState(null)
     const [newPostList, setPostList] = useState(postList)
     const [description, setDescription] = useState()
     const [tempList, setTempList] = useState([])
-    console.log(newPostList)
+    //console.log(newPostList)
     const addPost = () => {
-        setPostList([...newPostList, { id: newPostList.length, post: './logo192.png', description: "" }])
+        setPostList([...newPostList, { id: newPostList.length, link: './logo192.png', description: "", contentType: "1" }])
     }
 
-    const getPost = (id, picture, description) => {
+    const getPost = (id, picture, description, contentType) => {
         const findIndex = newPostList.findIndex(element => element.id == id)
         let arr = [...newPostList]
-        arr[findIndex] = { id: id, post: picture, description: description }
+        arr[findIndex] = { id: id, post: picture, description: description, contentType: "1" }
         setPostList(arr)
     }
 
@@ -54,6 +54,9 @@ const ExhibitionPosting = ({ postList }) => {
         setPostList(arr)
     }
 
+    useEffect(() => {
+        func(newPostList)
+    }, [newPostList])
 
 
     return (
@@ -71,7 +74,7 @@ const ExhibitionPosting = ({ postList }) => {
                                     <Draggable key={e.id} draggableId={"draggable" + e.id} index={e.id}>
                                         {(provided) =>
                                             <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
-                                                <Post id={e.id} post={e.post} des={e.description} func={getPost} deleteFun={getDeletePost} ></Post>
+                                                <Post id={e.id} post={e.link} des={e.description} func={getPost} deleteFun={getDeletePost} ></Post>
                                             </div>
                                         }
                                     </Draggable>

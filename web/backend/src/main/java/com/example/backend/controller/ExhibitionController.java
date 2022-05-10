@@ -42,8 +42,10 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/make-exhibition-step2")
-    private String makeOnlineExhibitionStep2(@RequestParam Long id, @RequestBody List<ContentDto> contents, Principal principal){
-        OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(id, contents);
-        return onlineExhibition.toString();
+    private String makeOnlineExhibitionStep2(@RequestBody List<ContentDto> contents, Principal principal){ // @RequestParam Long id 추가
+        // 주석 나중에 풀기
+        // OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(id, contents);
+        System.out.println(contents); // 왜 link에 null이 나올까
+        return "success";//onlineExhibition.toString();
     }
 }
