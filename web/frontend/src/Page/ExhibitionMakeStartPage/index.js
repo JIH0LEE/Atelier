@@ -10,7 +10,7 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
@@ -25,18 +25,15 @@ const ExhibitionMakePage = () => {
   const [showingPoster, setShowingPoster] = useState(null)
   const [poster, setPoster] = useState(null)
   const [step, setStep] = useState(1)
-  let params = useParams()
-  let pageStep = params.step
+
   const isWider = src => {
     var img = new Image()
     img.src = src
-    console.log(img.width > img.height)
     return img.width > img.height
   }
 
   const titleChange = e => {
     setTitle(e.target.value)
-    console.log(title)
   }
   const tag1Change = e => {
     setTag1(e.target.value)
@@ -83,7 +80,7 @@ const ExhibitionMakePage = () => {
       }
       navigate(`/make-exhibition-2step`, {
         state: {
-          id: id,
+          id: res.data.id,
         },
       })
     })
