@@ -106,6 +106,13 @@ const ExhibitionMakePage = () => {
     } else {
       axios.defaults.headers.common['Authorization'] =
         window.localStorage.getItem('token')
+      axios
+        .post(`/api/user/save-exhibition-step1?id=${id}`, formData)
+        .then(res => {
+          if (res.data.success) {
+            setId(res.data.id)
+          }
+        })
     }
   }
 
