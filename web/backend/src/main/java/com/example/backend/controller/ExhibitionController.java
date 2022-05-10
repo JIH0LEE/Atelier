@@ -32,7 +32,25 @@ public class ExhibitionController {
             onlineExhibitionDto.setPoster(posterURL);
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
             OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
+            return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
+        }catch (Exception e){
+            return IdDto.builder().id(null).success(false).build();
+        }
+    }
 
+    @GetMapping(value = "/user/save-exhibition-step1")
+    private IdDto saveOnlineExhibitionStep1(@RequestParam Long id,MakeExhibitionDto makeExhibitionDto, Principal principal){
+        try{
+            OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
+            onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
+            onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
+            onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
+            onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
+            onlineExhibitionDto.setTag3(makeExhibitionDto.getTag3());
+            String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
+            onlineExhibitionDto.setPoster(posterURL);
+            onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
+            OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
         }catch (Exception e){
             return IdDto.builder().id(null).success(false).build();
@@ -48,13 +66,13 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/make-exhibition-step3")
-    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
+    private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
         OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
         return BgmDto.builder().src(onlineExhibition.getBgm()).build();
     }
 
     @GetMapping(value = "/user/make-exhibition-step3")
-    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, Principal principal){
+    private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
         OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
         return BgmDto.builder().src(onlineExhibition.getBgm()).build();
     }
@@ -65,4 +83,6 @@ public class ExhibitionController {
         return onlineExhibitionService.showMySavedOnlineExhibition(user);
 
     }
+
+
 }

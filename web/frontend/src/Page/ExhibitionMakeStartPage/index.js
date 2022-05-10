@@ -94,13 +94,19 @@ const ExhibitionMakePage = () => {
     formData.append('tag3', tag3)
     formData.append('poster', poster)
     formData.append('description', description)
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/make-exhibition', formData).then(res => {
-      if (res.data.success) {
-        setId(res.data.id)
-      }
-    })
+    if (id === null) {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+
+      axios.post('/api/user/make-exhibition', formData).then(res => {
+        if (res.data.success) {
+          setId(res.data.id)
+        }
+      })
+    } else {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+    }
   }
 
   return (
