@@ -207,6 +207,7 @@ public class OnlineExhibitionService {
                 content.setLink(saveContents(link));
                 content.setDescription(description);
                 content.setContentType(contentType);
+                content.setOnlineExhibition(onlineExhibition);
 
                 contents.add(content);
             }
