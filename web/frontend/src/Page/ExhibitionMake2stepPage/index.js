@@ -21,18 +21,39 @@ const ExhibitionMake2stepPage = ({ id }) => {
     const location = useLocation()
 
     const [ID, setID] = useState(location.state.id)
+
+    const formData = new FormData()
+    formData.append("id", 0)
+    formData.append("link", "./logo192.png")
+    formData.append("description", "")
+    formData.append("contentType", "0")
+
     const [postList, setPostList] = useState([
-        { id: 0, link: "./logo192.png", description: '', contentType: "0" },
+        { id: 0, link: "", description: '' },
     ])
-    //console.log(postList)
-    const getPostList = (posts) => {
-        setPostList(posts)
+
+    const [IDList, setIDList] = useState([0])
+    const [fileList, setFileList] = useState([null])
+    const [descriptionList, setDescriptionList] = useState([""])
+
+    const getPostList = (newPostList, list1, list2, list3) => {
+        setPostList(newPostList)
+        setIDList(list1)
+        setFileList(list2)
+        setDescriptionList(list3)
     }
 
     const save = () => {
         axios.defaults.headers.common['Authorization'] =
             window.localStorage.getItem('token')
-        axios.post('/api/user/make-exhibition-step2', { id: ID, contentList: postList }).then(res => {
+
+        var formData = new FormData()
+        for (let i = 0; i < fileList.length; i++) {
+            formData.append("IDList", IDList[i])
+            formData.append("fileList", fileList[i])
+            formData.append("descriptionList", descriptionList[i])
+        }
+        axios.post('/api/user/make-exhibition-step2', formData).then(res => {
             console.log(res)
         })
     }
