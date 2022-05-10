@@ -226,6 +226,7 @@ public class OnlineExhibitionService {
     public OnlineExhibition saveStep3(Long id, BgmDto bgm){
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
         onlineExhibition.setBgm(bgm.getSrc());
+        onlineExhibition.setStep(bgm.getStep());
         return onlineExhibitionRepository.save(onlineExhibition);
 
     }

@@ -62,6 +62,7 @@ public class ExhibitionController {
     }
 
 
+
     @PostMapping(value = "/user/make-exhibition-step2/file")
     private String makeOnlineExhibitionStep2File(ContentListDto contentList, Principal principal){ //fileList
         System.out.println(contentList);
@@ -81,14 +82,15 @@ public class ExhibitionController {
 
     @PostMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
+        System.out.println(bgm);
         OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
-        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+        return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 
     @GetMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
         OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
-        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+        return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 
     @GetMapping(value = "/user/get-saved-exhibition")

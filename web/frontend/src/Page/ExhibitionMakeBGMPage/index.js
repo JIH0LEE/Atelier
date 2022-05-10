@@ -4,6 +4,8 @@ import axios from 'axios'
 
 const ExhibitionMakeBGMPage = () => {
   const [currentBGM, setCurrentBGM] = useState(null)
+  const [id, setID] = useState(68)
+  const [step, setStep] = useState(3)
   const cuteBGM = [
     {
       id: 1,
@@ -92,11 +94,7 @@ const ExhibitionMakeBGMPage = () => {
       src: 'http://docs.google.com/uc?export=open&id=1Vmm672LVzoRFaShOwt1WGujDh0_87Kp0',
     },
   ]
-  function isIdValid(element) {
-    if (element.id === 'apple') {
-      return true
-    }
-  }
+
   const changeCuteBGM = e => {
     let findId = e.target.id
     let obj = cuteBGM.find(bgm => bgm.id == findId)
@@ -120,6 +118,31 @@ const ExhibitionMakeBGMPage = () => {
     let obj = brightBGM.find(bgm => bgm.id == findId)
     document.getElementById('myAudio').volume = 0.1
     setCurrentBGM(obj.src)
+  }
+
+  const save = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    console.log(currentBGM)
+    const body = {
+      step: step,
+      src: currentBGM,
+    }
+    axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
+      console.log(res.data)
+    })
+  }
+
+  const next = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    const body = {
+      step: step + 1,
+      src: currentBGM,
+    }
+    axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
+      console.log(res.data)
+    })
   }
 
   return (
@@ -237,8 +260,8 @@ const ExhibitionMakeBGMPage = () => {
           </Tab.Container>
         </Container>
         <Container id="elem4">
-          <Button>Save</Button>
-          <Button>Next</Button>
+          <Button onClick={save}>Save</Button>
+          <Button onClick={next}>Next</Button>
         </Container>
       </Container>
     </Container>
