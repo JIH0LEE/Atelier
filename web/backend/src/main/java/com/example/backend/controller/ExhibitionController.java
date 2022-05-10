@@ -7,6 +7,7 @@ import com.example.backend.service.OnlineExhibitionService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -59,25 +60,26 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/make-exhibition-step2")
-    private String makeOnlineExhibitionStep2(@RequestBody ContentListDto contents, Principal principal){
+        private String makeOnlineExhibitionStep2(@RequestPart("fileList") List<MultipartFile> contents, Principal principal){
         System.out.println("here!");
-        System.out.println(contents.getIDList());
-        System.out.println(contents.getFileList());
-        System.out.println(contents.getDescriptionList());
+        System.out.println(contents.size());
+//        System.out.println(contents.getFileList());
+//        System.out.println(contents.getDescriptionList());
         //String onlineExhibition = onlineExhibitionService.saveStep2(contents.getId(), contents.getContentList());
         return "here!";//onlineExhibition;
     }
 
     @PostMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
+        System.out.println(bgm);
         OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
-        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+        return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 
     @GetMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
         OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
-        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+        return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 
     @GetMapping(value = "/user/get-saved-exhibition")

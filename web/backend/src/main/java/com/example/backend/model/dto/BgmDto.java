@@ -11,6 +11,7 @@ import lombok.ToString;
 @Builder
 public class BgmDto {
 
+    private int step;
     private String src;
 
 }
