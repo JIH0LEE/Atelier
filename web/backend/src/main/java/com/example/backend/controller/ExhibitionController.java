@@ -1,10 +1,10 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.dto.ContentDto;
-import com.example.backend.model.dto.MakeExhibitionDto;
-import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.OnlineExhibition;
+import com.example.backend.model.entity.User;
 import com.example.backend.service.OnlineExhibitionService;
+import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +18,11 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
-
+    private final UserService userService;
     @PostMapping(value = "/user/make-exhibition")
-    private String makeOnlineExhibition(MakeExhibitionDto makeExhibitionDto, Principal principal){
+    private IdDto makeOnlineExhibition(MakeExhibitionDto makeExhibitionDto, Principal principal){
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
-
             onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
             onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
             onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
@@ -32,12 +31,11 @@ public class ExhibitionController {
             String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
             onlineExhibitionDto.setPoster(posterURL);
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
-
             OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
 
-            return "success";
+            return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
         }catch (Exception e){
-            return e.getMessage();
+            return IdDto.builder().id(null).success(false).build();
         }
     }
 
@@ -47,5 +45,24 @@ public class ExhibitionController {
         // OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(id, contents);
         System.out.println(contents); // 왜 link에 null이 나올까
         return "success";//onlineExhibition.toString();
+    }
+
+    @PostMapping(value = "/user/make-exhibition-step3")
+    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
+        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+    }
+
+    @GetMapping(value = "/user/make-exhibition-step3")
+    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
+        return BgmDto.builder().src(onlineExhibition.getBgm()).build();
+    }
+
+    @GetMapping(value = "/user/get-saved-exhibition")
+    private List<OnlineExhibitionDto> getSavedOnlineExhibition( Principal principal){
+        User user=userService.getUser(principal.getName());
+        return onlineExhibitionService.showMySavedOnlineExhibition(user);
+
     }
 }

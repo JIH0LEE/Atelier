@@ -63,4 +63,6 @@ public class OnlineExhibition {
     private List<Content> contents = new ArrayList<>();
 
     private int step;
+
+    private boolean isOnline;
 }

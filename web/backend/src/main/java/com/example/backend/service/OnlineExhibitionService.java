@@ -1,9 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.model.dto.CommentDto;
-import com.example.backend.model.dto.CommentReqDto;
-import com.example.backend.model.dto.ContentDto;
-import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.*;
 import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.LikeRepository;
@@ -32,7 +29,7 @@ public class OnlineExhibitionService {
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
         List<OnlineExhibitionDto> result=new ArrayList<>();
-        onlineExhibitionRepository.findAll().forEach((data)->{
+        onlineExhibitionRepository.findAllByStepGreaterThan(4).forEach((data)->{
             result.add(OnlineExhibitionDto.builder()
                             .id(data.getId())
                             .title(data.getTitle())
@@ -45,6 +42,25 @@ public class OnlineExhibitionService {
                             .poster(data.getPoster())
                             .likeCount(data.getLikeCount())
                             .author(data.getUser().getNickname())
+                    .build());
+        });
+        return result;
+    }
+    public List<OnlineExhibitionDto> showMySavedOnlineExhibition(User user){
+        List<OnlineExhibitionDto> result=new ArrayList<>();
+        onlineExhibitionRepository.findAllByUserAndStepLessThan(user,5).forEach((data)->{
+            result.add(OnlineExhibitionDto.builder()
+                    .id(data.getId())
+                    .title(data.getTitle())
+                    .description(data.getDescription())
+                    .startDate(data.getStartDate())
+                    .endDate(data.getEndDate())
+                    .tag1(data.getTag1())
+                    .tag2(data.getTag2())
+                    .tag3(data.getTag3())
+                    .poster(data.getPoster())
+                    .likeCount(data.getLikeCount())
+                    .author(data.getUser().getNickname())
                     .build());
         });
         return result;
@@ -195,6 +211,17 @@ public class OnlineExhibitionService {
         }
         onlineExhibition.setContents(contents);
         return onlineExhibitionRepository.save(onlineExhibition);
+
+    }
+    public OnlineExhibition saveStep3(Long id, BgmDto bgm){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        onlineExhibition.setBgm(bgm.getSrc());
+        return onlineExhibitionRepository.save(onlineExhibition);
+
+    }
+    public OnlineExhibition getStep3(Long id){
+
+        return onlineExhibitionRepository.findById(id).get();
 
     }
 

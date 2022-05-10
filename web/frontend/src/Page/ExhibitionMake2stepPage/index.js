@@ -10,7 +10,7 @@ import {
     Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import ExhibitionPosting from '../../Component/ExhibitionPosting'
 import PostList from './PostList'
 import './style.css'
@@ -18,24 +18,20 @@ import { DragDropContext } from 'react-beautiful-dnd'
 
 
 const ExhibitionMake2stepPage = ({ id }) => {
-    //onsole.log(id)
+    const location = useLocation()
+    console.log('state', location.state)
+    console.log(id)
     const [postList, setPostList] = useState([
         { id: 0, link: '', description: '', contentType: "1" },
     ])
-    console.log(postList)
-    const save = () => { // DB로 postList 보내기
-        axios.post('/api/user/make-exhibition-step2', postList).then(res => {
-            console.log(res)
-        })
-    }
 
-    const next = () => {
-
-    }
-
-    const getList = (posts) => {
+    const getPostList = (posts) => {
         setPostList(posts)
     }
+
+    const save = () => { }
+
+    const next = () => { }
 
     return (
         <Container className="exhibition_make-container2">
@@ -56,7 +52,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
                 </Container>
 
                 <Container id="elem3">
-                    <ExhibitionPosting postList={postList} func={getList}></ExhibitionPosting>
+                    <ExhibitionPosting postList={postList} func={getPostList}></ExhibitionPosting>
                 </Container>
                 <Container id="elem4">
                     <Button onClick={save}>Save</Button>
