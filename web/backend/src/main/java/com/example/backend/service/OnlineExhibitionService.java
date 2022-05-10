@@ -235,8 +235,25 @@ public class OnlineExhibitionService {
         String tag3=onlineExhibitionDto.getTag3();
         String poster=onlineExhibitionDto.getPoster();
         String description=onlineExhibitionDto.getDescription();
-        target.setStep(st)
-        return onlineExhibitionRepository.findById(id).get();
+        target.setStep(step);
+        target.setTitle(title);
+        target.setTag1(tag1);
+        target.setTag2(tag2);
+        target.setTag3(tag3);
+        target.setPoster(poster);
+        target.setDescription(description);
+        return onlineExhibitionRepository.save(target);
+    }
+
+    public boolean deleteById(Long id){
+        try{
+            onlineExhibitionRepository.deleteById(id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+
     }
 
 }

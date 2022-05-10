@@ -38,8 +38,9 @@ public class ExhibitionController {
         }
     }
 
-    @GetMapping(value = "/user/save-exhibition-step1")
+    @PostMapping(value = "/user/save-exhibition-step1")
     private IdDto saveOnlineExhibitionStep1(@RequestParam Long id,MakeExhibitionDto makeExhibitionDto, Principal principal){
+
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
             onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
@@ -50,7 +51,7 @@ public class ExhibitionController {
             String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
             onlineExhibitionDto.setPoster(posterURL);
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
-            OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
+            OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep1(id,onlineExhibitionDto);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
         }catch (Exception e){
             return IdDto.builder().id(null).success(false).build();
@@ -80,6 +81,12 @@ public class ExhibitionController {
     private List<OnlineExhibitionDto> getSavedOnlineExhibition( Principal principal){
         User user=userService.getUser(principal.getName());
         return onlineExhibitionService.showMySavedOnlineExhibition(user);
+
+    }
+    @DeleteMapping(value = "/user/delete-online")
+    private boolean deleteOnlineExhibition(@RequestParam Long id, Principal principal){
+
+        return onlineExhibitionService.deleteById(id);
 
     }
 
