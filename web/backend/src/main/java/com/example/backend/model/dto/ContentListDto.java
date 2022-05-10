@@ -11,6 +11,7 @@ import java.util.List;
 @ToString
 @Builder
 public class ContentListDto {
+    private Long ID;
     private List<Long> IDList;
     //private List<ContentDto> contentList;
     private List<MultipartFile> fileList;

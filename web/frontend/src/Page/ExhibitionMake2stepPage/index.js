@@ -33,7 +33,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
     ])
 
     const [IDList, setIDList] = useState([0])
-    const [fileList, setFileList] = useState([null])
+    const [fileList, setFileList] = useState([undefined])
     const [descriptionList, setDescriptionList] = useState([""])
 
     const getPostList = (newPostList, list1, list2, list3) => {
@@ -48,14 +48,18 @@ const ExhibitionMake2stepPage = ({ id }) => {
             window.localStorage.getItem('token')
 
         var formData = new FormData()
+
+        console.log(fileList.length)
         for (let i = 0; i < fileList.length; i++) {
             formData.append("IDList", IDList[i])
             formData.append("fileList", fileList[i])
             formData.append("descriptionList", descriptionList[i])
         }
-        axios.post('/api/user/make-exhibition-step2', formData).then(res => {
+        formData.append("ID", ID)
+        axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
             console.log(res)
         })
+
     }
 
     const next = () => { }

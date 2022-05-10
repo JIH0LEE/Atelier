@@ -1,15 +1,18 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.dto.*;
+import com.example.backend.model.entity.ContentType;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
 import com.example.backend.service.OnlineExhibitionService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -58,15 +61,23 @@ public class ExhibitionController {
         }
     }
 
-    @PostMapping(value = "/user/make-exhibition-step2")
-    private String makeOnlineExhibitionStep2(@RequestBody ContentListDto contents, Principal principal){
-        System.out.println("here!");
-        System.out.println(contents.getIDList());
-        System.out.println(contents.getFileList());
-        System.out.println(contents.getDescriptionList());
-        //String onlineExhibition = onlineExhibitionService.saveStep2(contents.getId(), contents.getContentList());
-        return "here!";//onlineExhibition;
+
+    @PostMapping(value = "/user/make-exhibition-step2/file")
+    private String makeOnlineExhibitionStep2File(ContentListDto contentList, Principal principal){ //fileList
+        System.out.println(contentList);
+        List<ContentDto> contents=new ArrayList<>();
+        List<Long> IDs=contentList.getIDList();
+        List<MultipartFile> files=contentList.getFileList();
+        List<String> descriptions=contentList.getDescriptionList();
+
+        for (int i=0; i<IDs.size();i++){
+            ContentDto aContent=new ContentDto(IDs.get(i), files.get(i), descriptions.get(i), ContentType.IMAGE);
+            contents.add(aContent);
+        }
+        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents);
+        return onlineExhibition;
     }
+
 
     @PostMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
