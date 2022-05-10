@@ -26,13 +26,13 @@ const ExhibitionPosting = ({ postList, func }) => {
     const [tempList, setTempList] = useState([])
     //console.log(newPostList)
     const addPost = () => {
-        setPostList([...newPostList, { id: newPostList.length, link: './logo192.png', description: "", contentType: "1" }])
+        setPostList([...newPostList, { id: newPostList.length, link: "./logo192.png", description: "", contentType: "0" }])
     }
 
     const getPost = (id, picture, description, contentType) => {
         const findIndex = newPostList.findIndex(element => element.id == id)
         let arr = [...newPostList]
-        arr[findIndex] = { id: id, post: picture, description: description, contentType: "1" }
+        arr[findIndex] = { id: id, link: picture, description: description, contentType: "0" }
         setPostList(arr)
     }
 

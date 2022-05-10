@@ -40,11 +40,10 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/make-exhibition-step2")
-    private String makeOnlineExhibitionStep2(@RequestBody List<ContentDto> contents, Principal principal){ // @RequestParam Long id 추가
-        // 주석 나중에 풀기
-        // OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(id, contents);
+    private String makeOnlineExhibitionStep2(@RequestBody ContentListDto contents, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep2(contents.getId(), contents.getContentList());
         System.out.println(contents); // 왜 link에 null이 나올까
-        return "success";//onlineExhibition.toString();
+        return onlineExhibition.toString();
     }
 
     @PostMapping(value = "/user/make-exhibition-step3")
@@ -54,7 +53,7 @@ public class ExhibitionController {
     }
 
     @GetMapping(value = "/user/make-exhibition-step3")
-    private BgmDto makeOnlineExhibitionStep2(@RequestParam Long id, Principal principal){
+    private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
         OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
         return BgmDto.builder().src(onlineExhibition.getBgm()).build();
     }
