@@ -5,6 +5,7 @@ import com.example.backend.model.entity.OnlineExhibition;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class ContentDto {
     private Long id;
 
-    private String link;
+    private MultipartFile link;
 
     private String description;
 

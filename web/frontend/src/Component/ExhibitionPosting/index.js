@@ -25,15 +25,33 @@ const ExhibitionPosting = ({ postList, func }) => {
     const [description, setDescription] = useState()
     const [tempList, setTempList] = useState([])
     //console.log(newPostList)
+    const [IDList, setIDList] = useState([0])
+    const [fileList, setFileList] = useState([null])
+    const [descriptionList, setDescriptionList] = useState([""])
     const addPost = () => {
-        setPostList([...newPostList, { id: newPostList.length, link: "./logo192.png", description: "", contentType: "0" }])
+        setPostList([...newPostList, { id: newPostList.length, link: "./logo192.png", description: "" }])
+        setIDList([...IDList, newPostList.length])
+        setFileList([...fileList, null])
+        setDescription([...descriptionList, ""])
     }
 
-    const getPost = (id, picture, description, contentType) => {
+    const getPost = (id, picture, description, uploadFile) => {
         const findIndex = newPostList.findIndex(element => element.id == id)
         let arr = [...newPostList]
-        arr[findIndex] = { id: id, link: picture, description: description, contentType: "0" }
+        arr[findIndex] = { id: id, link: picture, description: description }
         setPostList(arr)
+
+        let arr1 = [...IDList]
+        arr1[findIndex] = id
+        setIDList(arr1)
+
+        let arr2 = [...fileList]
+        arr2[findIndex] = uploadFile
+        setFileList(arr2)
+
+        let arr3 = [...descriptionList]
+        arr3[findIndex] = description
+        setDescriptionList(arr3)
     }
 
     const getDeletePost = (id) => {
@@ -42,7 +60,17 @@ const ExhibitionPosting = ({ postList, func }) => {
         if (index > -1) arr.splice(index, 1)
         setPostList(arr)
 
+        let arr1 = [...IDList]
+        if (index > -1) arr1.splice(index, 1)
+        setIDList(arr1)
 
+        let arr2 = [...fileList]
+        if (index > -1) arr2.splice(index, 1)
+        setFileList(arr2)
+
+        let arr3 = [...descriptionList]
+        if (index > -1) arr3.splice(index, 1)
+        setDescriptionList(arr3)
     }
 
     const handleChange = (result) => {
@@ -50,12 +78,29 @@ const ExhibitionPosting = ({ postList, func }) => {
         const arr = [...newPostList]
         const [reorderedItem] = arr.splice(result.source.index, 1)
         arr.splice(result.destination.index, 0, reorderedItem)
-
         setPostList(arr)
+
+        const arr1 = [...IDList]
+        const [reorderedItem1] = arr1.splice(result.source.index, 1)
+        arr1.splice(result.destination.index, 0, reorderedItem1)
+        setIDList(arr1)
+
+        const arr2 = [...fileList]
+        const [reorderedItem2] = arr2.splice(result.source.index, 1)
+        arr2.splice(result.destination.index, 0, reorderedItem2)
+        setFileList(arr2)
+
+        const arr3 = [...descriptionList]
+        const [reorderedItem3] = arr3.splice(result.source.index, 1)
+        arr3.splice(result.destination.index, 0, reorderedItem3)
+        setDescriptionList(arr3)
     }
+    //console.log("IDList: " + IDList)
+    //console.log("fileList: " + fileList)
+    //console.log("descriptionList: " + descriptionList)
 
     useEffect(() => {
-        func(newPostList)
+        func(newPostList, IDList, fileList, descriptionList)
     }, [newPostList])
 
 

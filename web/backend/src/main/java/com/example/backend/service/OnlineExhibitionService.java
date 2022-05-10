@@ -191,28 +191,38 @@ public class OnlineExhibitionService {
         return false;
     }
 
-    public OnlineExhibition saveStep2(Long id, List<ContentDto> contentDtos){
-        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
-        List<Content> contents = new ArrayList<>();
-        for (int i=0;i<contentDtos.size();i++){
-            ContentDto contentDto = contentDtos.get(i);
-            Long contentId = contentDto.getId();
-            String link = contentDto.getLink();
-            String description = contentDto.getDescription();
-            ContentType contentType = contentDto.getContentType();
+    public String saveStep2(Long id, List<ContentDto> contentDtos){
+        try{
+            OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+            List<Content> contents = new ArrayList<>();
+            for (int i=0;i<contentDtos.size();i++){
+                ContentDto contentDto = contentDtos.get(i);
+                Long contentId = contentDto.getId();
+                MultipartFile link = contentDto.getLink();
+                String description = contentDto.getDescription();
+                ContentType contentType = contentDto.getContentType();
 
-            Content content = new Content();
-            content.setId(contentId);
-            content.setLink(link);
-            content.setDescription(description);
-            content.setContentType(contentType);
+                Content content = new Content();
+                content.setId(contentId);
+                content.setLink(saveContents(link));
+                content.setDescription(description);
+                content.setContentType(contentType);
 
-            contents.add(content);
+                contents.add(content);
+            }
+            onlineExhibition.setContents(contents);
+            return onlineExhibitionRepository.save(onlineExhibition).toString();
+        }catch(Exception e){
+            return e.getMessage();
         }
-        onlineExhibition.setContents(contents);
-        return onlineExhibitionRepository.save(onlineExhibition);
 
     }
+
+    public String saveContents(MultipartFile file) throws IOException {
+        String posterURL =s3Service.upload(file,"content");
+        return posterURL;
+    }
+
     public OnlineExhibition saveStep3(Long id, BgmDto bgm){
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
         onlineExhibition.setBgm(bgm.getSrc());

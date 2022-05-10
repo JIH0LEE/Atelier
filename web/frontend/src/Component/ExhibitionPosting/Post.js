@@ -42,7 +42,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
     }
 
     const passToUpComponent = (e) => {
-        func(id, picture, description)
+        func(id, picture, description, uploadFile)
     }
 
     const passDelete = (e) => {
