@@ -28,6 +28,7 @@ const ExhibitionMakePage = () => {
   const [step, setStep] = useState(1)
 
   useEffect(() => {
+    console.log(location.state.id)
     if (id == null) {
       console.log(1)
     } else {
@@ -111,6 +112,7 @@ const ExhibitionMakePage = () => {
       axios
         .post(`/api/user/save-exhibition-step1?id=${id}`, formData)
         .then(res => {
+          console.log(res.data)
           if (res.data.success) {
             setId(res.data.id)
             navigate(`/make-exhibition-2step`, {
@@ -235,8 +237,12 @@ const ExhibitionMakePage = () => {
           </Col>
         </Container>
         <Container id="elem4">
-          <Button onClick={save}>Save</Button>
-          <Button onClick={next}>Next</Button>
+          <Button onClick={next} style={{ float: 'right' }}>
+            Next
+          </Button>
+          <Button onClick={save} style={{ float: 'right' }}>
+            Save
+          </Button>
         </Container>
       </Container>
     </Container>

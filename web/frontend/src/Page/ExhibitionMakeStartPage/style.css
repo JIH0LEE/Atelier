@@ -46,15 +46,16 @@
   height: 10%;
   width: 100%;
   max-width: 3000px;
-  display: flex;
-  justify-content: right;
+  /* display: flex; */
+  /* justify-content: right; */
   align-items: center;
 }
+
 .exhibition_make-container > .inner #elem4 > .btn {
   background-color: #daa520;
   border-color: #daa520;
-  font-size: 40px;
   margin: 10px;
+  font-size: 40px;
 }
 
 .exhibition_make-container > .inner #elem5 {

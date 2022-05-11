@@ -42,8 +42,8 @@
   height: 10%;
   width: 100%;
   max-width: 3000px;
-  display: flex;
-  justify-content: right;
+  /* display: flex; */
+  /* justify-content: right; */
   align-items: center;
 }
 .exhibition_make-container2 > .inner #elem4 > .btn {
