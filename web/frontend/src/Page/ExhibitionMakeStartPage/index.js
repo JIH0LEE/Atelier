@@ -10,18 +10,19 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
 
 const ExhibitionMakePage = () => {
+  const location = useLocation()
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [tag1, setTag1] = useState('')
   const [tag2, setTag2] = useState('')
   const [tag3, setTag3] = useState('')
   const [description, setDescription] = useState('')
-  const [id, setId] = useState(null)
+  const [id, setId] = useState(location.state.id)
   const [showingPoster, setShowingPoster] = useState(null)
   const [poster, setPoster] = useState(null)
   const [step, setStep] = useState(1)

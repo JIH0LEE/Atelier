@@ -7,6 +7,7 @@ import {
   FormLabel,
   Badge,
   CloseButton,
+  Button,
 } from 'react-bootstrap'
 import './style.css'
 import { useNavigate } from 'react-router-dom'
@@ -16,16 +17,36 @@ import './style.css'
 const SavedExhibition = ({
   id,
   title,
-  date,
   keyword,
   poaster,
   author,
   likes,
   description,
+  step,
 }) => {
   const navigate = useNavigate()
-  const onClick = () => {
-    alert('Hi')
+  const load = () => {
+    if (step == 1) {
+      navigate(`/make-exhibition-start`, {
+        state: {
+          id: id,
+        },
+      })
+    } else if (step == 2) {
+      navigate(`/make-exhibition-2step`, {
+        state: {
+          id: id,
+        },
+      })
+    } else if (step == 3) {
+      navigate(`/make-exhibition-bgm`, {
+        state: {
+          id: id,
+        },
+      })
+    } else if (step == 4) {
+    } else {
+    }
   }
   const onDelete = () => {
     axios.defaults.headers.common['Authorization'] =
@@ -87,22 +108,30 @@ const SavedExhibition = ({
             </FormLabel>
           </Container>
 
-          <Container>
+          <Container style={{ display: 'flex' }}>
             <FormLabel
               style={{
                 fontSize: '30px',
                 color: 'pink',
-                float: 'left',
+
                 fontWeight: 'bold',
               }}
             >
               {likes} likes
             </FormLabel>
-            <FormLabel
-              style={{ fontSize: '30px', color: 'black', float: 'right' }}
+            <Button
+              style={{
+                marginLeft: 'auto',
+                Color: 'black',
+                marginTop: '10px',
+                backgroundColor: '#daa520',
+                borderColor: '#daa520',
+                color: 'white',
+              }}
+              onClick={load}
             >
-              {date}
-            </FormLabel>
+              불러오기
+            </Button>
           </Container>
         </Col>
       </Row>

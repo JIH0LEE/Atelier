@@ -19,6 +19,7 @@ const Post = ({ posts, loading }) => {
           author={exhibition.author}
           poaster={exhibition.poster}
           description={exhibition.description}
+          step={exhibition.step}
         ></SavedExhibition>
       ))}
     </Container>

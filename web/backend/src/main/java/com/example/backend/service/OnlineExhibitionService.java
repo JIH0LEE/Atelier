@@ -61,6 +61,7 @@ public class OnlineExhibitionService {
                     .poster(data.getPoster())
                     .likeCount(data.getLikeCount())
                     .author(data.getUser().getNickname())
+                    .step(data.getStep())
                     .build());
         });
         return result;

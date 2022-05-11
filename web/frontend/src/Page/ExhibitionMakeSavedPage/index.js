@@ -13,7 +13,6 @@ const ExhibitionMakeSavedPage = () => {
       axios.defaults.headers.common['Authorization'] =
         window.localStorage.getItem('token')
       const res = await axios.get('/api/user/get-saved-exhibition')
-
       setOnlineExhibition(res.data)
       const _change = !change
       setChange(_change)
