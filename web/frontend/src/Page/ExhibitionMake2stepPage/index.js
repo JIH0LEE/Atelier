@@ -10,7 +10,7 @@ import {
   Figure,
 } from 'react-bootstrap'
 import axios from 'axios'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import ExhibitionPosting from '../../Component/ExhibitionPosting'
 import PostList from './PostList'
 import './style.css'
@@ -18,6 +18,7 @@ import { DragDropContext } from 'react-beautiful-dnd'
 
 const ExhibitionMake2stepPage = ({ id }) => {
   const location = useLocation()
+  const navigate = useNavigate()
 
   const [ID, setID] = useState(location.state.id)
 
@@ -58,9 +59,32 @@ const ExhibitionMake2stepPage = ({ id }) => {
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
       console.log(res)
     })
+
   }
 
-  const next = () => {}
+  const next = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+
+    var formData = new FormData()
+
+    console.log(fileList.length)
+    for (let i = 0; i < fileList.length; i++) {
+      formData.append('IDList', IDList[i])
+      formData.append('fileList', fileList[i])
+      formData.append('descriptionList', descriptionList[i])
+    }
+    formData.append('ID', ID)
+    axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
+      console.log(res)
+    })
+
+    navigate(`/make-exhibition-bgm`, {
+      state: {
+        id: ID,
+      },
+    })
+  }
 
   return (
     <Container className="exhibition_make-container2">
