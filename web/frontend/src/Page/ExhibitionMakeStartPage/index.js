@@ -141,6 +141,7 @@ const ExhibitionMakePage = () => {
       axios.post('/api/user/make-exhibition', formData).then(res => {
         if (res.data.success) {
           setId(res.data.id)
+          alert('저장되었습니다')
         }
       })
     } else {
@@ -151,6 +152,7 @@ const ExhibitionMakePage = () => {
         .then(res => {
           if (res.data.success) {
             setId(res.data.id)
+            alert('저장되었습니다')
           }
         })
     }

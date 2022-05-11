@@ -52,7 +52,8 @@ const SavedExhibition = ({
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     axios.delete(`/api/user/delete-online?id=${id}`).then(res => {
-      console.log(res.data)
+      alert('삭제되었습니다!')
+      navigate('/make-exhibition-ready')
     })
   }
   return (

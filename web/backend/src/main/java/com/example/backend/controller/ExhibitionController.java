@@ -33,8 +33,6 @@ public class ExhibitionController {
                 String posterURL=onlineExhibitionService.savePoster(poster);
                 onlineExhibitionDto.setPoster(posterURL);
             }
-
-
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
             OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();

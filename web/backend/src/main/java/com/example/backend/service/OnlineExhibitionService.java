@@ -255,7 +255,10 @@ public class OnlineExhibitionService {
         target.setTag1(tag1);
         target.setTag2(tag2);
         target.setTag3(tag3);
-        target.setPoster(poster);
+        if(onlineExhibitionDto.getPoster()!=null){
+            target.setPoster(poster);
+        }
+
         target.setDescription(description);
         return onlineExhibitionRepository.save(target);
     }
