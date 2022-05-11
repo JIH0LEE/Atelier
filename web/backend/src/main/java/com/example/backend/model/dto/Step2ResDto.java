@@ -1,5 +1,6 @@
 package com.example.backend.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -9,12 +10,11 @@ import java.util.List;
 
 @Data
 @ToString
+@AllArgsConstructor
 @Builder
-public class ContentListDto {
-    private Long ID;
+public class Step2ResDto {
     private List<Long> IDList;
-    //private List<ContentDto> contentList;
-
-    private List<MultipartFile> fileList;
+    private List<String> fileList;
     private List<String> descriptionList;
+    private List<Step2Dto> contentDtoList;
 }

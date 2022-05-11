@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.dto.*;
+import com.example.backend.model.entity.Content;
 import com.example.backend.model.entity.ContentType;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
@@ -94,6 +95,33 @@ public class ExhibitionController {
         }
         String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents);
         return onlineExhibition;
+    }
+
+    @GetMapping(value="/user/make-exhibition-step2")
+    private Step2ResDto makeOnlineExhibitionStep2(@RequestParam Long id, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.findById(id);
+        System.out.println(id);
+        List<Content> contents=onlineExhibition.getContents();
+        List<Long> IDList=new ArrayList<>();
+        List<String> fileList=new ArrayList<>();
+        List<String> descriptionList=new ArrayList<>();
+        List<Step2Dto> step2DtoList=new ArrayList<>();
+
+        for (int i=0;i<contents.size();i++){
+            Content content=contents.get(i);
+            IDList.add(content.getId());
+            fileList.add(content.getLink());
+            descriptionList.add(content.getDescription());
+
+            Step2Dto step2Dto=new Step2Dto(content.getId(), content.getLink(), content.getDescription());
+            step2DtoList.add(step2Dto);
+        }
+        return Step2ResDto.builder()
+                .IDList(IDList)
+                .fileList(fileList)
+                .descriptionList(descriptionList)
+                .contentDtoList(step2DtoList)
+                .build();
     }
 
 

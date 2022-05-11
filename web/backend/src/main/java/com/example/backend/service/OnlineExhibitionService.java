@@ -213,6 +213,7 @@ public class OnlineExhibitionService {
                 contents.add(content);
             }
             onlineExhibition.setContents(contents);
+            onlineExhibition.setStep(onlineExhibition.getStep());
             return onlineExhibitionRepository.save(onlineExhibition).toString();
         }catch(Exception e){
             return e.getMessage();

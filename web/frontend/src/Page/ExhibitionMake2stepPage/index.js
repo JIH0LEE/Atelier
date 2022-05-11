@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Row,
@@ -21,6 +21,40 @@ const ExhibitionMake2stepPage = ({ id }) => {
   const navigate = useNavigate()
 
   const [ID, setID] = useState(location.state.id)
+  //console.log(ID)
+
+  const [postList, setPostList] = useState([
+    { id: 0, link: '', description: '' },
+  ])
+  console.log(postList)
+  const [IDList, setIDList] = useState([0])
+  const [fileList, setFileList] = useState([undefined])
+  const [descriptionList, setDescriptionList] = useState([''])
+
+
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.get(`/api/user/make-exhibition-step2?id=${ID}`) //, { params: { id: ID } }
+      .then(({ data }) => {
+        console.log(data)
+        setPostList(data.contentDtoList)
+        setIDList(data.idlist)
+        setFileList(data.fileList)
+        setDescriptionList(data.descriptionList)
+        //setData(data.contentDtoList)
+        //console.log(postList)
+      })
+      .catch(e => {
+        console.log(e)
+
+      })
+
+  }, [])
+
+
+
 
   const formData = new FormData()
   formData.append('id', 0)
@@ -28,13 +62,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
   formData.append('description', '')
   formData.append('contentType', '0')
 
-  const [postList, setPostList] = useState([
-    { id: 0, link: '', description: '' },
-  ])
-
-  const [IDList, setIDList] = useState([0])
-  const [fileList, setFileList] = useState([undefined])
-  const [descriptionList, setDescriptionList] = useState([''])
 
   const getPostList = (newPostList, list1, list2, list3) => {
     setPostList(newPostList)
@@ -49,7 +76,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
 
     var formData = new FormData()
 
-    console.log(fileList.length)
+
     for (let i = 0; i < fileList.length; i++) {
       formData.append('IDList', IDList[i])
       formData.append('fileList', fileList[i])
@@ -68,7 +95,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
 
     var formData = new FormData()
 
-    console.log(fileList.length)
     for (let i = 0; i < fileList.length; i++) {
       formData.append('IDList', IDList[i])
       formData.append('fileList', fileList[i])
