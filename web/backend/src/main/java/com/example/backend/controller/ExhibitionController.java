@@ -99,7 +99,7 @@ public class ExhibitionController {
 
     @PostMapping(value = "/user/make-exhibition-step3")
     private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, @RequestBody BgmDto bgm, Principal principal){
-        System.out.println(bgm);
+
         OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep3(id, bgm);
         return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
@@ -120,6 +120,14 @@ public class ExhibitionController {
     private boolean deleteOnlineExhibition(@RequestParam Long id, Principal principal){
 
         return onlineExhibitionService.deleteById(id);
+
+    }
+
+    @PostMapping(value = "/user/step-change")
+    private boolean changeStep(@RequestParam Long id,@RequestBody int step, Principal principal){
+
+        OnlineExhibition rt=onlineExhibitionService.changeStepById(id,step);
+        return true;
 
     }
 

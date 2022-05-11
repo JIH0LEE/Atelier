@@ -274,4 +274,13 @@ public class OnlineExhibitionService {
 
     }
 
+    public OnlineExhibition changeStepById(Long id,int step){
+
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        onlineExhibition.setStep(step);
+        return onlineExhibitionRepository.save(onlineExhibition);
+
+
+    }
+
 }

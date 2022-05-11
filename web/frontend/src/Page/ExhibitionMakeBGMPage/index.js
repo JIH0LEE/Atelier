@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Tab, Col, Button, ListGroup, Row } from 'react-bootstrap'
+import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 const ExhibitionMakeBGMPage = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [currentBGM, setCurrentBGM] = useState(null)
-  const [id, setID] = useState(68)
+  const [id, setID] = useState(location.state.id)
   const [step, setStep] = useState(3)
   const cuteBGM = [
     {
@@ -94,7 +97,14 @@ const ExhibitionMakeBGMPage = () => {
       src: 'http://docs.google.com/uc?export=open&id=1Vmm672LVzoRFaShOwt1WGujDh0_87Kp0',
     },
   ]
-
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.get(`/api/user/make-exhibition-step3?id=${id}`).then(res => {
+      setStep(res.data.step)
+      setCurrentBGM(res.data.src)
+    })
+  }, [])
   const changeCuteBGM = e => {
     let findId = e.target.id
     let obj = cuteBGM.find(bgm => bgm.id == findId)
@@ -123,13 +133,12 @@ const ExhibitionMakeBGMPage = () => {
   const save = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
-    console.log(currentBGM)
     const body = {
       step: step,
       src: currentBGM,
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
-      console.log(res.data)
+      alert('저장되었습니다')
     })
   }
 
@@ -141,7 +150,23 @@ const ExhibitionMakeBGMPage = () => {
       src: currentBGM,
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
-      console.log(res.data)
+      alert('저장되었습니다')
+    })
+  }
+
+  const previous = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    const body = {
+      step: step - 1,
+      src: currentBGM,
+    }
+    axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
+      navigate(`/make-exhibition-2step`, {
+        state: {
+          id: id,
+        },
+      })
     })
   }
 
@@ -260,8 +285,15 @@ const ExhibitionMakeBGMPage = () => {
           </Tab.Container>
         </Container>
         <Container id="elem4">
-          <Button onClick={save}>Save</Button>
-          <Button onClick={next}>Next</Button>
+          <Button onClick={previous} style={{ float: 'left' }}>
+            Previous
+          </Button>
+          <Button onClick={next} style={{ float: 'right' }}>
+            Next
+          </Button>
+          <Button onClick={save} style={{ float: 'right' }}>
+            Save
+          </Button>
         </Container>
       </Container>
     </Container>
