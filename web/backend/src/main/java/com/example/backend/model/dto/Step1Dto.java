@@ -16,6 +16,7 @@ public class Step1Dto {
     private String tag1;
     private String tag2;
     private String tag3;
-    private MultipartFile poster;
+
+//    private MultipartFile poster;
     private String description;
 }

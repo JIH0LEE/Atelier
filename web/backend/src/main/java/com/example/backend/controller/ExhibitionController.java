@@ -21,7 +21,7 @@ public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
     private final UserService userService;
     @PostMapping(value = "/user/make-exhibition")
-    private IdDto makeOnlineExhibition(Step1Dto makeExhibitionDto, Principal principal){
+    private IdDto makeOnlineExhibition(Step1Dto makeExhibitionDto,@RequestParam(required = false)MultipartFile poster, Principal principal){
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
             onlineExhibitionDto.setStep(makeExhibitionDto.getStep());
@@ -29,8 +29,12 @@ public class ExhibitionController {
             onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
             onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
             onlineExhibitionDto.setTag3(makeExhibitionDto.getTag3());
-            String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
-            onlineExhibitionDto.setPoster(posterURL);
+            if(poster!=null){
+                String posterURL=onlineExhibitionService.savePoster(poster);
+                onlineExhibitionDto.setPoster(posterURL);
+            }
+
+
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
             OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
@@ -40,7 +44,7 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/save-exhibition-step1")
-    private IdDto saveOnlineExhibitionStep1(@RequestParam Long id, Step1Dto makeExhibitionDto, Principal principal){
+    private IdDto saveOnlineExhibitionStep1(@RequestParam Long id, Step1Dto makeExhibitionDto,@RequestParam(required = false)MultipartFile poster, Principal principal){
 
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
@@ -49,8 +53,10 @@ public class ExhibitionController {
             onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
             onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
             onlineExhibitionDto.setTag3(makeExhibitionDto.getTag3());
-            String posterURL=onlineExhibitionService.savePoster(makeExhibitionDto.getPoster());
-            onlineExhibitionDto.setPoster(posterURL);
+            if(poster!=null){
+                String posterURL=onlineExhibitionService.savePoster(poster);
+                onlineExhibitionDto.setPoster(posterURL);
+            }
             onlineExhibitionDto.setDescription(makeExhibitionDto.getDescription());
             OnlineExhibition onlineExhibition = onlineExhibitionService.saveStep1(id,onlineExhibitionDto);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
