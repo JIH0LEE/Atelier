@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Row,
@@ -25,6 +25,25 @@ const ExhibitionMakePage = () => {
   const [showingPoster, setShowingPoster] = useState(null)
   const [poster, setPoster] = useState(null)
   const [step, setStep] = useState(1)
+
+  useEffect(() => {
+    if (id == null) {
+      console.log(1)
+    } else {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.get(`/api/user/make-exhibition-step1?id=${id}`).then(res => {
+        console.log(res.data)
+        setTitle(res.data.title)
+        setTag1(res.data.tag1)
+        setTag2(res.data.tag2)
+        setTag3(res.data.tag3)
+        setDescription(res.data.description)
+        setShowingPoster(res.data.poster)
+        setStep(res.data.step)
+      })
+    }
+  }, [])
 
   const isWider = src => {
     var img = new Image()
@@ -158,6 +177,7 @@ const ExhibitionMakePage = () => {
                 onChange={titleChange}
                 maxLength={20}
                 placeholder="title"
+                value={title}
               />
             </InputGroup>
           </Row>
@@ -167,16 +187,19 @@ const ExhibitionMakePage = () => {
                 onChange={tag1Change}
                 maxLength={5}
                 placeholder="tag1"
+                value={tag1}
               />
               <FormControl
                 onChange={tag2Change}
                 maxLength={5}
                 placeholder="tag2"
+                value={tag2}
               />
               <FormControl
                 onChange={tag3Change}
                 maxLength={5}
                 placeholder="tag3"
+                value={tag3}
               />
             </InputGroup>
           </Row>
@@ -200,6 +223,7 @@ const ExhibitionMakePage = () => {
               onChange={descriptionChange}
               maxLength={400}
               placeholder="Description"
+              value={description}
               style={{ width: '80%', height: '80%' }}
             ></textarea>
             <Container

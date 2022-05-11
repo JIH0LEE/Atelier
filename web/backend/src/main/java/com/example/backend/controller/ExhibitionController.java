@@ -10,11 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,10 +21,10 @@ public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
     private final UserService userService;
     @PostMapping(value = "/user/make-exhibition")
-    private IdDto makeOnlineExhibition(MakeExhibitionDto makeExhibitionDto, Principal principal){
+    private IdDto makeOnlineExhibition(Step1Dto makeExhibitionDto, Principal principal){
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
-            onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
+            onlineExhibitionDto.setStep(makeExhibitionDto.getStep());
             onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
             onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
             onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
@@ -42,11 +40,11 @@ public class ExhibitionController {
     }
 
     @PostMapping(value = "/user/save-exhibition-step1")
-    private IdDto saveOnlineExhibitionStep1(@RequestParam Long id,MakeExhibitionDto makeExhibitionDto, Principal principal){
+    private IdDto saveOnlineExhibitionStep1(@RequestParam Long id, Step1Dto makeExhibitionDto, Principal principal){
 
         try{
             OnlineExhibitionDto onlineExhibitionDto = new OnlineExhibitionDto();
-            onlineExhibitionDto.setStep(Integer.parseInt(makeExhibitionDto.getStep()));
+            onlineExhibitionDto.setStep(makeExhibitionDto.getStep());
             onlineExhibitionDto.setTitle(makeExhibitionDto.getTitle());
             onlineExhibitionDto.setTag1(makeExhibitionDto.getTag1());
             onlineExhibitionDto.setTag2(makeExhibitionDto.getTag2());
@@ -59,6 +57,21 @@ public class ExhibitionController {
         }catch (Exception e){
             return IdDto.builder().id(null).success(false).build();
         }
+    }
+
+    @GetMapping(value = "/user/make-exhibition-step1")
+    private Step1ResDto getOnlineExhibitionStep1(@RequestParam Long id, Principal principal){
+
+        OnlineExhibition onlineExhibition = onlineExhibitionService.findById(id);
+        return Step1ResDto.builder()
+                .title(onlineExhibition.getTitle())
+                .step(onlineExhibition.getStep())
+                .tag1(onlineExhibition.getTag1())
+                .tag2(onlineExhibition.getTag2())
+                .tag3(onlineExhibition.getTag3())
+                .poster(onlineExhibition.getPoster())
+                .description(onlineExhibition.getDescription())
+                .build();
     }
 
 
@@ -88,8 +101,8 @@ public class ExhibitionController {
     }
 
     @GetMapping(value = "/user/make-exhibition-step3")
-    private BgmDto makeOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
-        OnlineExhibition onlineExhibition = onlineExhibitionService.getStep3(id);
+    private BgmDto getOnlineExhibitionStep3(@RequestParam Long id, Principal principal){
+        OnlineExhibition onlineExhibition = onlineExhibitionService.findById(id);
         return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 

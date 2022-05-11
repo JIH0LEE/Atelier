@@ -224,6 +224,8 @@ public class OnlineExhibitionService {
         return posterURL;
     }
 
+
+
     public OnlineExhibition saveStep3(Long id, BgmDto bgm){
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
         onlineExhibition.setBgm(bgm.getSrc());
@@ -231,7 +233,7 @@ public class OnlineExhibitionService {
         return onlineExhibitionRepository.save(onlineExhibition);
 
     }
-    public OnlineExhibition getStep3(Long id){
+    public OnlineExhibition findById(Long id){
 
         return onlineExhibitionRepository.findById(id).get();
 
