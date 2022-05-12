@@ -2,10 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.*;
-import com.example.backend.repository.CommentRepository;
-import com.example.backend.repository.LikeRepository;
-import com.example.backend.repository.OnlineExhibitionRepository;
-import com.example.backend.repository.UserRepository;
+import com.example.backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +23,7 @@ public class OnlineExhibitionService {
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
     private final S3Service s3Service;
+    private final ContentRepository contentRepository;
 
     public List<OnlineExhibitionDto> showAllOnlineExhibition(){
         List<OnlineExhibitionDto> result=new ArrayList<>();
@@ -193,36 +191,38 @@ public class OnlineExhibitionService {
     }
 
     public String saveStep2(Long id, List<ContentDto> contentDtos, int step){
+
         try{
             OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
-            List<Content> alreadyContents=onlineExhibition.getContents();
-            List<Long> alreadyContentsID=new ArrayList<>();
-            for (int i=0;i<alreadyContents.size();i++){
-                alreadyContentsID.add(alreadyContents.get(i).getId());
-            }
-            List<Content> contents = new ArrayList<>();
+
             for (int i=0;i<contentDtos.size();i++){
-                if ()
-
-                ContentDto contentDto = contentDtos.get(i);
-                if(alreadyContentsID.contains(contentDto.getId())){
-                    onlineExhibition.getContents()
+                //원래 있을때
+                try {
+                    System.out.println("case1");
+                    Content content = contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition, contentDtos.get(i).getOrderId());
+                    content.setContentType(contentDtos.get(i).getContentType());
+                    content.setDescription(contentDtos.get(i).getDescription());
+                    if(contentDtos.get(i).getLink()!=null){
+                        content.setLink(saveContents(contentDtos.get(i).getLink()));
+                    }
+                    contentRepository.save(content);
+                }catch(Exception e){
+                    System.out.println("case2");
+                    Content content=new Content();
+                    content.setOrderId(contentDtos.get(i).getOrderId());
+                    content.setOnlineExhibition(onlineExhibition);
+                    content.setContentType(contentDtos.get(i).getContentType());
+                    content.setDescription(contentDtos.get(i).getDescription());
+                    if(contentDtos.get(i).getLink()!=null){
+                        content.setLink(saveContents(contentDtos.get(i).getLink()));
+                    }
+                    contentRepository.save(content);
                 }
-                Long contentId = contentDto.getId();
-                MultipartFile link = contentDto.getLink();
-                String description = contentDto.getDescription();
-                ContentType contentType = contentDto.getContentType();
 
-                Content content = new Content();
-                content.setId(contentId);
-                content.setLink(saveContents(link));
-                content.setDescription(description);
-                content.setContentType(contentType);
-                content.setOnlineExhibition(onlineExhibition);
 
-                contents.add(content);
+
             }
-            onlineExhibition.setContents(contents);
+
             onlineExhibition.setStep(step);
             return onlineExhibitionRepository.save(onlineExhibition).toString();
         }catch(Exception e){

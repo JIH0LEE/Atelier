@@ -23,15 +23,11 @@ const ExhibitionMake2stepPage = ({ id }) => {
   const [ID, setID] = useState(location.state.id)
   //console.log(ID)
 
-  const [postList, setPostList] = useState([
-    { id: 0, link: '', description: '' },
-  ])
-  console.log(postList)
+  const [postList, setPostList] = useState([])
+
   const [IDList, setIDList] = useState([0])
   const [fileList, setFileList] = useState([undefined])
   const [descriptionList, setDescriptionList] = useState([''])
-
-
 
   const formData = new FormData()
   formData.append('id', 0)
@@ -39,8 +35,8 @@ const ExhibitionMake2stepPage = ({ id }) => {
   formData.append('description', '')
   formData.append('contentType', '0')
 
-
   const getPostList = (newPostList, list1, list2, list3) => {
+    console.log(newPostList)
     setPostList(newPostList)
     setIDList(list1)
     setFileList(list2)
@@ -53,7 +49,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
 
     var formData = new FormData()
 
-
     for (let i = 0; i < IDList.length; i++) {
       formData.append('IDList', IDList[i])
       formData.append('fileList', fileList[i])
@@ -65,7 +60,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
       console.log(res)
     })
-
   }
 
   const next = () => {
@@ -75,7 +69,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
     var formData = new FormData()
 
     for (let i = 0; i < fileList.length; i++) {
-      if (typeof (fileList[i]) === "object") {
+      if (typeof fileList[i] === 'object') {
         //formData.append('IDList', IDList[i])
         console.log(i)
         formData.append('fileList', fileList[i])
@@ -107,7 +101,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
     axios.post(`/api/user/step-change?=${ID}`, { step: 1 }).then(res => {
       console.log(res)
     })
-
   }
 
   return (
@@ -136,7 +129,9 @@ const ExhibitionMake2stepPage = ({ id }) => {
           ></ExhibitionPosting>
         </Container>
         <Container id="elem4">
-          <Button onClick={previous} style={{ float: 'left' }}>Previous</Button>
+          <Button onClick={previous} style={{ float: 'left' }}>
+            Previous
+          </Button>
 
           <Button onClick={next} style={{ float: 'right' }}>
             Next

@@ -85,8 +85,8 @@ public class ExhibitionController {
     private String makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, Principal principal){ //fileList
         System.out.println(contentList);
 
-        List<Long> IDs=contentList.getIDList();
-        List<Long> imageChangeID=contentList.getImageChangeList();
+        List<Integer> IDs=contentList.getIDList();
+        List<Integer> imageChangeID=contentList.getImageChangeList();
         System.out.println("==========");
         System.out.println("imageChangeID: "+imageChangeID);
         System.out.println("fileList: "+fileList);
@@ -97,18 +97,24 @@ public class ExhibitionController {
         int step = contentList.getStep();
 
         List<ContentDto> contents=new ArrayList<>();
-        for (int i=0; i<imageChangeID.size();i++){
-            ContentDto aContent=new ContentDto(imageChangeID.get(i), fileList.get(i), null, ContentType.IMAGE);
-            contents.add(aContent);
-        }
-        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step);
 
-        contents=new ArrayList<>();
         for (int i=0; i< IDs.size(); i++){
-            ContentDto aContent=new ContentDto(IDs.get(i), null, descriptions.get(i), ContentType.IMAGE);
-            contents.add(aContent);
+            if(imageChangeID.contains(IDs.get(i))){
+                int idx=imageChangeID.indexOf(IDs.get(i));
+                ContentDto aContent=new ContentDto(IDs.get(i), fileList.get(idx), descriptions.get(i), ContentType.IMAGE);
+
+                contents.add(aContent);
+            }
+            else{
+                ContentDto aContent=new ContentDto(IDs.get(i), null, descriptions.get(i), ContentType.IMAGE);
+
+                contents.add(aContent);
+            }
+
         }
-        onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step);
+        contents.forEach(System.out::println);
+
+        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step);
         return onlineExhibition;
     }
 
@@ -117,18 +123,18 @@ public class ExhibitionController {
         OnlineExhibition onlineExhibition = onlineExhibitionService.findById(id);
         System.out.println(id);
         List<Content> contents=onlineExhibition.getContents();
-        List<Long> IDList=new ArrayList<>();
+        List<Integer> IDList=new ArrayList<>();
         List<String> fileList=new ArrayList<>();
         List<String> descriptionList=new ArrayList<>();
         List<Step2Dto> step2DtoList=new ArrayList<>();
 
         for (int i=0;i<contents.size();i++){
             Content content=contents.get(i);
-            IDList.add(content.getId());
+            IDList.add(content.getOrderId());
             fileList.add(content.getLink());
             descriptionList.add(content.getDescription());
 
-            Step2Dto step2Dto=new Step2Dto(content.getId(), content.getLink(), content.getDescription());
+            Step2Dto step2Dto=new Step2Dto(content.getOrderId(), content.getLink(), content.getDescription());
             step2DtoList.add(step2Dto);
         }
         return Step2ResDto.builder()

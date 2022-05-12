@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @Builder
 public class Step2Dto {
-    private Long id;
+    private Integer id;
 
     private String link;
 

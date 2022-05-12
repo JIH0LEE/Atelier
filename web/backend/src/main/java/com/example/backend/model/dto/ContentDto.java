@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContentDto {
-    private Long id;
+    private int orderId;
 
     private MultipartFile link;
 

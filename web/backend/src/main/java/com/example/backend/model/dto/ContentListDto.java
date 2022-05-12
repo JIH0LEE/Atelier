@@ -12,12 +12,12 @@ import java.util.List;
 @Builder
 public class ContentListDto {
     private Long ID;
-    private List<Long> IDList;
+    private List<Integer> IDList;
     //private List<ContentDto> contentList;
 
     //private List<MultipartFile> fileList;
     private List<String> descriptionList;
-    private List<Long> imageChangeList;
+    private List<Integer> imageChangeList;
 
     private int step;
 }

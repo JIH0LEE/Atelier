@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Step2ResDto {
-    private List<Long> IDList;
+    private List<Integer> IDList;
     private List<String> fileList;
     private List<String> descriptionList;
     private List<Step2Dto> contentDtoList;
