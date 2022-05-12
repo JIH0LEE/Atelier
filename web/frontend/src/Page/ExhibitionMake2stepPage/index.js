@@ -152,11 +152,12 @@ const ExhibitionMake2stepPage = ({ id }) => {
         </Container>
         <Container id="elem4">
           <Button onClick={previous} style={{ float: 'left' }}>Previous</Button>
-          <Button onClick={save} style={{ float: 'right' }}>
-            Save
-          </Button>
+
           <Button onClick={next} style={{ float: 'right' }}>
             Next
+          </Button>
+          <Button onClick={save} style={{ float: 'right' }}>
+            Save
           </Button>
         </Container>
       </Container>
