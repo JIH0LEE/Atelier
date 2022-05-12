@@ -19,7 +19,7 @@ import ModalButtonPosting from "./ModalButtonPosting"
 import Post from "./Post"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
-const ExhibitionPosting = ({ postList, func }) => {
+const ExhibitionPosting = ({ postList, func, id }) => {
     const [post, setPost] = useState(null)
     const [newPostList, setPostList] = useState(postList)
     const [description, setDescription] = useState()
@@ -103,6 +103,25 @@ const ExhibitionPosting = ({ postList, func }) => {
         func(newPostList, IDList, fileList, descriptionList)
     }, [newPostList])
 
+    useEffect(() => {
+        axios.defaults.headers.common['Authorization'] =
+            window.localStorage.getItem('token')
+        axios.get(`/api/user/make-exhibition-step2?id=${id}`) //, { params: { id: ID } }
+            .then(({ data }) => {
+                console.log(data)
+                setPostList(data.contentDtoList)
+                setIDList(data.idlist)
+                setFileList(data.fileList)
+                setDescriptionList(data.descriptionList)
+                //setData(data.contentDtoList)
+                //console.log(postList)
+            })
+            .catch(e => {
+                console.log(e)
+
+            })
+
+    }, [])
 
     return (
         <Container>

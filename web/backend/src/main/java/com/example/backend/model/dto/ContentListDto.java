@@ -17,4 +17,5 @@ public class ContentListDto {
 
     private List<MultipartFile> fileList;
     private List<String> descriptionList;
+    private int step;
 }

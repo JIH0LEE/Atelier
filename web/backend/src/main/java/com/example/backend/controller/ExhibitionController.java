@@ -88,12 +88,13 @@ public class ExhibitionController {
         List<Long> IDs=contentList.getIDList();
         List<MultipartFile> files=contentList.getFileList();
         List<String> descriptions=contentList.getDescriptionList();
+        int step = contentList.getStep();
 
         for (int i=0; i<IDs.size();i++){
             ContentDto aContent=new ContentDto(IDs.get(i), files.get(i), descriptions.get(i), ContentType.IMAGE);
             contents.add(aContent);
         }
-        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents);
+        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step);
         return onlineExhibition;
     }
 

@@ -32,28 +32,28 @@ const ExhibitionMake2stepPage = ({ id }) => {
   const [descriptionList, setDescriptionList] = useState([''])
 
 
-
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.get(`/api/user/make-exhibition-step2?id=${ID}`) //, { params: { id: ID } }
-      .then(({ data }) => {
-        console.log(data)
-        setPostList(data.contentDtoList)
-        setIDList(data.idlist)
-        setFileList(data.fileList)
-        setDescriptionList(data.descriptionList)
-        //setData(data.contentDtoList)
-        //console.log(postList)
-      })
-      .catch(e => {
-        console.log(e)
-
-      })
-
-  }, [])
-
-
+  /*
+    useEffect(() => {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.get(`/api/user/make-exhibition-step2?id=${ID}`) //, { params: { id: ID } }
+        .then(({ data }) => {
+          console.log(data)
+          setPostList(data.contentDtoList)
+          setIDList(data.idlist)
+          setFileList(data.fileList)
+          setDescriptionList(data.descriptionList)
+          //setData(data.contentDtoList)
+          //console.log(postList)
+        })
+        .catch(e => {
+          console.log(e)
+  
+        })
+  
+    }, [])
+  
+  */
 
 
   const formData = new FormData()
@@ -83,6 +83,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
       formData.append('descriptionList', descriptionList[i])
     }
     formData.append('ID', ID)
+    formData.append('step', 2)
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
       console.log(res)
     })
@@ -101,6 +102,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
       formData.append('descriptionList', descriptionList[i])
     }
     formData.append('ID', ID)
+    formData.append('step', 3)
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
       console.log(res)
     })
@@ -110,6 +112,17 @@ const ExhibitionMake2stepPage = ({ id }) => {
         id: ID,
       },
     })
+  }
+
+  const previous = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+
+    navigate('/make-exhibition-start', { state: { id: ID } })
+    axios.post(`/api/user/step-change?=${ID}`, { step: 1 }).then(res => {
+      console.log(res)
+    })
+
   }
 
   return (
@@ -134,10 +147,11 @@ const ExhibitionMake2stepPage = ({ id }) => {
           <ExhibitionPosting
             postList={postList}
             func={getPostList}
+            id={ID}
           ></ExhibitionPosting>
         </Container>
         <Container id="elem4">
-          <Button style={{ float: 'left' }}>Previous</Button>
+          <Button onClick={previous} style={{ float: 'left' }}>Previous</Button>
           <Button onClick={save} style={{ float: 'right' }}>
             Save
           </Button>

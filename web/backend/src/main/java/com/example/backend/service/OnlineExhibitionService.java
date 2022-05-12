@@ -192,7 +192,7 @@ public class OnlineExhibitionService {
         return false;
     }
 
-    public String saveStep2(Long id, List<ContentDto> contentDtos){
+    public String saveStep2(Long id, List<ContentDto> contentDtos, int step){
         try{
             OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
             List<Content> contents = new ArrayList<>();
@@ -213,7 +213,7 @@ public class OnlineExhibitionService {
                 contents.add(content);
             }
             onlineExhibition.setContents(contents);
-            onlineExhibition.setStep(onlineExhibition.getStep());
+            onlineExhibition.setStep(step);
             return onlineExhibitionRepository.save(onlineExhibition).toString();
         }catch(Exception e){
             return e.getMessage();
