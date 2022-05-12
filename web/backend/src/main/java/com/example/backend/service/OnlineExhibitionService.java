@@ -195,9 +195,19 @@ public class OnlineExhibitionService {
     public String saveStep2(Long id, List<ContentDto> contentDtos, int step){
         try{
             OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+            List<Content> alreadyContents=onlineExhibition.getContents();
+            List<Long> alreadyContentsID=new ArrayList<>();
+            for (int i=0;i<alreadyContents.size();i++){
+                alreadyContentsID.add(alreadyContents.get(i).getId());
+            }
             List<Content> contents = new ArrayList<>();
             for (int i=0;i<contentDtos.size();i++){
+                if ()
+
                 ContentDto contentDto = contentDtos.get(i);
+                if(alreadyContentsID.contains(contentDto.getId())){
+                    onlineExhibition.getContents()
+                }
                 Long contentId = contentDto.getId();
                 MultipartFile link = contentDto.getLink();
                 String description = contentDto.getDescription();

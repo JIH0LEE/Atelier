@@ -15,7 +15,9 @@ public class ContentListDto {
     private List<Long> IDList;
     //private List<ContentDto> contentList;
 
-    private List<MultipartFile> fileList;
+    //private List<MultipartFile> fileList;
     private List<String> descriptionList;
+    private List<Long> imageChangeList;
+
     private int step;
 }

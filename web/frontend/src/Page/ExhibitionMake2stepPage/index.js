@@ -32,29 +32,6 @@ const ExhibitionMake2stepPage = ({ id }) => {
   const [descriptionList, setDescriptionList] = useState([''])
 
 
-  /*
-    useEffect(() => {
-      axios.defaults.headers.common['Authorization'] =
-        window.localStorage.getItem('token')
-      axios.get(`/api/user/make-exhibition-step2?id=${ID}`) //, { params: { id: ID } }
-        .then(({ data }) => {
-          console.log(data)
-          setPostList(data.contentDtoList)
-          setIDList(data.idlist)
-          setFileList(data.fileList)
-          setDescriptionList(data.descriptionList)
-          //setData(data.contentDtoList)
-          //console.log(postList)
-        })
-        .catch(e => {
-          console.log(e)
-  
-        })
-  
-    }, [])
-  
-  */
-
 
   const formData = new FormData()
   formData.append('id', 0)
@@ -77,11 +54,12 @@ const ExhibitionMake2stepPage = ({ id }) => {
     var formData = new FormData()
 
 
-    for (let i = 0; i < fileList.length; i++) {
+    for (let i = 0; i < IDList.length; i++) {
       formData.append('IDList', IDList[i])
       formData.append('fileList', fileList[i])
       formData.append('descriptionList', descriptionList[i])
     }
+
     formData.append('ID', ID)
     formData.append('step', 2)
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
@@ -97,8 +75,15 @@ const ExhibitionMake2stepPage = ({ id }) => {
     var formData = new FormData()
 
     for (let i = 0; i < fileList.length; i++) {
+      if (typeof (fileList[i]) === "object") {
+        //formData.append('IDList', IDList[i])
+        console.log(i)
+        formData.append('fileList', fileList[i])
+        formData.append('imageChangeList', IDList[i])
+        //formData.append('descriptionList', descriptionList[i])
+      }
+
       formData.append('IDList', IDList[i])
-      formData.append('fileList', fileList[i])
       formData.append('descriptionList', descriptionList[i])
     }
     formData.append('ID', ID)
