@@ -201,6 +201,7 @@ public class OnlineExhibitionService {
                     System.out.println("case1");
                     Content content = contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition, contentDtos.get(i).getOrderId());
                     content.setContentType(contentDtos.get(i).getContentType());
+                    System.out.println(contentDtos.get(i).getDescription());
                     content.setDescription(contentDtos.get(i).getDescription());
                     if(contentDtos.get(i).getLink()!=null){
                         content.setLink(saveContents(contentDtos.get(i).getLink()));
@@ -242,6 +243,7 @@ public class OnlineExhibitionService {
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
         onlineExhibition.setBgm(bgm.getSrc());
         onlineExhibition.setStep(bgm.getStep());
+        System.out.println("step:"+bgm.getStep());
         return onlineExhibitionRepository.save(onlineExhibition);
 
     }

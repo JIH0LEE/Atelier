@@ -131,10 +131,11 @@ const ExhibitionMakeBGMPage = () => {
   }
 
   const save = () => {
+    console.log(step)
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     const body = {
-      step: step,
+      step: 3,
       src: currentBGM,
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
@@ -146,7 +147,7 @@ const ExhibitionMakeBGMPage = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     const body = {
-      step: step + 1,
+      step: 4,
       src: currentBGM,
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
@@ -158,7 +159,7 @@ const ExhibitionMakeBGMPage = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     const body = {
-      step: step - 1,
+      step: 2,
       src: currentBGM,
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {

@@ -88,9 +88,10 @@ public class ExhibitionController {
         List<Integer> IDs=contentList.getIDList();
         List<Integer> imageChangeID=contentList.getImageChangeList();
         System.out.println("==========");
-        System.out.println("imageChangeID: "+imageChangeID);
-        System.out.println("fileList: "+fileList);
-        System.out.println("ID: "+IDs);
+//        System.out.println("imageChangeID: "+imageChangeID);
+//        System.out.println("fileList: "+fileList);
+//        System.out.println("ID: "+IDs);
+        System.out.println("ID: "+contentList.getStep());
 
         List<String> descriptions=contentList.getDescriptionList();
         System.out.println("descriptionList: "+descriptions);

@@ -28,7 +28,6 @@ const ExhibitionMakePage = () => {
   const [step, setStep] = useState(1)
 
   useEffect(() => {
-    console.log(location.state.id)
     if (id == null) {
       console.log(1)
     } else {
