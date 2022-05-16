@@ -22,6 +22,7 @@ import ExhibitionInfo from './Page/ExhibitionInfo'
 import ExhibitionMake2stepPage from './Page/ExhibitionMake2stepPage'
 import ExhibitionMakeReadyPage from './Page/ExhibitionMakeReadyPage'
 import ExhibitionMakeSavedPage from './Page/ExhibitionMakeSavedPage'
+import ExhibitionMake4stepPage from './Page/ExhibitionMake4stepPage'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -83,6 +84,10 @@ function App() {
           <Route
             path="/exhibition/:key"
             element={<ExhibitionInfo></ExhibitionInfo>}
+          ></Route>
+          <Route
+            path="/make-exhibition-4step"
+            element={<ExhibitionMake4stepPage></ExhibitionMake4stepPage>}
           ></Route>
         </Routes>
       </Container>

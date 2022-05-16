@@ -52,6 +52,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
 
   const passDelete = e => {
     deleteFun(id)
+
   }
 
   return (

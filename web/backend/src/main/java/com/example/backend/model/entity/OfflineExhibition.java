@@ -5,17 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.*;
+
+
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+
+
 public class OfflineExhibition {
 
     @Id
@@ -36,10 +43,12 @@ public class OfflineExhibition {
 
     private String poster;
 
+    @Column(length = 5000)
     private String descript;
 
     private String keyword;
 
+    @Column(length = 50000)
     private String word2vec;
 
 
