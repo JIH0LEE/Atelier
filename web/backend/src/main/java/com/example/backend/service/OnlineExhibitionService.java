@@ -4,7 +4,10 @@ import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.*;
 import com.example.backend.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -189,32 +192,43 @@ public class OnlineExhibitionService {
         //OnlineExhibition onlineExhibition
         return false;
     }
+    @Transactional()
+    public List<Long> getDeleteList(Long id,List<Integer> orderID){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        List<Integer> deleteList=new ArrayList<>();
+        List<Long> rt=new ArrayList<>();
+        onlineExhibition.getContents().forEach(content->{
+            if(!orderID.contains(content.getOrderId())){
+                deleteList.add(content.getOrderId());
+            }
+        });
 
+        deleteList.forEach(deleteID->
+        {
+            System.out.println(deleteID);
+            Long deleteId=contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition,deleteID).getId();
+            rt.add(deleteId);
+        });
+        return rt;
+    }
+    @Transactional
     public String saveStep2(Long id, List<ContentDto> contentDtos, int step,List<Integer> orderID){
 
 
         try{
             OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
-            List<Integer> deleteList=new ArrayList<>();
-            onlineExhibition.getContents().forEach(content->{
-                if(!orderID.contains(content.getOrderId())){
-                    deleteList.add(content.getOrderId());
-                }
-            });
+
             for (int i=0;i<contentDtos.size();i++){
                 //원래 있을때
                 try {
-                    System.out.println("case1");
                     Content content = contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition, contentDtos.get(i).getOrderId());
                     content.setContentType(contentDtos.get(i).getContentType());
-                    System.out.println(contentDtos.get(i).getDescription());
                     content.setDescription(contentDtos.get(i).getDescription());
                     if(contentDtos.get(i).getLink()!=null){
                         content.setLink(saveContents(contentDtos.get(i).getLink()));
                     }
                     contentRepository.save(content);
                 }catch(Exception e){
-                    System.out.println("case2");
                     Content content=new Content();
                     content.setOrderId(contentDtos.get(i).getOrderId());
                     content.setOnlineExhibition(onlineExhibition);
@@ -227,27 +241,25 @@ public class OnlineExhibitionService {
                 }
             }
 //            //삭제하기
-            List<Content> newContents=onlineExhibition.getContents();
 
-            onlineExhibition.getContents().forEach(content -> {
-                if(deleteList.contains(content.getOrderId())){
-                    newContents.remove(content.getOrderId());
-                }
-            });
-            onlineExhibition.setContents(newContents);
-//            System.out.println("삭제 리스트");
-//            System.out.println(deleteList);
-//            deleteList.forEach(deleteID->{
-//                contentRepository.deleteById(contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition,deleteID).getId());
-//            });
+
+
+
 
             //정렬하기
             onlineExhibition.setStep(step);
+
+            System.out.println(onlineExhibition.getContents());
+
             return onlineExhibitionRepository.save(onlineExhibition).toString();
         }catch(Exception e){
             return e.getMessage();
         }
 
+    }
+    @Transactional
+    public void deleteContent(Long id){
+        contentRepository.deleteById(id);
     }
 
     public String saveContents(MultipartFile file) throws IOException {

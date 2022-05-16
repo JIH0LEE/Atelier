@@ -5,9 +5,11 @@ import com.example.backend.model.entity.Content;
 import com.example.backend.model.entity.ContentType;
 import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
+import com.example.backend.repository.ContentRepository;
 import com.example.backend.service.OnlineExhibitionService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
     private final UserService userService;
+    private final ContentRepository contentRepository;
     @PostMapping(value = "/user/make-exhibition")
     private IdDto makeOnlineExhibition(Step1Dto makeExhibitionDto,@RequestParam(required = false)MultipartFile poster, Principal principal){
         try{
@@ -80,10 +83,10 @@ public class ExhibitionController {
     }
 
 
-
+    @Transactional
     @PostMapping(value = "/user/make-exhibition-step2/file")
     private String makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, @RequestParam(required = false)List<Integer> imageChangeList,Principal principal){ //fileList
-        System.out.println(contentList);
+
 
         List<Integer> IDs=contentList.getIDList();
         List<Integer> imageChangeID=new ArrayList<>();
@@ -117,10 +120,17 @@ public class ExhibitionController {
             }
 
         }
-        contents.forEach(System.out::println);
 
-        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step,contentList.getIDList());
-        return onlineExhibition;
+
+
+        List<Long> deletes=onlineExhibitionService.getDeleteList(contentList.getID(),contentList.getIDList());
+        deletes.forEach(delete->{
+            contentRepository.deleteById(delete);
+        });
+
+        return onlineExhibitionService.saveStep2(contentList.getID(), contents, step,contentList.getIDList());
+
+
     }
 
     @GetMapping(value="/user/make-exhibition-step2")
