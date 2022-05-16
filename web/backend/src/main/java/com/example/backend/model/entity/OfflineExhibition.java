@@ -43,12 +43,12 @@ public class OfflineExhibition {
 
     private String poster;
 
-    @Column(length = 5000)
+
     private String descript;
 
-    private String keyword;
+    //private String keyword;
 
-    @Column(length = 50000)
+
     private String word2vec;
 
 

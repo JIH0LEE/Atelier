@@ -35,8 +35,7 @@ public class Recommended {
 
     private String poster;
 
-    @Column(length = 5000)
+
     private String descript;
 
-    private String keyword;
 }
