@@ -10,12 +10,8 @@ spring:
 
     generate-ddl: false
     hibernate:
-
-<<<<<<< HEAD
-      ddl-auto: create-drop
-=======
       ddl-auto: create
->>>>>>> 0c9c9074390991f5f8f9f30ff857722ea44e0b28
+
 
 
   datasource:

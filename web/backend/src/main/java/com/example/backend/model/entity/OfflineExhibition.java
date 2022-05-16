@@ -46,7 +46,7 @@ public class OfflineExhibition {
 
     private String descript;
 
-    //private String keyword;
+    private String keyword;
 
 
     private String word2vec;
