@@ -1,10 +1,8 @@
 package com.example.backend.repository;
 
-import com.example.backend.model.entity.OffilineExhibition;
+import com.example.backend.model.entity.OfflineExhibition;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface OfflineExhibitionRepository extends JpaRepository<OffilineExhibition,Long> {
+public interface OfflineExhibitionRepository extends JpaRepository<OfflineExhibition,Long> {
 
 }

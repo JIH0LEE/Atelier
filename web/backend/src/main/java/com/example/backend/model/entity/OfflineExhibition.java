@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class OffilineExhibition {
+public class OfflineExhibition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +24,23 @@ public class OffilineExhibition {
 
     private String title;
 
-    private LocalDateTime startDate;
-
-    private LocalDateTime endDate;
-
-    private String image;
-
     private String link;
 
-    @OneToMany(mappedBy = "offlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
-    private List<Keyword> keywords = new ArrayList<>();
+    private int start_date;
+
+    private int end_date;
+
+    private String locate;
+
+    private String place;
+
+    private String poster;
+
+    private String descript;
+
+    private String keyword;
+
+    private String word2vec;
+
+
 }

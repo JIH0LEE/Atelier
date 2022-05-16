@@ -106,7 +106,7 @@ const ExhibitionPosting = ({ postList, func, id }) => {
 
   useEffect(() => {
     func(newPostList, IDList, fileList, descriptionList)
-  }, [newPostList])
+  }, [newPostList, IDList, fileList, descriptionList])
 
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] =
