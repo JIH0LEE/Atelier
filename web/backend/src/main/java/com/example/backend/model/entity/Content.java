@@ -26,7 +26,7 @@ public class Content {
     @Enumerated(EnumType.STRING)
     private ContentType contentType;
 
-    @ManyToOne(fetch=FetchType.LAZY,cascade = { CascadeType.ALL})
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="online_exhibition_id")
     @ToString.Exclude
     private OnlineExhibition onlineExhibition;

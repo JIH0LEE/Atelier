@@ -25,7 +25,7 @@ const ExhibitionPosting = ({ postList, func, id }) => {
   const [description, setDescription] = useState()
   const [tempList, setTempList] = useState([])
   //console.log(newPostList)
-  const [IDList, setIDList] = useState([0])
+  const [IDList, setIDList] = useState([])
   const [fileList, setFileList] = useState([null])
   const [descriptionList, setDescriptionList] = useState([''])
   const addPost = () => {

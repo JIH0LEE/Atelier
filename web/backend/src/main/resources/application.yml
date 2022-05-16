@@ -10,9 +10,8 @@ spring:
 
     generate-ddl: false
     hibernate:
-      ddl-auto: update
 
-
+      ddl-auto: create
 
 
   datasource:
