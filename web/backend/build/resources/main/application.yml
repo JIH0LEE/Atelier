@@ -11,11 +11,15 @@ spring:
     generate-ddl: false
     hibernate:
 
+<<<<<<< HEAD
       ddl-auto: create-drop
+=======
+      ddl-auto: create
+>>>>>>> 0c9c9074390991f5f8f9f30ff857722ea44e0b28
 
 
   datasource:
-    url: jdbc:mysql://atelier.caejnedfdhpl.ap-northeast-2.rds.amazonaws.com/atelier
+    url: jdbc:mysql://atelier.caejnedfdhpl.ap-northeast-2.rds.amazonaws.com/atelier1
     username: admin
     password: dltmddusqkqh12
     initialization-mode: always
