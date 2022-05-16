@@ -132,7 +132,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
           <Button onClick={previous} style={{ float: 'left' }}>
             Previous
           </Button>
-
+      
           <Button onClick={next} style={{ float: 'right' }}>
             Next
           </Button>

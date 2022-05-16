@@ -17,7 +17,7 @@ public class ContentListDto {
 
     //private List<MultipartFile> fileList;
     private List<String> descriptionList;
-    private List<Integer> imageChangeList;
+//    private List<Integer> imageChangeList;
 
     private int step;
 }

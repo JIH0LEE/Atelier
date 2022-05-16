@@ -190,11 +190,17 @@ public class OnlineExhibitionService {
         return false;
     }
 
-    public String saveStep2(Long id, List<ContentDto> contentDtos, int step){
+    public String saveStep2(Long id, List<ContentDto> contentDtos, int step,List<Integer> orderID){
+
 
         try{
             OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
-
+            List<Integer> deleteList=new ArrayList<>();
+            onlineExhibition.getContents().forEach(content->{
+                if(!orderID.contains(content.getOrderId())){
+                    deleteList.add(content.getOrderId());
+                }
+            });
             for (int i=0;i<contentDtos.size();i++){
                 //원래 있을때
                 try {
@@ -219,11 +225,15 @@ public class OnlineExhibitionService {
                     }
                     contentRepository.save(content);
                 }
-
-
-
             }
+            //삭제하기
+            System.out.println("삭제 리스트");
+            System.out.println(deleteList);
+            deleteList.forEach(deleteID->{
+                contentRepository.deleteById(contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition,deleteID).getId());
+            });
 
+            //정렬하기
             onlineExhibition.setStep(step);
             return onlineExhibitionRepository.save(onlineExhibition).toString();
         }catch(Exception e){

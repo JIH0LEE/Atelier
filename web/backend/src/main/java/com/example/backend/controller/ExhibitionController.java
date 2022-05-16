@@ -82,16 +82,20 @@ public class ExhibitionController {
 
 
     @PostMapping(value = "/user/make-exhibition-step2/file")
-    private String makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, Principal principal){ //fileList
+    private String makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, @RequestParam(required = false)List<Integer> imageChangeList,Principal principal){ //fileList
         System.out.println(contentList);
 
         List<Integer> IDs=contentList.getIDList();
-        List<Integer> imageChangeID=contentList.getImageChangeList();
+        List<Integer> imageChangeID=new ArrayList<>();
+        if(imageChangeList!=null){
+            imageChangeID=imageChangeList;
+        }
+
         System.out.println("==========");
-//        System.out.println("imageChangeID: "+imageChangeID);
+        System.out.println("imageChangeID: "+imageChangeID);
 //        System.out.println("fileList: "+fileList);
-//        System.out.println("ID: "+IDs);
-        System.out.println("ID: "+contentList.getStep());
+        System.out.println("ID: "+IDs);
+
 
         List<String> descriptions=contentList.getDescriptionList();
         System.out.println("descriptionList: "+descriptions);
@@ -115,7 +119,7 @@ public class ExhibitionController {
         }
         contents.forEach(System.out::println);
 
-        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step);
+        String onlineExhibition = onlineExhibitionService.saveStep2(contentList.getID(), contents, step,contentList.getIDList());
         return onlineExhibition;
     }
 
