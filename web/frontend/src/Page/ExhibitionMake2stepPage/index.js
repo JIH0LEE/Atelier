@@ -25,7 +25,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
 
   const [postList, setPostList] = useState([])
 
-  const [IDList, setIDList] = useState([0])
+  const [IDList, setIDList] = useState([])
   const [fileList, setFileList] = useState([undefined])
   const [descriptionList, setDescriptionList] = useState([''])
 
@@ -132,7 +132,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
           <Button onClick={previous} style={{ float: 'left' }}>
             Previous
           </Button>
-      
+
           <Button onClick={next} style={{ float: 'right' }}>
             Next
           </Button>

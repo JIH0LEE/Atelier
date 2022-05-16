@@ -226,12 +226,20 @@ public class OnlineExhibitionService {
                     contentRepository.save(content);
                 }
             }
-            //삭제하기
-            System.out.println("삭제 리스트");
-            System.out.println(deleteList);
-            deleteList.forEach(deleteID->{
-                contentRepository.deleteById(contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition,deleteID).getId());
+//            //삭제하기
+            List<Content> newContents=onlineExhibition.getContents();
+
+            onlineExhibition.getContents().forEach(content -> {
+                if(deleteList.contains(content.getOrderId())){
+                    newContents.remove(content.getOrderId());
+                }
             });
+            onlineExhibition.setContents(newContents);
+//            System.out.println("삭제 리스트");
+//            System.out.println(deleteList);
+//            deleteList.forEach(deleteID->{
+//                contentRepository.deleteById(contentRepository.findByOnlineExhibitionAndOrderId(onlineExhibition,deleteID).getId());
+//            });
 
             //정렬하기
             onlineExhibition.setStep(step);

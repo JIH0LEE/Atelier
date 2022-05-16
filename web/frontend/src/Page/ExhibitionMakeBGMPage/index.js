@@ -146,6 +146,7 @@ const ExhibitionMakeBGMPage = () => {
   const next = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
+
     const body = {
       step: 4,
       src: currentBGM,
@@ -156,6 +157,7 @@ const ExhibitionMakeBGMPage = () => {
   }
 
   const previous = () => {
+    console.log(id, currentBGM)
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
     const body = {
