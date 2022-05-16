@@ -20,7 +20,7 @@ public class Keyword {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="online_exhibition_id")
     @ToString.Exclude
-    private OffilineExhibition offlineExhibition;
+    private OfflineExhibition offlineExhibition;
 
     private String content;
 }
