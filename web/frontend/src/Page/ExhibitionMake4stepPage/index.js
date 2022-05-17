@@ -46,14 +46,16 @@ const ExhibitionMake4stepPage = () => {
               width: '690px',
               height: '432px',
               marginBottom: '357px',
+              padding: '0px',
               overflow: 'hidden',
             }}
           >
             <Image
               src="./loopy.png"
               style={{
-                objectFit: 'contain',
-                height: '430px',
+                objectFit: 'cover',
+                width: '690px',
+                maxHeight: '432px',
               }}
             ></Image>
           </Container>
