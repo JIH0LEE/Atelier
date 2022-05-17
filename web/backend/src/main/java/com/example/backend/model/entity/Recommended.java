@@ -35,6 +35,7 @@ public class Recommended {
 
     private String poster;
 
+    private String keywords;
 
     private String descript;
 
