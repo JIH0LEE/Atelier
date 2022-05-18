@@ -17,6 +17,8 @@ import background3 from '../../images/exhibitionBackground/background3.jpg'
 import background4 from '../../images/exhibitionBackground/background4.jpg'
 
 import './style.css'
+import './BackgroundFour'
+import BackgroundFour from './BackgroundFour'
 
 const ExhibitionMake4stepPage = () => {
   return (
@@ -38,29 +40,7 @@ const ExhibitionMake4stepPage = () => {
         </Container>
 
         <Container id="elem3">
-          <Container
-            style={{
-              backgroundImage: `url(${background3})`,
-            }}
-            className="preview"
-          >
-            {/* case4 */}
-            {/* <Container className="background4">
-              <Image className="background4-img" src="./loopy.png"></Image>
-            </Container>
-           */}
-            {/* case1 */}
-            {/* <Container className="background1">
-              <Image className="background1-img" src="./loopy.png"></Image>
-            </Container> */}
-            {/* case2 */}
-            {/* <Container className="background2">
-              <Image className="background2-img" src="./loopy.png"></Image>
-            </Container> */}
-            <Container className="background3">
-              <Image className="background3-img" src="./loopy.png"></Image>
-            </Container>
-          </Container>
+          <BackgroundFour></BackgroundFour>
         </Container>
 
         <Container id="elem4">
