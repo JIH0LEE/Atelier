@@ -20,6 +20,30 @@ import './style.css'
 import Background from './Background'
 
 const ExhibitionMake4stepPage = () => {
+  const [index, setIndex] = useState(1)
+  const [background, setBackground] = useState("background1")
+  const nextTheme = () => {
+    index += 1
+    if (index == 5) {
+      setIndex(1)
+    }
+    if (index == 1) {
+
+    } else if (index == 1) {
+
+    } else if (index == 1) {
+
+    }
+  }
+  const previousTheme = () => {
+    index -= 1
+    if (index == 0) {
+      setIndex(4)
+    }
+  }
+  const changeBackground = () => {
+
+  }
   return (
     <Container className="exhibition_make-container4">
       <Container className="inner">
@@ -37,7 +61,11 @@ const ExhibitionMake4stepPage = () => {
           </Col>
           <Col></Col>
         </Container>
+        <Container style={{ margin: "10px", display: "flex" }}>
+          <Button style={{ marginRight: "auto", backgroundColor: "#daa520", borderColor: "#daa520", fontSize: "30px" }}>previous</Button>
 
+          <Button style={{ backgroundColor: "#daa520", borderColor: "#daa520", fontSize: "30px" }}>  next  </Button>
+        </Container>
         <Container id="elem3">
           <Background
             imgSrc={background4}
