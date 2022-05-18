@@ -40,78 +40,27 @@ const ExhibitionMake4stepPage = () => {
         <Container id="elem3">
           <Container
             style={{
-              backgroundImage: `url(${background4})`,
+              backgroundImage: `url(${background3})`,
             }}
             className="preview"
           >
+            {/* case4 */}
+            {/* <Container className="background4">
+              <Image className="background4-img" src="./loopy.png"></Image>
+            </Container>
+           */}
             {/* case1 */}
-            <Container className="background1">
+            {/* <Container className="background1">
               <Image className="background1-img" src="./loopy.png"></Image>
+            </Container> */}
+            {/* case2 */}
+            {/* <Container className="background2">
+              <Image className="background2-img" src="./loopy.png"></Image>
+            </Container> */}
+            <Container className="background3">
+              <Image className="background3-img" src="./loopy.png"></Image>
             </Container>
           </Container>
-
-          {/* case1 */}
-          {/* <Container
-            style={{
-              width: '690px',
-              height: '432px',
-              marginBottom: '357px',
-              padding: '0px',
-              overflow: 'hidden',
-            }}
-          >
-            <Image
-              src="./loopy.png"
-              style={{
-                objectFit: 'cover',
-                width: '690px',
-                maxHeight: '432px',
-              }}
-            ></Image>
-            
-          </Container> */}
-          {/* case2 */}
-          {/* <Container
-            style={{
-              width: '580px',
-              height: '350px',
-              marginBottom: '300px',
-              padding: '0px',
-              overflow: 'hidden',
-            }}
-          >
-            <Image
-              src="./loopy.png"
-              style={{
-                objectFit: 'cover',
-                width: '580px',
-                maxHeight: '350px',
-              }}
-            ></Image>
-          </Container> */}
-
-          {/* case3 */}
-          {/* 
-          <Container
-            style={{
-              width: '627px',
-              height: '350px',
-              marginBottom: '400px',
-              padding: '0px',
-              overflow: 'hidden',
-              border: 'solid'
-            }}
-          >
-            <Image
-              src="./loopy.png"
-              style={{
-                objectFit: 'cover',
-                width: '627px',
-                maxHeight: '350px',
-              }}
-            ></Image>
-          </Container>
-          */}
         </Container>
 
         <Container id="elem4">
