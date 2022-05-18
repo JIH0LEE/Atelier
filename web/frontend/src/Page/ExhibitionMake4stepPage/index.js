@@ -39,12 +39,31 @@ const ExhibitionMake4stepPage = () => {
         <Container
           id="elem3"
           style={{
-            backgroundImage: `url(${background2})`,
+            backgroundImage: `url(${background4})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             width: '800px',
           }}
         >
+          <Container
+            style={{
+              width: '512px',
+              height: '305px',
+              marginBottom: '160px',
+              padding: '0px',
+              overflow: 'hidden',
+              border: 'solid'
+            }}
+          >
+            <Image
+              src="./loopy.png"
+              style={{
+                objectFit: 'cover',
+                width: '512px',
+                maxHeight: '305px',
+              }}
+            ></Image>
+          </Container>
           {/* case1 */}
           {/* <Container
             style={{
@@ -84,6 +103,29 @@ const ExhibitionMake4stepPage = () => {
               }}
             ></Image>
           </Container> */}
+
+          {/* case3 */}
+          {/* 
+          <Container
+            style={{
+              width: '627px',
+              height: '350px',
+              marginBottom: '400px',
+              padding: '0px',
+              overflow: 'hidden',
+              border: 'solid'
+            }}
+          >
+            <Image
+              src="./loopy.png"
+              style={{
+                objectFit: 'cover',
+                width: '627px',
+                maxHeight: '350px',
+              }}
+            ></Image>
+          </Container>
+          */}
         </Container>
 
         <Container id="elem4">
