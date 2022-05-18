@@ -36,34 +36,39 @@ const ExhibitionMake4stepPage = () => {
           </Col>
           <Col></Col>
         </Container>
-        <Container
-          id="elem3"
-          style={{
-            backgroundImage: `url(${background4})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            width: '800px',
-          }}
-        >
+        <Container id="elem2"></Container>
+        <Container id="elem3">
           <Container
             style={{
-              width: '512px',
-              height: '305px',
-              marginBottom: '160px',
+              backgroundImage: `url(${background4})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+            }}
+            className="preview"
+          >
+            {/* case1 */}
+            {/* <Container
+            style={{
+              width: '690px',
+              height: '432px',
+              marginBottom: '357px',
               padding: '0px',
               overflow: 'hidden',
-              border: 'solid'
             }}
           >
             <Image
               src="./loopy.png"
               style={{
                 objectFit: 'cover',
-                width: '512px',
-                maxHeight: '305px',
+                width: '690px',
+                maxHeight: '432px',
               }}
             ></Image>
+            
+          </Container> */}
           </Container>
+
           {/* case1 */}
           {/* <Container
             style={{
