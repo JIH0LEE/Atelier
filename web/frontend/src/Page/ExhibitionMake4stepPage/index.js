@@ -39,7 +39,10 @@ const ExhibitionMake4stepPage = () => {
         </Container>
 
         <Container id="elem3">
-          <Background imgSrc={background1} classNameParm={"background1"}></Background>
+          <Background
+            imgSrc={background4}
+            classNameParm={'background4'}
+          ></Background>
         </Container>
 
         <Container id="elem4">

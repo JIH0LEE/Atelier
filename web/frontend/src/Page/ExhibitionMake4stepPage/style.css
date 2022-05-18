@@ -44,7 +44,7 @@
   margin: 0px;
 }
 
-.exhibition_make-container4 > .inner #elem3 > .preview {
+.preview {
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -54,26 +54,16 @@
   background-position: center;
 }
 
-.exhibition_make-container4 > .inner #elem3 > .preview > .background4 {
+.preview > .background4 {
   width: 66%;
   height: 38.5%;
   padding: 0px;
   overflow: hidden;
   border: solid;
-  margin-top: 267px;
+  margin-top: 287px;
 }
-.exhibition_make-container4
-  > .inner
-  #elem3
-  > .preview
-  > .background4
-  > .background4-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow: hidden;
-}
-.exhibition_make-container4 > .inner #elem3 > .preview > .background1 {
+
+.preview > .background1 {
   width: 87.5%;
   height: 54%;
   padding: 0px;
@@ -81,18 +71,8 @@
   border: solid;
   margin-top: 85px;
 }
-.exhibition_make-container4
-  > .inner
-  #elem3
-  > .preview
-  > .background1
-  > .background1-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow: hidden;
-}
-.exhibition_make-container4 > .inner #elem3 > .preview > .background2 {
+
+.preview > .background2 {
   width: 75%;
   height: 54%;
   padding: 0px;
@@ -100,18 +80,8 @@
   border: solid;
   margin-top: 215px;
 }
-.exhibition_make-container4
-  > .inner
-  #elem3
-  > .preview
-  > .background2
-  > .background2-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow: hidden;
-}
-.exhibition_make-container4 > .inner #elem3 > .preview > .background3 {
+
+.preview > .background3 {
   width: 78.5%;
   height: 64%;
   padding: 0px;
@@ -119,12 +89,7 @@
   border: solid;
   margin-top: 170px;
 }
-.exhibition_make-container4
-  > .inner
-  #elem3
-  > .preview
-  > .background3
-  > .background3-img {
+.background-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
