@@ -20,30 +20,50 @@ import './style.css'
 import Background from './Background'
 
 const ExhibitionMake4stepPage = () => {
-  const [index, setIndex] = useState(1)
-  const [background, setBackground] = useState("background1")
+  const [index, setIndex] = useState(0)
+
+  const maxId = 4
+  const backgroundList = [
+    {
+      id: 0,
+      imgSrc: background1,
+      classNameParm: 'background1',
+    },
+    {
+      id: 1,
+      imgSrc: background2,
+      classNameParm: 'background2',
+    },
+    {
+      id: 2,
+      imgSrc: background3,
+      classNameParm: 'background3',
+    },
+    {
+      id: 3,
+      imgSrc: background4,
+      classNameParm: 'background4',
+    },
+  ]
   const nextTheme = () => {
-    index += 1
-    if (index == 5) {
-      setIndex(1)
+    let nextId = index + 1
+    if (nextId >= maxId) {
+      setIndex(0)
+    } else {
+      setIndex(nextId)
     }
-    if (index == 1) {
-
-    } else if (index == 1) {
-
-    } else if (index == 1) {
-
-    }
+    console.log(index)
   }
   const previousTheme = () => {
-    index -= 1
-    if (index == 0) {
-      setIndex(4)
+    let prevId = index - 1
+    if (prevId < 0) {
+      setIndex(maxId - 1)
+    } else {
+      setIndex(prevId)
     }
+    console.log(index)
   }
-  const changeBackground = () => {
-
-  }
+  const changeBackground = () => {}
   return (
     <Container className="exhibition_make-container4">
       <Container className="inner">
@@ -61,15 +81,35 @@ const ExhibitionMake4stepPage = () => {
           </Col>
           <Col></Col>
         </Container>
-        <Container style={{ margin: "10px", display: "flex" }}>
-          <Button style={{ marginRight: "auto", backgroundColor: "#daa520", borderColor: "#daa520", fontSize: "30px" }}>previous</Button>
+        <Container style={{ margin: '10px', display: 'flex' }}>
+          <Button
+            style={{
+              marginRight: 'auto',
+              backgroundColor: '#daa520',
+              borderColor: '#daa520',
+              fontSize: '30px',
+            }}
+            onClick={previousTheme}
+          >
+            previous
+          </Button>
 
-          <Button style={{ backgroundColor: "#daa520", borderColor: "#daa520", fontSize: "30px" }}>  next  </Button>
+          <Button
+            style={{
+              backgroundColor: '#daa520',
+              borderColor: '#daa520',
+              fontSize: '30px',
+            }}
+            onClick={nextTheme}
+          >
+            {' '}
+            next{' '}
+          </Button>
         </Container>
         <Container id="elem3">
           <Background
-            imgSrc={background4}
-            classNameParm={'background4'}
+            imgSrc={backgroundList[index].imgSrc}
+            classNameParm={backgroundList[index].classNameParm}
           ></Background>
         </Container>
 
