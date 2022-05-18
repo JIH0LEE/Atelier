@@ -48,25 +48,9 @@ const ExhibitionMake4stepPage = () => {
             className="preview"
           >
             {/* case1 */}
-            {/* <Container
-            style={{
-              width: '690px',
-              height: '432px',
-              marginBottom: '357px',
-              padding: '0px',
-              overflow: 'hidden',
-            }}
-          >
-            <Image
-              src="./loopy.png"
-              style={{
-                objectFit: 'cover',
-                width: '690px',
-                maxHeight: '432px',
-              }}
-            ></Image>
-            
-          </Container> */}
+            <Container className="background1">
+              <Image className="background1-img" src="./loopy.png"></Image>
+            </Container>
           </Container>
 
           {/* case1 */}
