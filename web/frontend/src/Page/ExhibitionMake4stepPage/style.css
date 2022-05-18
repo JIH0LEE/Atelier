@@ -35,8 +35,8 @@
   margin: 0px;
 }
 .exhibition_make-container4 > .inner #elem3 {
-  height: 80%;
-  width: 100%;
+  height: 1000px;
+  width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,7 +61,7 @@
   padding: 0px;
   overflow: hidden;
   border: solid;
-  margin-top: 27%;
+  margin-top: 267px;
 }
 .exhibition_make-container4
   > .inner
