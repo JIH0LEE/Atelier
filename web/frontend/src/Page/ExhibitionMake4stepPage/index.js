@@ -12,6 +12,10 @@ import {
   Image,
 } from 'react-bootstrap'
 import background1 from '../../images/exhibitionBackground/background1.jpg'
+import background2 from '../../images/exhibitionBackground/background2.jpg'
+import background3 from '../../images/exhibitionBackground/background3.jpg'
+import background4 from '../../images/exhibitionBackground/background4.jpg'
+
 import './style.css'
 
 const ExhibitionMake4stepPage = () => {
@@ -35,13 +39,14 @@ const ExhibitionMake4stepPage = () => {
         <Container
           id="elem3"
           style={{
-            backgroundImage: `url(${background1})`,
+            backgroundImage: `url(${background2})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             width: '800px',
           }}
         >
-          <Container
+          {/* case1 */}
+          {/* <Container
             style={{
               width: '690px',
               height: '432px',
@@ -58,7 +63,27 @@ const ExhibitionMake4stepPage = () => {
                 maxHeight: '432px',
               }}
             ></Image>
-          </Container>
+            
+          </Container> */}
+          {/* case2 */}
+          {/* <Container
+            style={{
+              width: '580px',
+              height: '350px',
+              marginBottom: '300px',
+              padding: '0px',
+              overflow: 'hidden',
+            }}
+          >
+            <Image
+              src="./loopy.png"
+              style={{
+                objectFit: 'cover',
+                width: '580px',
+                maxHeight: '350px',
+              }}
+            ></Image>
+          </Container> */}
         </Container>
 
         <Container id="elem4">
