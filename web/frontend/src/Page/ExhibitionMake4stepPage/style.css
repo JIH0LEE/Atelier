@@ -35,7 +35,7 @@
   margin: 0px;
 }
 .exhibition_make-container4 > .inner #elem3 {
-  height: 65%;
+  height: 80%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -45,21 +45,23 @@
 }
 
 .exhibition_make-container4 > .inner #elem3 > .preview {
-  width: 100%;
+  width: 80%;
   height: 100%;
-  /* max-width: 3000px; */
   margin: 0px;
   justify-content: center;
   align-items: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .exhibition_make-container4 > .inner #elem3 > .preview > .background1 {
-  width: 39%;
+  width: 66%;
   height: 38.5%;
   padding: 0px;
   overflow: hidden;
   border: solid;
-  margin-top: 17.5%;
+  margin-top: 27%;
 }
 .exhibition_make-container4
   > .inner

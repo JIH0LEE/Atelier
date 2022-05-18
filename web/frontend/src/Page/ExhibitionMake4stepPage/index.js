@@ -36,14 +36,11 @@ const ExhibitionMake4stepPage = () => {
           </Col>
           <Col></Col>
         </Container>
-        <Container id="elem2"></Container>
+
         <Container id="elem3">
           <Container
             style={{
               backgroundImage: `url(${background4})`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
             }}
             className="preview"
           >
