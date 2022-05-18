@@ -4,21 +4,24 @@ import {
     Container,
     Image,
 } from 'react-bootstrap'
+import background1 from '../../images/exhibitionBackground/background1.jpg'
+import background2 from '../../images/exhibitionBackground/background2.jpg'
+import background3 from '../../images/exhibitionBackground/background3.jpg'
 import background4 from '../../images/exhibitionBackground/background4.jpg'
 
-const BackgroundFour = () => {
+const Background = ({ imgSrc, classNameParm }) => {
     return (<>
         <Container
             style={{
-                backgroundImage: `url(${background4})`,
+                backgroundImage: `url(${imgSrc})`,
             }}
             className="preview"
         >
-            <Container className="background1">
+            <Container className={classNameParm}>
                 <Image className="background1-img" src="./loopy.png"></Image>
             </Container>
         </Container>
     </>)
 }
 
-export default BackgroundFour
+export default Background

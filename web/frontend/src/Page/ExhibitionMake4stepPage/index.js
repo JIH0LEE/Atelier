@@ -17,8 +17,7 @@ import background3 from '../../images/exhibitionBackground/background3.jpg'
 import background4 from '../../images/exhibitionBackground/background4.jpg'
 
 import './style.css'
-import './BackgroundFour'
-import BackgroundFour from './BackgroundFour'
+import Background from './Background'
 
 const ExhibitionMake4stepPage = () => {
   return (
@@ -40,7 +39,7 @@ const ExhibitionMake4stepPage = () => {
         </Container>
 
         <Container id="elem3">
-          <BackgroundFour></BackgroundFour>
+          <Background imgSrc={background1} classNameParm={"background1"}></Background>
         </Container>
 
         <Container id="elem4">
