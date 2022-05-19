@@ -13,7 +13,8 @@ import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom'
 import ModalPosterButton from './ModalButtonPoster'
 import './style.css'
-
+import isLogin from '../../utils/isLogin'
+import { Navigate } from 'react-router-dom'
 const ExhibitionMakePage = () => {
   const location = useLocation()
   const navigate = useNavigate()

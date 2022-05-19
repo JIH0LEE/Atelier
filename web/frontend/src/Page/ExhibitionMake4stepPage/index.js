@@ -12,6 +12,8 @@ import {
   Figure,
   Image,
 } from 'react-bootstrap'
+import isLogin from '../../utils/isLogin'
+import { Navigate } from 'react-router-dom'
 import background1 from '../../images/exhibitionBackground/background1.jpg'
 import background2 from '../../images/exhibitionBackground/background2.jpg'
 import background3 from '../../images/exhibitionBackground/background3.jpg'
@@ -27,6 +29,7 @@ const ExhibitionMake4stepPage = () => {
   const [id, setId] = useState(location.state.id)
   console.log(id)
   const maxId = 4
+
   const backgroundList = [
     {
       id: 0,
@@ -49,6 +52,19 @@ const ExhibitionMake4stepPage = () => {
       classNameParm: 'background4',
     },
   ]
+  if (!isLogin()) {
+    alert('로그인이 필요합니다')
+    return (
+      <Navigate
+        to={{
+          pathname: '/sign-in',
+          state: {
+            from: '/',
+          },
+        }}
+      />
+    )
+  }
   const nextTheme = () => {
     let nextId = index + 1
     if (nextId >= maxId) {
