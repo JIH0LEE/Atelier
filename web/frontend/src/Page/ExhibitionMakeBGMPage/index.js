@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Container, Tab, Col, Button, ListGroup, Row } from 'react-bootstrap'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import isLogin from '../../utils/isLogin'
+import { Navigate } from 'react-router-dom'
 
 const ExhibitionMakeBGMPage = () => {
   const location = useLocation()
@@ -97,6 +99,7 @@ const ExhibitionMakeBGMPage = () => {
       src: 'http://docs.google.com/uc?export=open&id=1Vmm672LVzoRFaShOwt1WGujDh0_87Kp0',
     },
   ]
+
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
@@ -105,6 +108,19 @@ const ExhibitionMakeBGMPage = () => {
       setCurrentBGM(res.data.src)
     })
   }, [])
+  if (!isLogin()) {
+    alert('로그인이 필요합니다')
+    return (
+      <Navigate
+        to={{
+          pathname: '/sign-in',
+          state: {
+            from: '/',
+          },
+        }}
+      />
+    )
+  }
   const changeCuteBGM = e => {
     let findId = e.target.id
     let obj = cuteBGM.find(bgm => bgm.id == findId)

@@ -15,6 +15,8 @@ import ExhibitionPosting from '../../Component/ExhibitionPosting'
 import PostList from './PostList'
 import './style.css'
 import { DragDropContext } from 'react-beautiful-dnd'
+import isLogin from '../../utils/isLogin'
+import { Navigate } from 'react-router-dom'
 
 const ExhibitionMake2stepPage = ({ id }) => {
   const location = useLocation()
@@ -108,7 +110,19 @@ const ExhibitionMake2stepPage = ({ id }) => {
       console.log(res)
     })
   }
-
+  if (!isLogin()) {
+    alert('로그인이 필요합니다')
+    return (
+      <Navigate
+        to={{
+          pathname: '/sign-in',
+          state: {
+            from: '/',
+          },
+        }}
+      />
+    )
+  }
   return (
     <Container className="exhibition_make-container2">
       <Container className="inner">
