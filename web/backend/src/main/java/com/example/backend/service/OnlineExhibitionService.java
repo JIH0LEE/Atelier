@@ -277,6 +277,15 @@ public class OnlineExhibitionService {
         return onlineExhibitionRepository.save(onlineExhibition);
 
     }
+
+    public OnlineExhibition saveStep4(Long id, int theme, int step){
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
+        onlineExhibition.setTheme(Integer.toString(theme));
+        onlineExhibition.setStep(step);
+
+        return onlineExhibitionRepository.save(onlineExhibition);
+    }
+
     public OnlineExhibition findById(Long id){
 
         return onlineExhibitionRepository.findById(id).get();

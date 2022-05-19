@@ -174,6 +174,11 @@ public class ExhibitionController {
         return BgmDto.builder().src(onlineExhibition.getBgm()).step(onlineExhibition.getStep()).build();
     }
 
+    @PostMapping(value="/user/make-exhibition-step4")
+    private String makeOnlineExhibitionStep4(@RequestParam Long id, @RequestParam int theme, @RequestParam int step, Principal principal){
+        return onlineExhibitionService.saveStep4(id, theme, step).toString();
+    }
+
     @GetMapping(value = "/user/get-saved-exhibition")
     private List<OnlineExhibitionDto> getSavedOnlineExhibition( Principal principal){
         User user=userService.getUser(principal.getName());

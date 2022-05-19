@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import {
   Container,
@@ -18,10 +19,13 @@ import background4 from '../../images/exhibitionBackground/background4.jpg'
 
 import './style.css'
 import Background from './Background'
+import axios from 'axios'
 
 const ExhibitionMake4stepPage = () => {
+  const location = useLocation()
   const [index, setIndex] = useState(0)
-
+  const [id, setId] = useState(location.state.id)
+  console.log(id)
   const maxId = 4
   const backgroundList = [
     {
@@ -63,7 +67,20 @@ const ExhibitionMake4stepPage = () => {
     }
     console.log(index)
   }
-  const changeBackground = () => {}
+
+  const save = () => {
+    axios.post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${4}`).then(res => {
+      alert('저장되었습니다')
+    })
+  }
+
+  const submit = () => {
+    axios.post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${5}`).then(res => {
+      alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
+    })
+  }
+
+  const changeBackground = () => { }
   return (
     <Container className="exhibition_make-container4">
       <Container className="inner">
@@ -116,8 +133,8 @@ const ExhibitionMake4stepPage = () => {
         <Container id="elem4">
           <Button style={{ float: 'left' }}>Previous</Button>
 
-          <Button style={{ float: 'right' }}>Next</Button>
-          <Button style={{ float: 'right' }}>Save</Button>
+          <Button style={{ float: 'right' }} onClick={submit}>Submit</Button>
+          <Button style={{ float: 'right' }} onClick={save}>Save</Button>
         </Container>
       </Container>
     </Container>
