@@ -1,6 +1,7 @@
 package com.example.backend.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,5 +30,6 @@ public class Content {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="online_exhibition_id")
     @ToString.Exclude
+    @JsonIgnore
     private OnlineExhibition onlineExhibition;
 }

@@ -58,7 +58,7 @@ public class OnlineExhibition {
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Good> likes = new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "onlineExhibition",fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     private List<Content> contents = new ArrayList<>();
 

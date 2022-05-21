@@ -332,7 +332,10 @@ public class OnlineExhibitionService {
         onlineExhibition.setStep(step);
         return onlineExhibitionRepository.save(onlineExhibition);
 
+    }
 
+    public OnlineExhibition getOnlineExhibitionById(Long id){
+        return onlineExhibitionRepository.findById(id).get();
     }
 
 }
