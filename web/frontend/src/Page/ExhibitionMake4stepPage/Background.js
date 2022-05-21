@@ -6,17 +6,23 @@ import background2 from '../../images/exhibitionBackground/background2.jpg'
 import background3 from '../../images/exhibitionBackground/background3.jpg'
 import background4 from '../../images/exhibitionBackground/background4.jpg'
 
-const Background = ({ imgSrc, classNameParm }) => {
+const Background = ({ backgroundSrc, classNameParm, content }) => {
+  const imgSrc = content ? content.link : './loopy.png'
+  const test = () => {
+    if (content) {
+      alert('hi')
+    }
+  }
   return (
     <>
       <Container
         style={{
-          backgroundImage: `url(${imgSrc})`,
+          backgroundImage: `url(${backgroundSrc})`,
         }}
         className="preview"
       >
-        <Container className={classNameParm}>
-          <Image className="background-img" src="./loopy.png"></Image>
+        <Container onClick={test} className={classNameParm}>
+          <Image className="background-img" src={imgSrc}></Image>
         </Container>
       </Container>
     </>

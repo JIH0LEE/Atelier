@@ -14,10 +14,35 @@ const ExhibitionPage = () => {
   const location = useLocation()
   const [id, setId] = useState(location.state.id)
   const [contents, setContents] = useState([])
+  const [theme, setTheme] = useState(0)
+  const backgroundList = [
+    {
+      id: 0,
+      imgSrc: background1,
+      classNameParm: 'background1',
+    },
+    {
+      id: 1,
+      imgSrc: background2,
+      classNameParm: 'background2',
+    },
+    {
+      id: 2,
+      imgSrc: background3,
+      classNameParm: 'background3',
+    },
+    {
+      id: 3,
+      imgSrc: background4,
+      classNameParm: 'background4',
+    },
+  ]
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`/api/select-online-exhibition?id=${id}`)
+      console.log(res.data)
       setContents(res.data.contents)
+      setTheme(parseInt(res.data.theme))
     }
 
     fetchData()
@@ -27,10 +52,20 @@ const ExhibitionPage = () => {
   return (
     <Container className="exhibition-show-container">
       <Container className="inner">
-        <Background
-          imgSrc={background4}
-          classNameParm={'background4'}
-        ></Background>
+        <Container className="content">
+          {contents.map(content => (
+            <Background
+              backgroundSrc={backgroundList[theme].imgSrc}
+              classNameParm={backgroundList[theme].classNameParm}
+              content={content}
+            ></Background>
+          ))}
+          {/* <Background
+            backgroundSrc={background1}
+            classNameParm={'background1'}
+            content={null}
+          ></Background> */}
+        </Container>
       </Container>
     </Container>
   )
