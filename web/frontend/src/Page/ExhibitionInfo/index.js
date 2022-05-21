@@ -8,7 +8,7 @@ import {
   Badge,
   FormLabel,
 } from 'react-bootstrap'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import HeartImg from './heart.png'
 import EmptyHeartImg from './heart-2.png'
 import Comment from '../../Component/Comment'
@@ -27,6 +27,7 @@ const ExhibitionInfo = () => {
   const [commentList, setCommentList] = useState([])
   const [commentLength, setCommentLength] = useState(0)
   const [likecount, setLikecount] = useState(like)
+  const navigate = useNavigate()
   const commentChange = e => {
     setComment(e.target.value)
     setCommentLength(e.target.value.length)
@@ -67,6 +68,15 @@ const ExhibitionInfo = () => {
     var idx = _commentList.findIndex(comment => comment.id === target.id)
     _commentList.splice(idx, 1)
     setCommentList(_commentList)
+  }
+
+  //상세보기 페이지 이동
+  const moveToExhibition = () => {
+    navigate('/show-exhibition', {
+      state: {
+        id: id,
+      },
+    })
   }
 
   useEffect(() => {
@@ -169,6 +179,7 @@ const ExhibitionInfo = () => {
               background: '#daa520',
               border: '#daa520',
             }}
+            onClick={moveToExhibition}
           >
             전시회 바로 이동
           </Button>
