@@ -10,7 +10,7 @@ const ExhibitionPage = () => {
   const [id, setId] = useState(location.state.id)
   console.log(id)
   return (
-    <Container className="exhibition-container">
+    <Container className="exhibition-show-container">
       <Container className="inner"></Container>
     </Container>
   )
