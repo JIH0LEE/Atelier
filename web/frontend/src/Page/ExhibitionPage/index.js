@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Carousel } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import Background from '../ExhibitionMake4stepPage/Background'
 import background1 from '../../images/exhibitionBackground/background1.jpg'
@@ -17,16 +17,6 @@ const ExhibitionPage = () => {
   const [theme, setTheme] = useState(0)
   const [currentOrder, setCurrentOrder] = useState(0)
 
-  const next = () => {
-    if (currentOrder < contents.length - 1) {
-      setCurrentOrder(currentOrder + 1)
-    }
-  }
-  const previous = () => {
-    if (currentOrder > 0) {
-      setCurrentOrder(currentOrder - 1)
-    }
-  }
   const backgroundList = [
     {
       id: 0,
@@ -63,15 +53,19 @@ const ExhibitionPage = () => {
   return (
     <Container className="exhibition-show-container">
       <Container className="inner">
-        <Button onClick={previous}>previous</Button>
-        <Container className="content">
-          <Background
-            backgroundSrc={backgroundList[theme].imgSrc}
-            classNameParm={backgroundList[theme].classNameParm}
-            content={contents[currentOrder]}
-          ></Background>
-        </Container>
-        <Button onClick={next}>next</Button>
+        <Carousel>
+          {contents.map(content => (
+            <Carousel.Item>
+              <Container className="content">
+                <Background
+                  backgroundSrc={backgroundList[theme].imgSrc}
+                  classNameParm={backgroundList[theme].classNameParm}
+                  content={content}
+                ></Background>
+              </Container>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </Container>
     </Container>
   )
