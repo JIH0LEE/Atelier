@@ -156,7 +156,6 @@ const ExhibitionMakeBGMPage = () => {
     }
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
       alert('저장되었습니다')
-
     })
   }
 
@@ -171,7 +170,7 @@ const ExhibitionMakeBGMPage = () => {
     axios.post(`/api/user/make-exhibition-step3?id=${id}`, body).then(res => {
       alert('저장되었습니다')
       navigate('/make-exhibition-4step', {
-        state: { id: id }
+        state: { id: id },
       })
     })
   }

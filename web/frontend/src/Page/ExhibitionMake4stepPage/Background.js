@@ -10,9 +10,15 @@ import background4 from '../../images/exhibitionBackground/background4.jpg'
 const Background = ({ backgroundSrc, classNameParm, content }) => {
   const imgSrc = content ? content.link : './loopy.png'
   const [modal, setModal] = useState(false)
-  const openModal = () => { setModal(true) }
-  const closeModal = () => { setModal(false) }
-  const getStatus = (openState) => { closeModal() }
+  const openModal = () => {
+    setModal(true)
+  }
+  const closeModal = () => {
+    setModal(false)
+  }
+  const getStatus = openState => {
+    closeModal()
+  }
   const test = () => {
     if (content) {
       openModal()
@@ -28,15 +34,16 @@ const Background = ({ backgroundSrc, classNameParm, content }) => {
       >
         <Container onClick={test} className={classNameParm}>
           <Image className="background-img" src={imgSrc}></Image>
-
         </Container>
       </Container>
       <Modal show={modal} onHide={closeModal} size="lg">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <Image src={imgSrc} style={{ width: "100%" }}></Image>
+          <Image src={imgSrc} style={{ width: '100%' }}></Image>
         </Modal.Body>
-        <Modal.Footer style={{ justifyContent: "left" }}>{content.description}</Modal.Footer>
+        <Modal.Footer style={{ justifyContent: 'left' }}>
+          {content.description}
+        </Modal.Footer>
       </Modal>
     </>
   )

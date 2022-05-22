@@ -15,7 +15,7 @@ const ExhibitionPage = () => {
   const [id, setId] = useState(location.state.id)
   const [contents, setContents] = useState([])
   const [theme, setTheme] = useState(0)
-  const [currentOrder, setCurrentOrder] = useState(0)
+  const [bgm, setBgm] = useState(null)
 
   const backgroundList = [
     {
@@ -42,8 +42,10 @@ const ExhibitionPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`/api/select-online-exhibition?id=${id}`)
+      console.log(res.data)
       setContents(res.data.contents)
       setTheme(parseInt(res.data.theme))
+      setBgm(res.data.bgm)
     }
 
     fetchData()
@@ -52,6 +54,17 @@ const ExhibitionPage = () => {
   console.log(id)
   return (
     <Container className="exhibition-show-container">
+      <Container className="bgm">
+        <audio
+          id="myAudio"
+          controls
+          volume={0.5}
+          loop
+          src={bgm}
+          autoPlay={true}
+        ></audio>
+      </Container>
+
       <Container className="inner">
         <Carousel>
           {contents.map(content => (

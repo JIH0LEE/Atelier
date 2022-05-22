@@ -1,15 +1,22 @@
 .exhibition-show-container {
-  background-color: rgba(255, 255, 255, 0.8);
-  height: 70%;
-  width: 70%;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  height: 50%;
+  width: 80%;
   max-width: 3000px;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
 }
+.exhibition-show-container .bgm {
+  height: 10%;
+  width: 95%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
 .exhibition-show-container .inner {
-  height: 95%;
+  height: 90%;
   width: 95%;
   max-width: 1200px;
   display: flex;
@@ -17,6 +24,8 @@
   align-items: center;
 }
 .exhibition-show-container .inner .content {
+  border-radius: 10%;
+  border: solid 20px;
   height: 1000px;
   width: 1200px;
   display: flex;
@@ -24,14 +33,5 @@
   align-items: center;
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
 }
-
-/* .exhibition-show-container .inner .carousel-inner {
-  height: 1000px;
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  margin: 0px;
-} */
