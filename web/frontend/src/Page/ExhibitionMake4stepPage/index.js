@@ -85,18 +85,22 @@ const ExhibitionMake4stepPage = () => {
   }
 
   const save = () => {
-    axios.post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${4}`).then(res => {
-      alert('저장되었습니다')
-    })
+    axios
+      .post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${4}`)
+      .then(res => {
+        alert('저장되었습니다')
+      })
   }
 
   const submit = () => {
-    axios.post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${5}`).then(res => {
-      alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
-    })
+    axios
+      .post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${5}`)
+      .then(res => {
+        alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
+      })
   }
 
-  const changeBackground = () => { }
+  const changeBackground = () => {}
   return (
     <Container className="exhibition_make-container4">
       <Container className="inner">
@@ -141,16 +145,21 @@ const ExhibitionMake4stepPage = () => {
         </Container>
         <Container id="elem3">
           <Background
-            imgSrc={backgroundList[index].imgSrc}
+            backgroundSrc={backgroundList[index].imgSrc}
             classNameParm={backgroundList[index].classNameParm}
+            content={null}
           ></Background>
         </Container>
 
         <Container id="elem4">
           <Button style={{ float: 'left' }}>Previous</Button>
 
-          <Button style={{ float: 'right' }} onClick={submit}>Submit</Button>
-          <Button style={{ float: 'right' }} onClick={save}>Save</Button>
+          <Button style={{ float: 'right' }} onClick={submit}>
+            Submit
+          </Button>
+          <Button style={{ float: 'right' }} onClick={save}>
+            Save
+          </Button>
         </Container>
       </Container>
     </Container>

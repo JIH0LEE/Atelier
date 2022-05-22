@@ -32,6 +32,13 @@ public class OnlineController {
     private List<OnlineExhibitionDto> showOnlineExhibitions(){
         return onlineExhibitionService.showAllOnlineExhibition();
     }
+
+    @GetMapping("/select-online-exhibition")
+    private OnlineExhibition getOnlineExhibitions(@RequestParam Long id){
+        return onlineExhibitionService.getOnlineExhibitionById(id);
+    }
+
+
     @GetMapping("/user/likes")
     private HeartClickDto isHeart(@RequestParam String id, Principal principal){
         Long onlineId=Long.parseLong(id);
