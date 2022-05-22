@@ -15,7 +15,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 .exhibition-show-container .inner .content {
   height: 1000px;
