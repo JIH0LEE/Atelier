@@ -6,16 +6,13 @@ import { testColor } from '../../Style/theme'
 import axios from 'axios'
 import './style.css'
 
-const OfflineExhibition = ({
-  id,
-  title,
-
-  poaster,
-
-  description,
-}) => {
+const OfflineExhibition = ({ id, title, poaster, description }) => {
+  const navigate = useNavigate()
+  const onClick = () => {
+    navigate(`/offline-exhibition/${id}`) // { state: title }
+  }
   return (
-    <Container className="offline-exhibition-container">
+    <Container className="offline-exhibition-container" onClick={onClick}>
       <Row>
         <Col className="row1-col2" xs={4}>
           <Figure className="img-container1">

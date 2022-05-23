@@ -13,17 +13,19 @@ const Navigation = () => {
       >
         <Col className="nav-element">
           <Nav>
-            <Nav.Link href="/community-home">Exhibition Info</Nav.Link>
+            <Nav.Link href="/community-home">Online Exhibition</Nav.Link>
+          </Nav>
+        </Col>
+        <Col className="nav-element">
+          <Nav>
+            <Nav.Link href="/offline-community-home">
+              Offline Exhibition
+            </Nav.Link>
           </Nav>
         </Col>
         <Col className="nav-element">
           <Nav>
             <Nav.Link href="/make-exhibition-ready">Make Exhibition</Nav.Link>
-          </Nav>
-        </Col>
-        <Col className="nav-element">
-          <Nav>
-            <Nav.Link href="#home">Nav 3</Nav.Link>
           </Nav>
         </Col>
       </Navbar>

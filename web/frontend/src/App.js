@@ -27,6 +27,7 @@ import ExhibitionMakeSavedPage from './Page/ExhibitionMakeSavedPage'
 import ExhibitionMake4stepPage from './Page/ExhibitionMake4stepPage'
 import ExhibitionPage from './Page/ExhibitionPage'
 import OfflineCommunityHomePage from './Page/OfflineCommunityHomePage'
+import OfflineExhibitionInfo from './Page/OfflineExhibitionInfo'
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
@@ -92,6 +93,10 @@ function App() {
           <Route
             path="/exhibition/:key"
             element={<ExhibitionInfo></ExhibitionInfo>}
+          ></Route>
+          <Route
+            path="/offline-exhibition/:id"
+            element={<OfflineExhibitionInfo></OfflineExhibitionInfo>}
           ></Route>
           <Route
             path="/make-exhibition-4step"
