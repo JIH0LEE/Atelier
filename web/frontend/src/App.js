@@ -16,6 +16,8 @@ import Navigation from './Component/Navigation'
 
 import TestPage from './Page/Test/TestPage'
 import background from './images/background.jpg'
+import background2 from './images/background2.jpg'
+import background3 from './images/background3.jpg'
 import { Container } from 'react-bootstrap'
 import CommunityHomePage from './Page/CommunityHomePage'
 import ExhibitionInfo from './Page/ExhibitionInfo'
@@ -38,7 +40,7 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundImage: `url(${background})`,
+        backgroundImage: `url(${background3})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
