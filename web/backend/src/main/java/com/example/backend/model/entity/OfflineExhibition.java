@@ -44,6 +44,7 @@ public class OfflineExhibition {
     private String poster;
 
 
+    @Column(length = 2000)
     private String descript;
 
     private String keyword;
