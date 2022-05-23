@@ -118,13 +118,11 @@ def onMouse(event, x, y, flags, param):
     global img_cut     # 잘라낸 이미지
     global isDragging, x0, y0, i
     
-    
     # 드래그 시작
     if event == cv2.EVENT_LBUTTONDOWN:  
         isDragging = True
         x0 = x
         y0 = y
-        
         
     # 드래그 진행
     elif event == cv2.EVENT_MOUSEMOVE:  
@@ -132,7 +130,6 @@ def onMouse(event, x, y, flags, param):
             img_draw = img_cut.copy()       
             cv2.rectangle(img_draw, (x0, y0), (x, y), blue, 2) 
             cv2.imshow('img', img_draw) 
-    
     
     # 드래그 중지
     elif event == cv2.EVENT_LBUTTONUP:  
