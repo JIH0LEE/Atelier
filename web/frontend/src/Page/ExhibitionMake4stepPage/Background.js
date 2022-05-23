@@ -26,6 +26,7 @@ const Background = ({ backgroundSrc, classNameParm, content }) => {
   }
   return (
     <>
+
       <Container
         style={{
           backgroundImage: `url(${backgroundSrc})`,
@@ -36,7 +37,7 @@ const Background = ({ backgroundSrc, classNameParm, content }) => {
           <Image className="background-img" src={imgSrc}></Image>
         </Container>
       </Container>
-      <Modal show={modal} onHide={closeModal} size="lg">
+      {content ? <Modal show={modal} onHide={closeModal} size="lg">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Image src={imgSrc} style={{ width: '100%' }}></Image>
@@ -44,7 +45,7 @@ const Background = ({ backgroundSrc, classNameParm, content }) => {
         <Modal.Footer style={{ justifyContent: 'left' }}>
           {content.description}
         </Modal.Footer>
-      </Modal>
+      </Modal> : <></>}
     </>
   )
 }
