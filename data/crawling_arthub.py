@@ -2,13 +2,11 @@ import re
 import pandas as pd
 import time
 from datetime import date
-import warnings
-warnings.filterwarnings(action='ignore')
 from selenium import webdriver
 
 
 
-### 전시회 크롤링: 아트허브
+# 전시회 크롤링: 아트허브
 def crawling_arthub():
     # 드라이버 실행
     options = webdriver.ChromeOptions()
@@ -112,7 +110,7 @@ def crawling_arthub():
 
 
 
-### 기초 전처리
+# 기초 전처리
 def separate_dates(dates):
     dates = re.sub(r' ', '', dates)
     dates = re.sub(r'-', '', dates)
