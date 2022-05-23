@@ -15,18 +15,25 @@ import Post from './Post'
 import './style.css'
 import PageBar from '../../Component/PageBar'
 const OfflineCommunityHomePage = () => {
-  const [onlineExhibition, setOnlineExhibition] = useState([])
-  const [change, setChange] = useState(false)
+  const [offlineExhibition, setOfflineExhibition] = useState([])
   useEffect(() => {
-    const fetchData = async () => {}
+    const fetchData = async () => {
+      const res = await axios.get('/api/get-offline-all')
+      console.log(res.data)
+      setOfflineExhibition(res.data)
+    }
+    fetchData()
   }, [])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(5)
-  const totalPage = onlineExhibition.length / postPerPage
+  const totalPage = offlineExhibition.length / postPerPage
   const indexOfLastPost = currentPage * postPerPage //1*10 = 10번 포스트
   const indexOfFirstPost = indexOfLastPost - postPerPage //10-10 = 0번 포스트
-  const currentPosts = onlineExhibition.slice(indexOfFirstPost, indexOfLastPost) //0~10번까지 포스트
+  const currentPosts = offlineExhibition.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  ) //0~10번까지 포스트
 
   const changeCurrentPage = num => {
     setCurrentPage(num)
