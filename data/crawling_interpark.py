@@ -1,16 +1,14 @@
-import re
-import pandas as pd
 import os
+import re
 import time
+import pandas as pd
 from datetime import date
-import warnings
-warnings.filterwarnings(action='ignore')
 from selenium import webdriver
 from image2text import TextGenerator
 
 
 
-### 전시회 크롤링: 인터파크
+# 전시회 크롤링: 인터파크
 def crawling_interpark():
     # 드라이버 실행
     options = webdriver.ChromeOptions()
@@ -138,7 +136,7 @@ def crawling_interpark():
 
 
 
-### 기초 전처리
+# 기초 전처리
 def separate_dates(dates):
     dates = re.sub(r' ', '', dates)
     dates = re.sub(r'\.', '', dates)
