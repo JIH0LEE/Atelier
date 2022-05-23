@@ -1,20 +1,19 @@
-import numpy as np
 import os
 import time
+import numpy as np
 import cv2
 from PIL import Image
 import pytesseract
 
 
 
-### 텍스트 추출 클래스
+# 텍스트 추출 클래스
 class TextGenerator:
     def __init__(self, img_url):        
         self.img_src = self.download_img(img_url)                 # 이미지 저장 경로
         self.img = cv2.imread(self.img_src, cv2.IMREAD_COLOR)     # 이미지 로드
         self.height, self.width = self.get_imgsize()              # 이미지 세로, 가로 길이
         self.tesseract_src = r'C:\Program Files\Tesseract-OCR\tesseract'     # tesseract 절대경로
-        
         
         
     # 이미지 다운로드 및 저장 경로 설정
@@ -26,12 +25,10 @@ class TextGenerator:
         return img_src
     
     
-    
     # 이미지 길이 리턴
     def get_imgsize(self):
         height, width, channel = self.img.shape
         return height, width
-    
     
     
     # 이미지 잘라서 텍스트 추출
@@ -42,7 +39,6 @@ class TextGenerator:
         cropped_num = []                                  # 자른 이미지 번호
         createFolder(f'./interpark descript/{title}')     # 자른 이미지 저장 경로
 
-        
         # 이미지 자르기
         for i in range(sliced_num+1):
             if i == sliced_num:
@@ -51,14 +47,12 @@ class TextGenerator:
                 img_cut = self.img[i*700:(i+1)*700, 0:self.width]
             imwrite(f'./interpark descript/{title}/cropped_{i}.jpg', img_cut)
 
-                
             # 영역 선택
             cv2.imshow('image cutting', img_cut)
             cv2.setMouseCallback('image cutting', onMouse)
             cv2.waitKey()
             cv2.destroyAllWindows()
             time.sleep(1)
-            
             
             # 선택한 영역에서 텍스트화
             cropped_descript = None
@@ -71,8 +65,7 @@ class TextGenerator:
                 pass
         return descript, sliced_num+1, cropped_num
                 
-                
-                
+               
     # 이미지 내 텍스트 추출
     def image2string(self, img_src):
         pytesseract.pytesseract.tesseract_cmd = self.tesseract_src
@@ -90,8 +83,8 @@ class TextGenerator:
         return pytesseract.image_to_string(img, config=config)
 
 
-
-### 자른 이미지 저장 관련
+    
+# 자른 이미지 저장 관련
 def createFolder(directory):
     try:
         if not os.path.exists(directory):
@@ -116,7 +109,7 @@ def imwrite(filename, img, params=None):
     
     
     
-### ROI 지정
+# ROI 지정
 isDragging = False            
 x0, y0, w, h = -1,-1,-1,-1    
 blue, red = (255,0,0), (0,0,255)  
