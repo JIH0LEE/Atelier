@@ -60,7 +60,7 @@ const Exhibition = ({
           </Container>
           <Container className="description-label-container">
             <FormLabel
-              style={{ fontSize: '25px', color: 'black', float: 'left' }}
+              style={{ fontSize: '15px', color: 'black', float: 'left' }}
             >
               {description}
             </FormLabel>

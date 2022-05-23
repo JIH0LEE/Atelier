@@ -9,11 +9,9 @@ import './style.css'
 const OfflineExhibition = ({
   id,
   title,
-  date,
-  keyword,
+
   poaster,
-  author,
-  likes,
+
   description,
 }) => {
   return (
@@ -39,12 +37,17 @@ const OfflineExhibition = ({
                 float: 'right',
               }}
             >
-              {author} 님의 작품
+              {'익명'} 님의 작품
             </FormLabel>
           </Container>
           <Container className="description-label-container">
             <FormLabel
-              style={{ fontSize: '25px', color: 'black', float: 'left' }}
+              style={{
+                fontSize: '15px',
+                color: 'black',
+                float: 'left',
+                textAlign: 'left',
+              }}
             >
               {description}
             </FormLabel>
@@ -52,17 +55,7 @@ const OfflineExhibition = ({
           <Container className="tag-label-container">
             <FormLabel
               style={{ fontSize: '30px', color: 'black', float: 'right' }}
-            >
-              <Badge className="tag-badge" bg="None" pill>
-                #{keyword[0]}
-              </Badge>
-              <Badge className="tag-badge" bg="None" pill>
-                #{keyword[1]}
-              </Badge>
-              <Badge className="tag-badge" bg="None" pill>
-                #{keyword[2]}
-              </Badge>
-            </FormLabel>
+            ></FormLabel>
           </Container>
 
           <Container>
@@ -73,14 +66,10 @@ const OfflineExhibition = ({
                 float: 'left',
                 fontWeight: 'bold',
               }}
-            >
-              {likes} likes
-            </FormLabel>
+            ></FormLabel>
             <FormLabel
               style={{ fontSize: '30px', color: 'black', float: 'right' }}
-            >
-              {date}
-            </FormLabel>
+            ></FormLabel>
           </Container>
         </Col>
       </Row>

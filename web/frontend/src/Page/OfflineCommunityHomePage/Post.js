@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import Exhibition from '../../Component/Exhibition'
+import OfflineExhibition from '../../Component/OfflineExhibition'
 
 const Post = ({ posts, loading }) => {
   if (loading) {
@@ -10,12 +10,12 @@ const Post = ({ posts, loading }) => {
   return (
     <Container>
       {posts.map(exhibition => (
-        <Exhibition
+        <OfflineExhibition
           id={exhibition.id}
           title={exhibition.title}
           poaster={exhibition.poster}
-          description={exhibition.description}
-        ></Exhibition>
+          description={exhibition.descript}
+        ></OfflineExhibition>
       ))}
     </Container>
   )
