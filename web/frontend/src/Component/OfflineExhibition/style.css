@@ -1,4 +1,4 @@
-.exhibition-container {
+.offline-exhibition-container {
   border-style: ridge;
   border-color: #daa520;
   border-width: 10px;
@@ -14,7 +14,7 @@
   padding: 10px;
   opacity: 100;
 }
-.exhibition-container .row1-col2 {
+.offline-exhibition-container .row1-col2 {
   margin: auto;
   justify-content: center;
   align-items: center;
@@ -39,8 +39,8 @@
   object-fit: cover;
   border-radius: 5px;
 }
-.title-label-container {
-  height: 60px;
+.offline-exhibition-container .title-label-container {
+  height: 60;
   border-bottom: solid;
 }
 .title-badge {
@@ -57,8 +57,8 @@
   height: 30px;
   border-bottom: solid 1px;
 }
-.description-label-container {
-  height: 100px;
+.offline-exhibition-container .description-label-container {
+  height: 200px;
   justify-content: center;
   border-bottom: solid 1px;
 }

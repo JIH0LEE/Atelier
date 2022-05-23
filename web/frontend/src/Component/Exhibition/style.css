@@ -39,11 +39,11 @@
   object-fit: cover;
   border-radius: 5px;
 }
-.title-label-container {
+.exhibition-container .title-label-container {
   height: 60px;
   border-bottom: solid;
 }
-.title-badge {
+.exhibition-container .title-badge {
   font-size: 30px;
   font-weight: bold;
   background-color: #daa520;
@@ -53,16 +53,16 @@
   font-weight: bold;
   background-color: #daa520;
 }
-.author-label-container {
+.exhibition-container .author-label-container {
   height: 30px;
   border-bottom: solid 1px;
 }
-.description-label-container {
+.exhibition-container .description-label-container {
   height: 100px;
   justify-content: center;
   border-bottom: solid 1px;
 }
-.tag-label-container {
+.exhibition-container .tag-label-container {
   height: 50px;
   justify-content: center;
   border-bottom: solid 1px;

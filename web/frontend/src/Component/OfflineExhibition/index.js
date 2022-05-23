@@ -15,7 +15,7 @@ const OfflineExhibition = ({
   description,
 }) => {
   return (
-    <Container className="exhibition-container">
+    <Container className="offline-exhibition-container">
       <Row>
         <Col className="row1-col2" xs={4}>
           <Figure className="img-container1">
@@ -28,34 +28,20 @@ const OfflineExhibition = ({
               {title}
             </Badge>
           </Container>
-          <Container className="author-label-container">
-            <FormLabel
-              style={{
-                marginBottom: '0px',
-                fontSize: '20px',
-                color: 'black',
-                float: 'right',
-              }}
-            >
-              {'익명'} 님의 작품
-            </FormLabel>
-          </Container>
+
           <Container className="description-label-container">
             <FormLabel
               style={{
-                fontSize: '15px',
+                fontSize: '20px',
                 color: 'black',
                 float: 'left',
-                textAlign: 'left',
+                textAlign: 'justify',
               }}
             >
-              {description}
+              {description.length > 200
+                ? description.slice(0, 200) + '...'
+                : description}
             </FormLabel>
-          </Container>
-          <Container className="tag-label-container">
-            <FormLabel
-              style={{ fontSize: '30px', color: 'black', float: 'right' }}
-            ></FormLabel>
           </Container>
 
           <Container>
