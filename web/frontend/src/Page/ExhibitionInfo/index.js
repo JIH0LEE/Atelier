@@ -35,7 +35,11 @@ const ExhibitionInfo = () => {
   const onHeartClick = () => {
     setFavorite(!favorite)
     if (favorite === true) {
-      setLikecount(likecount - 1)
+      if (likecount - 1 < 0) {
+        setLikecount(0)
+      } else {
+        setLikecount(likecount - 1)
+      }
     } else {
       setLikecount(likecount + 1)
     }
@@ -107,7 +111,7 @@ const ExhibitionInfo = () => {
       //console.log(body)
 
       async function post() {
-        axios.post('/api/user/likes', body, header).then(res => {})
+        axios.post('/api/user/likes', body, header).then(res => { })
       }
 
       post()
