@@ -1,13 +1,12 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.dto.RecommendRequestDto;
+import com.example.backend.model.dto.RecommendedExhibitionDto;
 import com.example.backend.model.entity.OfflineExhibition;
 import com.example.backend.repository.OfflineExhibitionRepository;
 import com.example.backend.service.OfflineExhibitionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,19 @@ public class OfflineController {
     @GetMapping("/get-offline-info")
     public OfflineExhibition getOfflineInfo(@RequestParam Long id){
         return offlineExhibitionService.getOfflineExhibitionById(id);
+    }
+
+    @PostMapping("/get-recommended-exhibition-without-db")
+    public String getRecommendedExhibition(@RequestBody RecommendRequestDto requestBody){
+        try {
+            Long id = requestBody.getOnlineid();
+            String tag1 = requestBody.getTag1();
+            String tag2 = requestBody.getTag2();
+            String tag3 = requestBody.getTag3();
+            return offlineExhibitionService.getRecommendedExhibition(id, tag1, tag2, tag3).toString();
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
     }
 }
