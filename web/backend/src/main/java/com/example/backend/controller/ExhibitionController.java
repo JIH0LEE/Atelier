@@ -7,6 +7,7 @@ import com.example.backend.model.entity.OnlineExhibition;
 import com.example.backend.model.entity.User;
 import com.example.backend.repository.ContentRepository;
 import com.example.backend.service.OnlineExhibitionService;
+import com.example.backend.service.RecommendService;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class ExhibitionController {
     private final OnlineExhibitionService onlineExhibitionService;
     private final UserService userService;
     private final ContentRepository contentRepository;
+    private final RecommendService recommendService;
     @PostMapping(value = "/user/make-exhibition")
     private IdDto makeOnlineExhibition(Step1Dto makeExhibitionDto,@RequestParam(required = false)MultipartFile poster, Principal principal){
         try{
@@ -175,8 +177,16 @@ public class ExhibitionController {
     }
 
     @PostMapping(value="/user/make-exhibition-step4")
-    private String makeOnlineExhibitionStep4(@RequestParam Long id, @RequestParam int theme, @RequestParam int step, Principal principal){
-        return onlineExhibitionService.saveStep4(id, theme, step).toString();
+    private OnlineExhibition makeOnlineExhibitionStep4(@RequestParam Long id, @RequestParam int theme, @RequestParam int step, Principal principal){
+        OnlineExhibition onlineExhibition=onlineExhibitionService.saveStep4(id, theme, step);
+        RecommendRequestDto recommendDto=RecommendRequestDto.builder()
+                .onlineid(onlineExhibition.getId())
+                .tag1(onlineExhibition.getTag1())
+                .tag2(onlineExhibition.getTag2())
+                .tag3(onlineExhibition.getTag3())
+                .build();
+        recommendService.recommendSave(recommendDto);
+        return onlineExhibition;
     }
 
     @GetMapping(value = "/user/get-saved-exhibition")
