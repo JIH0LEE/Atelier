@@ -25,8 +25,9 @@ const UserInfoPage = () => {
   useEffect(() => {
     if (isLogin()) {
       //로컬 storage를 이용한 방법
-      // axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-      axios.get('/api/user/user-info', header).then(res => {
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.get('/api/user/user-info').then(res => {
         setUsername(res.data.username)
         setNickname(res.data.nickname)
         setProfile(res.data.profile)

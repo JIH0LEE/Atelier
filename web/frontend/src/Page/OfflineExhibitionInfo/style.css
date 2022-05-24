@@ -16,7 +16,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid;
+}
+.offline-exhibitionInfo-container .title .title-badge {
+  height: 50%;
+  max-width: 3000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  border-radius: 20px;
 }
 .offline-exhibitionInfo-container .body {
   height: 70%;
@@ -25,7 +33,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid;
 }
 .offline-exhibitionInfo-container .body .poaster {
   height: 100%;
@@ -34,16 +41,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.offline-exhibitionInfo-container .body .poaster .img {
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  object-fit: cover;
   border: solid;
+  border-radius: 5%;
 }
 .offline-exhibitionInfo-container .body .descript {
   height: 100%;
   width: 100%;
+  padding: 5%;
   max-width: 3000px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border: solid;
+  font-weight: bold;
+  line-height: 2;
+  overflow: auto;
+  text-align: justify;
+  font-size: 20px;
 }
 .offline-exhibitionInfo-container .link {
   height: 10%;
@@ -52,5 +70,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid;
 }

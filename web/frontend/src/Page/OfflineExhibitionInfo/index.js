@@ -22,10 +22,11 @@ const OfflineExhibitionInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`/api/get-offline-info?id=${id}`)
+      console.log(res.data)
       setTitle(res.data.title)
       setDescription(res.data.descript)
       setLink(res.data.link)
-      setPoster(res.data.poaster)
+      setPoster(res.data.poster)
     }
 
     fetchData()
@@ -33,12 +34,30 @@ const OfflineExhibitionInfo = () => {
 
   return (
     <Container className="offline-exhibitionInfo-container">
-      <Container className="title">{title}</Container>
-      <Container className="body">
-        <Container className="poaster"></Container>
-        <Container className="descript"></Container>
+      <Container className="title">
+        <Badge className="title-badge" bg="None">
+          {title}
+        </Badge>
       </Container>
-      <Container className="link">{link}</Container>
+      <Container className="body">
+        <Container className="poaster">
+          <img src={poster} className="img"></img>
+        </Container>
+        <Container className="descript">{description}</Container>
+      </Container>
+      <Container className="link">
+        <Button
+          style={{
+            backgroundColor: '#daa520',
+            borderColor: '#daa520',
+            fontWeight: 'bold',
+            width: '90%',
+          }}
+          onClick={() => window.open(link, '_blank')}
+        >
+          바로가기
+        </Button>
+      </Container>
     </Container>
   )
 }

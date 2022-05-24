@@ -57,38 +57,38 @@
 
 .preview > .background4 {
   width: 66%;
-  height: 38.5%;
+  height: 38%;
   padding: 0px;
   overflow: hidden;
-
-  margin-top: 287px;
+  margin-top: 24.5%;
+  /* margin-top: 287px; */
 }
 
 .preview > .background1 {
   width: 87.5%;
-  height: 54%;
+  height: 53.5%;
   padding: 0px;
   overflow: hidden;
-
-  margin-top: 85px;
+  margin-top: 7.5%;
+  /* margin-top: 85px; */
 }
 
 .preview > .background2 {
   width: 75%;
   height: 54%;
   padding: 0px;
-
+  margin-top: 18%;
   overflow: hidden;
-  margin-top: 215px;
+  /* margin-top: 215px; */
 }
 
 .preview > .background3 {
   width: 78.5%;
-  height: 64%;
+  height: 63.5%;
   padding: 0px;
-
+  margin-top: 14.8%;
   overflow: hidden;
-  margin-top: 170px;
+  /* margin-top: 170px; */
 }
 .background-img {
   width: 100%;
@@ -180,4 +180,3 @@
   object-fit: cover;
   margin-bottom: 0px;
 }
-
