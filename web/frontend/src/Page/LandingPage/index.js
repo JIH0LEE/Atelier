@@ -12,6 +12,8 @@ import {
   InputGroup,
 } from 'react-bootstrap'
 import OfflineExhibition from '../../Component/OfflineExhibition'
+import PosterShow from './PosterShow'
+
 const LandingPage = () => {
   const [keyword1, setKeyword1] = useState("1st keyword")
   const [keyword2, setKeyword2] = useState("2nd keyword")
@@ -46,6 +48,10 @@ const LandingPage = () => {
       setDescription(res.data.descript)
     })
   }
+
+
+
+
 
   return (
     <>
@@ -83,6 +89,7 @@ const LandingPage = () => {
 
           </Container>
           {id == "" ? null : <OfflineExhibition id={id} title={title} poaster={poster} description={description}></OfflineExhibition>}
+          <PosterShow></PosterShow>
         </Container>
       </Container>
     </>

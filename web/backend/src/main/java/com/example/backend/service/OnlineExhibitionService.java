@@ -338,5 +338,8 @@ public class OnlineExhibitionService {
         return onlineExhibitionRepository.findById(id).get();
     }
 
+    public List<OnlineExhibition> getTop5Exhibition(){
+        return onlineExhibitionRepository.findTop5ByOrderByLikeCountDesc();
+    }
 
 }

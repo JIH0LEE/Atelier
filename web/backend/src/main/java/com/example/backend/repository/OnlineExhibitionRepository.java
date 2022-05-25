@@ -14,5 +14,6 @@ public interface OnlineExhibitionRepository extends JpaRepository<OnlineExhibiti
     public List<OnlineExhibition> findAllByStepGreaterThan(int step);
     public List<OnlineExhibition> findAllByUserAndStepLessThan(User user,int step);
     public List<Comment> findAllCommentsById(Long id);
+    public List<OnlineExhibition> findTop5ByOrderByLikeCountDesc();
 
 }

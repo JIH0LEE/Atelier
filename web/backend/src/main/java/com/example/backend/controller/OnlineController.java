@@ -65,4 +65,9 @@ public class OnlineController {
 
         return onlineExhibitionService.deleteComment(id);
     }
+
+    @GetMapping("/get-top-exhibition")
+    private List<OnlineExhibition> getTop5Exhibition(){
+        return onlineExhibitionService.getTop5Exhibition();
+    }
 }
