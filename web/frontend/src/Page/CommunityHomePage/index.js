@@ -97,32 +97,9 @@ const CommunityHomePage = () => {
     <>
       <Container className="communityPage">
         <Container className="community-main">
-          <FormLabel
-            style={{ fontSize: '30px', color: '#DD9700', marginTop: '8px' }}
-          >
-            지금 나에게 맞는 전시회를 찾아보세요!
-          </FormLabel>
+
           <Container>
-            <Row>
-              <InputGroup className="align-text">
-                <InputGroup.Text>키워드를 입력하세요</InputGroup.Text>
-                <FormControl
-                  aria-label="first keyword"
-                  placeholder="1st keyword"
-                />
-                <FormControl
-                  aria-label="second keyword"
-                  placeholder="2nd keyword"
-                />
-                <FormControl
-                  aria-label="third keyword"
-                  placeholder="3rd keyword"
-                />
-                <Button variant="outline-secondary" id="button-addon2">
-                  Button
-                </Button>
-              </InputGroup>
-            </Row>
+
             <Row>
               <Col></Col>
               <Col>

@@ -28,15 +28,14 @@ public class OfflineController {
     }
 
     @PostMapping("/get-recommended-exhibition-without-db")
-    public String getRecommendedExhibition(@RequestBody RecommendRequestDto requestBody){
+    public RecommendedExhibitionDto getRecommendedExhibition(@RequestBody RecommendRequestDto requestBody){
         try {
-            Long id = requestBody.getOnlineid();
             String tag1 = requestBody.getTag1();
             String tag2 = requestBody.getTag2();
             String tag3 = requestBody.getTag3();
-            return offlineExhibitionService.getRecommendedExhibition(id, tag1, tag2, tag3).toString();
+            return offlineExhibitionService.getRecommendedExhibition(tag1, tag2, tag3);
         }catch (Exception e){
-            return e.getMessage();
+            return null;
         }
 
     }

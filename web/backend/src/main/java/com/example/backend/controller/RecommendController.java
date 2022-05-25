@@ -26,7 +26,7 @@ public class RecommendController {
                 .build()
                 .toUri();
         RestTemplate restTemplate = new RestTemplate();
-        RecommendRequestDto recommendDto=RecommendRequestDto.builder().onlineid(2L).tag1("인생").tag2("운명").tag3("사랑").build();
+        RecommendRequestDto recommendDto=RecommendRequestDto.builder().tag1("인생").tag2("운명").tag3("사랑").build();
         ResponseEntity<String> result = restTemplate.postForEntity(uri,recommendDto,String.class);
         System.out.println(result);
         return "test";

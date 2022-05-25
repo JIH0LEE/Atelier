@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.model.dto.RecommendExhibitionRequestDto;
 import com.example.backend.model.dto.RecommendRequestDto;
 import com.example.backend.model.dto.RecommendedExhibitionDto;
 import com.example.backend.model.entity.OfflineExhibition;
@@ -31,17 +32,17 @@ public class OfflineExhibitionService {
         return offlineExhibitionRepository.findOfflineExhibitionById(exhibitionId);
     }
 
-    public RecommendedExhibitionDto getRecommendedExhibition(Long id, String keyword1, String keyword2, String keyword3) throws JsonProcessingException {
+    public RecommendedExhibitionDto getRecommendedExhibition(String keyword1, String keyword2, String keyword3) throws JsonProcessingException {
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8000")
-                .path("/recommend-exhibition")
+                .path("/recommended-exhibition-without-db")
                 .encode(Charset.defaultCharset())
                 .build()
                 .toUri();
 
         RestTemplate restTemplate = new RestTemplate();
 
-        RecommendRequestDto req = new RecommendRequestDto(id, keyword1, keyword2, keyword3);
+        RecommendExhibitionRequestDto req = new RecommendExhibitionRequestDto(keyword1, keyword2, keyword3);
         ObjectMapper objectMapper = new ObjectMapper();
         String reqJson=objectMapper.writeValueAsString(req);
 
