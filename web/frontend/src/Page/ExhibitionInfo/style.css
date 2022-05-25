@@ -67,3 +67,6 @@
   object-fit: cover;
   margin-bottom: 0px;
 }
+.exhibitionInfo-container .recommend-container {
+  padding: 20px;
+}

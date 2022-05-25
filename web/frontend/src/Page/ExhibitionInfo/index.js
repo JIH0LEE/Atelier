@@ -16,6 +16,7 @@ import isLogin from '../../utils/isLogin'
 import axios from 'axios'
 import { header } from '../../config'
 import './style.css'
+import OfflineExhibition from '../../Component/OfflineExhibition'
 const ExhibitionInfo = () => {
   const { id, title, date, keyword, poaster, description, like, author } =
     useLocation().state //state
@@ -111,7 +112,7 @@ const ExhibitionInfo = () => {
       //console.log(body)
 
       async function post() {
-        axios.post('/api/user/likes', body, header).then(res => { })
+        axios.post('/api/user/likes', body, header).then(res => {})
       }
 
       post()
@@ -247,6 +248,9 @@ const ExhibitionInfo = () => {
             </Row>
           </Container>
         </Row>
+        <Container className="recommend-container">
+          <FormLabel>안녕하세요</FormLabel>
+        </Container>
       </Container>
     </Container>
   )
