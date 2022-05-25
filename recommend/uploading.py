@@ -47,9 +47,9 @@ class Uploader():
         
         
     # 추천 결과 업로드
-    def upload_recommend(self, userid, recommended):
+    def upload_recommend(self, onlineid, recommended):
         # 추천된 전시회 정보
-        onlineid   = recommended['id']     # 해당 온라인 전시회 id 
+        onlineid   = onlineid     # 해당 온라인 전시회 id 
         title      = recommended['title']
         link       = recommended['link']
         start_date = recommended['start_date']
