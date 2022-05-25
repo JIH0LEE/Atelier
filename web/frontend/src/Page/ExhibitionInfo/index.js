@@ -28,6 +28,7 @@ const ExhibitionInfo = () => {
   const [commentList, setCommentList] = useState([])
   const [commentLength, setCommentLength] = useState(0)
   const [likecount, setLikecount] = useState(like)
+  const [recommend, setRecommend] = useState(null)
   const navigate = useNavigate()
   const commentChange = e => {
     setComment(e.target.value)
@@ -96,6 +97,9 @@ const ExhibitionInfo = () => {
     //댓글 가져오기
     axios.get('/api/comment', { params: { id: id } }).then(res => {
       setCommentList(res.data)
+    })
+    axios.get(`/api/recommend/get-recommend?onlineid=${id}`).then(res => {
+      setRecommend(res.data)
     })
   }, [])
 
@@ -249,7 +253,17 @@ const ExhibitionInfo = () => {
           </Container>
         </Row>
         <Container className="recommend-container">
-          <FormLabel>안녕하세요</FormLabel>
+          <FormLabel style={{ fontSize: '25px' }}>추천하는 전시회</FormLabel>
+          {recommend ? (
+            <OfflineExhibition
+              id={recommend.offlineid}
+              title={recommend.title}
+              poaster={recommend.poster}
+              description={recommend.descript}
+            ></OfflineExhibition>
+          ) : (
+            <></>
+          )}
         </Container>
       </Container>
     </Container>
