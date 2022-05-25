@@ -19,4 +19,5 @@ public class RecommendedExhibitionDto {
     private int start_date;
     private String title;
     private float word2vec;
+    private Long offlineid;
 }
