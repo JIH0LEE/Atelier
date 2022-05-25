@@ -15,7 +15,7 @@ def recommend_exhibition():
     tag1     = args['tag1']         # 해당 온라인 전시회 태그 3개
     tag2     = args['tag2']
     tag3     = args['tag3']
-    
+    print(args)
     
     # 사용자 태그에 따른 전시회 추천
     user_tags = [tag1, tag2, tag3]
