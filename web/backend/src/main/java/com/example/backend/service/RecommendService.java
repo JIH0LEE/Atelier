@@ -2,6 +2,8 @@ package com.example.backend.service;
 
 import com.example.backend.model.dto.RecommendRequestDto;
 
+import com.example.backend.model.entity.Recommended;
+import com.example.backend.repository.RecommendedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 @Component
 public class RecommendService {
+    private final RecommendedRepository recommendedRepository;
     public void recommendSave(RecommendRequestDto recommendDto){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8000")
@@ -23,6 +26,9 @@ public class RecommendService {
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<String> result = restTemplate.postForEntity(uri,recommendDto,String.class);
+    }
+    public Recommended getRecommend(Long onlineid){
+        return recommendedRepository.findRecommendedByOnlineid(onlineid);
     }
 
 }
