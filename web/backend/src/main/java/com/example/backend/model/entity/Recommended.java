@@ -17,7 +17,7 @@ public class Recommended {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userid;
+    private Long offlineid;
 
     private Long onlineid;
 
