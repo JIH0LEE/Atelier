@@ -59,11 +59,11 @@ class Uploader():
         poster     = recommended['poster']
         descript   = recommended['descript']
         keywords   = recommended['keyword']
-
+        offlineid  = recommended['id']
         # SQL 작성으로 업로드
-        sql = "INSERT INTO recommended (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords)\
-               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        self.cursor.execute(sql, (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords))
+        sql = "INSERT INTO recommended (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords,offlineid)\
+               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
+        self.cursor.execute(sql, (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords,offlineid))
         self.connection.commit()
         
         
