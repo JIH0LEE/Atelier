@@ -30,6 +30,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
   const [IDList, setIDList] = useState([])
   const [fileList, setFileList] = useState([])
   const [descriptionList, setDescriptionList] = useState([])
+  const [deleteList, setDeleteList] = useState([])
 
   const formData = new FormData()
   formData.append('id', 0)
@@ -44,7 +45,10 @@ const ExhibitionMake2stepPage = ({ id }) => {
     setFileList(list2)
     setDescriptionList(list3)
   }
-
+  const getDeletePostList = deleteList => {
+    console.log(deleteList)
+    setDeleteList(deleteList)
+  }
   const save = () => {
     axios.defaults.headers.common['Authorization'] =
       window.localStorage.getItem('token')
@@ -92,6 +96,15 @@ const ExhibitionMake2stepPage = ({ id }) => {
     formData.append('step', 3)
     axios.post('/api/user/make-exhibition-step2/file', formData).then(res => {
       console.log(res)
+      const body = {
+        deleteList: deleteList,
+        onlineExhibitionId: res.data.id,
+      }
+      axios
+        .post('api/user/make-exhibition-step2/delete-contents', body)
+        .then(res => {
+          console.log(res)
+        })
     })
 
     navigate(`/make-exhibition-bgm`, {
@@ -106,9 +119,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
       window.localStorage.getItem('token')
 
     navigate('/make-exhibition-start', { state: { id: ID } })
-    axios.post(`/api/user/step-change?=${ID}`, { step: 1 }).then(res => {
-      console.log(res)
-    })
+    axios.post(`/api/user/step-change?=${ID}`, { step: 1 }).then(res => {})
   }
   if (!isLogin()) {
     alert('로그인이 필요합니다')
@@ -145,6 +156,7 @@ const ExhibitionMake2stepPage = ({ id }) => {
           <ExhibitionPosting
             postList={postList}
             func={getPostList}
+            delete_func={getDeletePostList}
             id={ID}
           ></ExhibitionPosting>
         </Container>

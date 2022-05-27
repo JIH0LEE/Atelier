@@ -87,7 +87,7 @@ public class ExhibitionController {
 
     @Transactional
     @PostMapping(value = "/user/make-exhibition-step2/file")
-    private String makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, @RequestParam(required = false)List<Integer> imageChangeList,Principal principal){ //fileList
+    private OnlineExhibition makeOnlineExhibitionStep2File(ContentListDto contentList, @RequestParam(required = false)List<MultipartFile> fileList, @RequestParam(required = false)List<Integer> imageChangeList,Principal principal){ //fileList
 
 
         List<Integer> IDs=contentList.getIDList();
@@ -125,10 +125,10 @@ public class ExhibitionController {
 
 
 
-        List<Long> deletes=onlineExhibitionService.getDeleteList(contentList.getID(),contentList.getIDList());
-        deletes.forEach(delete->{
-            contentRepository.deleteById(delete);
-        });
+//        List<Long> deletes=onlineExhibitionService.getDeleteList(contentList.getID(),contentList.getIDList());
+//        deletes.forEach(delete->{
+//            contentRepository.deleteById(delete);
+//        });
 
         return onlineExhibitionService.saveStep2(contentList.getID(), contents, step,contentList.getIDList());
 
@@ -160,6 +160,13 @@ public class ExhibitionController {
                 .descriptionList(descriptionList)
                 .contentDtoList(step2DtoList)
                 .build();
+    }
+
+    @PostMapping(value = "/user/make-exhibition-step2/delete-contents")
+    private String deleteContent(Principal principal,@RequestBody ContentDeleteListDto contentDeleteListDto){
+
+        return onlineExhibitionService.deleteContent(contentDeleteListDto);
+
     }
 
 

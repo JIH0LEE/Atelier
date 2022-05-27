@@ -10,7 +10,9 @@ import java.util.List;
 public interface ContentRepository extends JpaRepository<Content,Long> {
 
     Content findByOnlineExhibitionAndOrderId(OnlineExhibition onlineExhibition,int orderId);
-    Content deleteContentByOnlineExhibitionAndOrderId(OnlineExhibition onlineExhibition,int orderId);
+
+    Content deleteByOnlineExhibitionAndOrderId(OnlineExhibition onlineExhibition,int orderId);
+
 
 
 

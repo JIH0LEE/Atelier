@@ -19,7 +19,7 @@ import ModalButtonPosting from './ModalButtonPosting'
 import Post from './Post'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-const ExhibitionPosting = ({ postList, func, id }) => {
+const ExhibitionPosting = ({ postList, func, id, delete_func }) => {
   const [post, setPost] = useState(null)
   const [newPostList, setPostList] = useState(postList)
   const [description, setDescription] = useState()
@@ -28,14 +28,17 @@ const ExhibitionPosting = ({ postList, func, id }) => {
   const [IDList, setIDList] = useState([])
   const [fileList, setFileList] = useState([null])
   const [descriptionList, setDescriptionList] = useState([''])
+  const [deleteList, setDeleteList] = useState([])
+  const [addId, setAddId] = useState(0)
   const addPost = () => {
     setPostList([
       ...newPostList,
-      { id: newPostList.length, link: './logo192.png', description: '' },
+      { id: addId + 1, link: './logo192.png', description: '' },
     ])
-    setIDList([...IDList, newPostList.length])
+    setIDList([...IDList, addId + 1])
     setFileList([...fileList, undefined])
     setDescription([...descriptionList, ''])
+    setAddId(addId + 1)
   }
 
   const getPost = (id, picture, description, uploadFile) => {
@@ -61,6 +64,7 @@ const ExhibitionPosting = ({ postList, func, id }) => {
     const index = newPostList.findIndex(function (item) {
       return item.id === id
     })
+    console.log(index)
     let arr = [...newPostList]
     if (index > -1) arr.splice(index, 1)
     setPostList(arr)
@@ -76,6 +80,9 @@ const ExhibitionPosting = ({ postList, func, id }) => {
     let arr3 = [...descriptionList]
     if (index > -1) arr3.splice(index, 1)
     setDescriptionList(arr3)
+    delete_func([...deleteList, index])
+
+    setDeleteList([...deleteList, index])
   }
 
   const handleChange = result => {
@@ -119,6 +126,7 @@ const ExhibitionPosting = ({ postList, func, id }) => {
         setIDList(data.idlist)
         setFileList(data.fileList)
         setDescriptionList(data.descriptionList)
+        setAddId(Math.max(...data.idlist))
         //setData(data.contentDtoList)
         //console.log(postList)
       })

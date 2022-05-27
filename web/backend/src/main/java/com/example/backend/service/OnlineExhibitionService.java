@@ -212,7 +212,7 @@ public class OnlineExhibitionService {
         return rt;
     }
     @Transactional
-    public String saveStep2(Long id, List<ContentDto> contentDtos, int step,List<Integer> orderID){
+    public OnlineExhibition saveStep2(Long id, List<ContentDto> contentDtos, int step,List<Integer> orderID){
 
 
         try{
@@ -251,9 +251,9 @@ public class OnlineExhibitionService {
 
             System.out.println(onlineExhibition.getContents());
 
-            return onlineExhibitionRepository.save(onlineExhibition).toString();
+            return onlineExhibitionRepository.save(onlineExhibition);
         }catch(Exception e){
-            return e.getMessage();
+            return null;
         }
 
     }
@@ -342,4 +342,21 @@ public class OnlineExhibitionService {
         return onlineExhibitionRepository.findTop5ByOrderByLikeCountDesc();
     }
 
+    @Transactional
+    public String deleteContent(ContentDeleteListDto contentDeleteListDto){
+        System.out.println("wht???");
+        List<Integer> deleteList=contentDeleteListDto.getDeleteList();
+
+        OnlineExhibition onlineExhibition=onlineExhibitionRepository.getById(contentDeleteListDto.getOnlineExhibitionId());
+
+        deleteList.forEach(elem ->{ try {
+            int num=elem;
+            contentRepository.deleteByOnlineExhibitionAndOrderId(onlineExhibition,num);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        });
+        return "test";
+    }
 }
