@@ -1,20 +1,14 @@
 package com.example.backend.controller;
 
 
-import com.example.backend.model.dto.CommentDto;
-import com.example.backend.model.dto.CommentReqDto;
-import com.example.backend.model.dto.HeartClickDto;
-import com.example.backend.model.dto.OnlineExhibitionDto;
+import com.example.backend.model.dto.*;
 import com.example.backend.model.entity.OnlineExhibition;
-import com.example.backend.model.entity.User;
-import com.example.backend.repository.OnlineExhibitionRepository;
-import com.example.backend.repository.UserRepository;
 import com.example.backend.service.OnlineExhibitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -67,7 +61,16 @@ public class OnlineController {
     }
 
     @GetMapping("/get-top-exhibition")
-    private List<OnlineExhibition> getTop5Exhibition(){
-        return onlineExhibitionService.getTop5Exhibition();
+    private List<MainPageExhibitionListDto> getTop5Exhibition(){
+        List<OnlineExhibition> onlineExhibitions = onlineExhibitionService.getTop5Exhibition();
+        List<MainPageExhibitionListDto> onlineExhibitionDtos = new ArrayList<>();
+        /*for (int i=0; i<onlineExhibitions.size();i++){
+            onlineExhibitionDtos.add(MainPageExhibitionListDto.builder().build())
+        }*/
+        onlineExhibitions.forEach(onlineExhibition -> {
+            onlineExhibitionDtos
+                    .add(MainPageExhibitionListDto.builder().username(onlineExhibition.getUser().getNickname()).onlineExhibition(onlineExhibition).build());
+        });
+        return onlineExhibitionDtos;
     }
 }

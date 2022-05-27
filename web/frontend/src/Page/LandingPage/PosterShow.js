@@ -15,8 +15,9 @@ const PosterShow = () => {
 
     }, [])
 
-    const ToExhibitionPage = (parms) => {
+    const ToExhibitionPage = (parms, username) => {
         console.log(parms)
+
         //const navigate = useNavigate()
         navigate(`/exhibition/${parms.id}`, {
             state: {
@@ -27,7 +28,7 @@ const PosterShow = () => {
                 poaster: parms.poster,
                 description: parms.description,
                 like: parms.like_count,
-                author: "",//parms.author,
+                author: username,//parms.author,
             },
         })
 
@@ -38,9 +39,9 @@ const PosterShow = () => {
             <Carousel>
                 {exhibitions ?
                     exhibitions.map(exhibition => (
-                        <Carousel.Item onClick={() => ToExhibitionPage(exhibition)}>
+                        <Carousel.Item onClick={() => ToExhibitionPage(exhibition.onlineExhibition, exhibition.username)}>
                             <Container className="content">
-                                <Container><Figure.Image src={exhibition.poster}></Figure.Image></Container>
+                                <Container><Figure.Image src={exhibition.onlineExhibition.poster}></Figure.Image></Container>
                             </Container>
                         </Carousel.Item>
                     ))
