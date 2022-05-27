@@ -27,7 +27,7 @@ const PosterShow = () => {
                 poaster: parms.poster,
                 description: parms.description,
                 like: parms.like_count,
-                //author: parms.author,
+                author: "",//parms.author,
             },
         })
 
