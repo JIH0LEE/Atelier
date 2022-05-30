@@ -1,0 +1,7 @@
+.nav-container .nav-element {
+  display: flex;
+  justify-content: center;
+  border: outset;
+  border-color: #daa520;
+  border-width: 5px;
+}

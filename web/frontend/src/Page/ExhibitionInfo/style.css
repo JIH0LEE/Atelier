@@ -1,0 +1,72 @@
+.exhibitionInfo-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 100%;
+  width: 90%;
+  max-width: 3000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+.exhibitionInfo-container .title-container {
+  height: 10%;
+  justify-content: center;
+  align-items: center;
+}
+.exhibitionInfo-container .date-container {
+  height: 10%;
+  text-align: right;
+}
+.exhibitionInfo-container .author-container {
+  height: 10%;
+  text-align: right;
+}
+.title-badge1 {
+  font-size: 100%;
+  font-weight: bold;
+  background-color: #daa520;
+}
+.exhibitionInfo-container .tag-badge {
+  font-size: 70%;
+  font-weight: bold;
+  background-color: #daa520;
+}
+.exhibitionInfo-container .tag-label-container1 {
+  height: 10%;
+}
+
+.exhibitionInfo-container .description-container {
+  border: solid 1px;
+  border-radius: 5px;
+  text-align: left;
+  height: 50%;
+  padding: 2px;
+}
+.exhibitionInfo-container .heart-container {
+  height: 10%;
+  color: red;
+  text-align: end;
+}
+
+.exhibition-img-container {
+  width: 300px;
+  height: 300px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  border-width: 1px;
+  overflow: hidden;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+.exhibition-img-container.img {
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 0px;
+}
+.exhibitionInfo-container .recommend-container {
+  padding: 20px;
+}
