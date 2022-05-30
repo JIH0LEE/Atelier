@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Container, Figure, Carousel } from 'react-bootstrap'
+import { Container, Carousel } from 'react-bootstrap'
 
 const PosterShow = () => {
   const navigate = useNavigate()
@@ -47,10 +47,11 @@ const PosterShow = () => {
                 }
               >
                 <Container className="content">
-                  <Container>
-                    <Figure.Image
+                  <Container className="test">
+                    <img
+                      className="img"
                       src={exhibition.onlineExhibition.poster}
-                    ></Figure.Image>
+                    ></img>
                   </Container>
                 </Container>
               </Carousel.Item>

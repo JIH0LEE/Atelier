@@ -61,7 +61,7 @@ const LandingPage = () => {
           </Container>
 
           <Container className="top5-container">
-            {' '}
+            <Container className="title">Top5</Container>
             {id == '' ? null : (
               <OfflineExhibition
                 id={id}
@@ -74,14 +74,12 @@ const LandingPage = () => {
           </Container>
         </Container>
         <Container className="recommend-container">
-          <FormLabel
-            style={{ fontSize: '30px', color: '#DD9700', marginTop: '50px' }}
-          >
+          <Container className="title">
             지금 나에게 맞는 전시회를 찾아보세요!
-          </FormLabel>
-          <Container>
+          </Container>
+          <Container className="search">
             <Row>
-              <InputGroup style={{ marginTop: '50px' }}>
+              <InputGroup>
                 <InputGroup.Text>키워드를 입력하세요</InputGroup.Text>
                 <FormControl
                   aria-label="first keyword"
