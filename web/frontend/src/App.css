@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Stylish&display=swap');
 
 .App {
   text-align: center;
-  font-family: 'EB Garamond', serif;
+  /* font-family: 'EB Garamond', serif; */
+  /* font-family: 'Nanum Pen Script', cursive; */
+  font-family: 'Stylish', sans-serif;
   padding-bottom: 10px;
 }
 
