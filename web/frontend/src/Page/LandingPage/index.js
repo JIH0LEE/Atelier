@@ -55,7 +55,9 @@ const LandingPage = () => {
   return (
     <>
       <Container className="landing-container">
-        <Container className="explain-container"></Container>
+        <Container className="explain-container">
+          페이지 설명 들어가는 부분
+        </Container>
         <Container className="bottom-container">
           <Container className="recommend-container">
             <FormLabel
@@ -92,18 +94,18 @@ const LandingPage = () => {
                 </InputGroup>
               </Row>
             </Container>
-            <Container className="top5-container">
-              {' '}
-              {id == '' ? null : (
-                <OfflineExhibition
-                  id={id}
-                  title={title}
-                  poaster={poster}
-                  description={description}
-                ></OfflineExhibition>
-              )}
-              <PosterShow></PosterShow>
-            </Container>
+          </Container>
+          <Container className="top5-container">
+            {' '}
+            {id == '' ? null : (
+              <OfflineExhibition
+                id={id}
+                title={title}
+                poaster={poster}
+                description={description}
+              ></OfflineExhibition>
+            )}
+            <PosterShow></PosterShow>
           </Container>
         </Container>
       </Container>
