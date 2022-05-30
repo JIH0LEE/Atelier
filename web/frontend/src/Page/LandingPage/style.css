@@ -1,11 +1,11 @@
 .landing-container {
   background-color: rgba(255, 255, 255, 0.8);
   
-  width: 90%;
+  width: 100%;
   max-width: 3000px;
   justify-content: center;
   align-items: center;
-  border-radius: 50px;
+  /*border-radius: 50px;*/
   padding-bottom: 100px;
  
 }
