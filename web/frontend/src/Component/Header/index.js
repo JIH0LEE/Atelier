@@ -1,4 +1,4 @@
-import { Button, Row, Col } from 'react-bootstrap'
+import { Button, Row, Col, Container } from 'react-bootstrap'
 import React from 'react'
 import { removeToken } from '../../utils/cookies'
 import isLogin from '../../utils/isLogin'
@@ -24,9 +24,9 @@ const Header = () => {
       <Row>
         <Col />
         <Col>
-          <div onClick={goToMain} className="header-font">
+          <Container onClick={goToMain} className="header-font">
             Atelier
-          </div>
+          </Container>
         </Col>
         <Col>
           <div style={{ display: 'inline-block', float: 'right' }}>
