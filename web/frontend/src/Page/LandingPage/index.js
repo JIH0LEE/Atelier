@@ -55,46 +55,11 @@ const LandingPage = () => {
   return (
     <>
       <Container className="landing-container">
-        <Container className="explain-container">
-          페이지 설명 들어가는 부분
-        </Container>
-        <Container className="bottom-container">
-          <Container className="recommend-container">
-            <FormLabel
-              style={{ fontSize: '30px', color: '#DD9700', marginTop: '50px' }}
-            >
-              지금 나에게 맞는 전시회를 찾아보세요!
-            </FormLabel>
-            <Container>
-              <Row>
-                <InputGroup style={{ marginTop: '50px' }}>
-                  <InputGroup.Text>키워드를 입력하세요</InputGroup.Text>
-                  <FormControl
-                    aria-label="first keyword"
-                    placeholder="1st keyword"
-                    onChange={keyword1Change}
-                  />
-                  <FormControl
-                    aria-label="second keyword"
-                    placeholder="2nd keyword"
-                    onChange={keyword2Change}
-                  />
-                  <FormControl
-                    aria-label="third keyword"
-                    placeholder="3rd keyword"
-                    onChange={keyword3Change}
-                  />
-                  <Button
-                    variant="outline-secondary"
-                    id="button-addon2"
-                    onClick={inputKeyword}
-                  >
-                    입력
-                  </Button>
-                </InputGroup>
-              </Row>
-            </Container>
+        <Container className="top-container">
+          <Container className="explain-container">
+            페이지 설명 들어가는 부분
           </Container>
+
           <Container className="top5-container">
             {' '}
             {id == '' ? null : (
@@ -106,6 +71,42 @@ const LandingPage = () => {
               ></OfflineExhibition>
             )}
             <PosterShow></PosterShow>
+          </Container>
+        </Container>
+        <Container className="recommend-container">
+          <FormLabel
+            style={{ fontSize: '30px', color: '#DD9700', marginTop: '50px' }}
+          >
+            지금 나에게 맞는 전시회를 찾아보세요!
+          </FormLabel>
+          <Container>
+            <Row>
+              <InputGroup style={{ marginTop: '50px' }}>
+                <InputGroup.Text>키워드를 입력하세요</InputGroup.Text>
+                <FormControl
+                  aria-label="first keyword"
+                  placeholder="1st keyword"
+                  onChange={keyword1Change}
+                />
+                <FormControl
+                  aria-label="second keyword"
+                  placeholder="2nd keyword"
+                  onChange={keyword2Change}
+                />
+                <FormControl
+                  aria-label="third keyword"
+                  placeholder="3rd keyword"
+                  onChange={keyword3Change}
+                />
+                <Button
+                  variant="outline-secondary"
+                  id="button-addon2"
+                  onClick={inputKeyword}
+                >
+                  입력
+                </Button>
+              </InputGroup>
+            </Row>
           </Container>
         </Container>
       </Container>
