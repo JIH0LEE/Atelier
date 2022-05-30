@@ -54,7 +54,7 @@ def recommend_exhibition():
 def recommend_exhibition_without_db():
     # 온라인 전시회 정보 가져오기
     args = request.get_json()
-    onlineid = args['onlineid']     # 해당 온라인 전시회 id
+    #onlineid = args['onlineid']     # 해당 온라인 전시회 id
     tag1     = args['tag1']         # 해당 온라인 전시회 태그 3개
     tag2     = args['tag2']
     tag3     = args['tag3']
