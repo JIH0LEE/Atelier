@@ -52,7 +52,6 @@ const Post = ({ id, post, des, func, deleteFun }) => {
 
   const passDelete = e => {
     deleteFun(id)
-
   }
 
   return (
@@ -114,7 +113,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
           <Row style={{ margin: '10px' }}>
             <Col xs={8}></Col>
             <Col>
-              <Container>
+              <Container style={{ display: 'flex' }}>
                 <Button
                   style={{
                     width: '100%',
