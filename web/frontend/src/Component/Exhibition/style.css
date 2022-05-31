@@ -41,7 +41,8 @@
 }
 .exhibition-container .title-label-container {
   height: 60px;
-  border-bottom: solid;
+  font-size: 30px;
+  color: #daa520;
 }
 .exhibition-container .title-badge {
   font-size: 30px;
@@ -55,15 +56,13 @@
 }
 .exhibition-container .author-label-container {
   height: 30px;
-  border-bottom: solid 1px;
 }
 .exhibition-container .description-label-container {
+  padding: 2%;
   height: 100px;
   justify-content: center;
-  border-bottom: solid 1px;
 }
 .exhibition-container .tag-label-container {
   height: 50px;
   justify-content: center;
-  border-bottom: solid 1px;
 }

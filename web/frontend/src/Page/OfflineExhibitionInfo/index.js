@@ -34,11 +34,7 @@ const OfflineExhibitionInfo = () => {
 
   return (
     <Container className="offline-exhibitionInfo-container">
-      <Container className="title">
-        <Badge className="title-badge" bg="None">
-          {title}
-        </Badge>
-      </Container>
+      <Container className="title">{title}</Container>
       <Container className="body">
         <Container className="poaster">
           <img src={poster} className="img"></img>
