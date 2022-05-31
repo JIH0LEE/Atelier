@@ -1,0 +1,27 @@
+.add-content-container {
+  padding: 10px;
+  margin: 10px;
+  border: solid;
+  border-color: #daa520;
+  height: 350px;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.add-content-container .upload-container {
+  height: 100%;
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.add-content-container .descript-container {
+  height: 100%;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
