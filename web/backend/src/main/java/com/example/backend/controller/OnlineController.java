@@ -41,6 +41,7 @@ public class OnlineController {
 
     @PostMapping("/user/likes")
     public boolean heartUpdate(@RequestBody HeartClickDto heartClickDto, Principal principal){
+        System.out.println("here!");
         return onlineExhibitionService.heartUpdate(heartClickDto.getId(), principal, heartClickDto.getClicked(), heartClickDto.getLikeCount());
     }
     @GetMapping("/comment")

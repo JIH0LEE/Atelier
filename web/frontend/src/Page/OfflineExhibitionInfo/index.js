@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom'
 import './style.css'
 const OfflineExhibitionInfo = () => {
   const { id } = useParams()
+  console.log(id)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')

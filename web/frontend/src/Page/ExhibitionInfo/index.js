@@ -30,6 +30,7 @@ const ExhibitionInfo = () => {
   const [likecount, setLikecount] = useState(like)
   const [recommend, setRecommend] = useState(null)
   const navigate = useNavigate()
+
   const commentChange = e => {
     setComment(e.target.value)
     setCommentLength(e.target.value.length)
@@ -45,7 +46,9 @@ const ExhibitionInfo = () => {
     } else {
       setLikecount(likecount + 1)
     }
+
   }
+
   const addComment = newComment => {
     var _commentList = [...commentList]
     _commentList.push(newComment)
@@ -98,9 +101,23 @@ const ExhibitionInfo = () => {
     axios.get('/api/comment', { params: { id: id } }).then(res => {
       setCommentList(res.data)
     })
+    /*
     axios.get(`/api/recommend/get-recommend?onlineid=${id}`).then(res => {
+      console.log(res.data)
       setRecommend(res.data)
     })
+    */
+    axios
+      .post('/api/get-recommended-exhibition-without-db', {
+        //id, title, poaster, description
+        tag1: keyword[0],
+        tag2: keyword[1],
+        tag3: keyword[2],
+      })
+      .then(res => {
+        console.log(res.data)
+        setRecommend(res.data) // id, title, poster, descript
+      })
   }, [])
 
   useEffect(() => {
@@ -116,12 +133,12 @@ const ExhibitionInfo = () => {
       //console.log(body)
 
       async function post() {
-        axios.post('/api/user/likes', body, header).then(res => {})
+        axios.post('/api/user/likes', body, header).then(res => { console.log(res.data) })
       }
 
       post()
     }
-  }, [favorite])
+  }, [favorite, likecount])
 
   return (
     //console.log(parms.key)
@@ -152,13 +169,13 @@ const ExhibitionInfo = () => {
               </Container>
 
               <Container className="tag-label-container1">
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[0]}
                 </Badge>
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[1]}
                 </Badge>
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[2]}
                 </Badge>
               </Container>
@@ -167,9 +184,13 @@ const ExhibitionInfo = () => {
               </Container>
 
               <Container className="heart-container">
+                <Button style={{
+                  width: "70%", justifyContent: "left", marginRight: "30px", background: '#f3ca4d',
+                  border: '#f3ca4d 2px solid', color: "dimgray",
+                }} onClick={moveToExhibition}>전시회 바로 가기</Button>
                 <img
                   src={favorite ? HeartImg : EmptyHeartImg}
-                  style={{ width: '20px' }}
+                  style={{ width: '20px', marginRight: "10px" }}
                   onClick={onHeartClick}
                 ></img>
                 {likecount} likes
@@ -180,18 +201,20 @@ const ExhibitionInfo = () => {
         </Container>
         <Row>
           <Col></Col>
-          <Button
+          {/*<Button
             style={{
               width: '80%',
               marginTop: '40px',
               marginBottom: '40px',
-              background: '#daa520',
-              border: '#daa520',
+              background: '#f3ca4d',
+              border: '#f3ca4d 2px solid',
+              color: "dimgray",
+              fontSize: "x-large"
             }}
             onClick={moveToExhibition}
           >
             전시회 바로 이동
-          </Button>
+          </Button>*/}
           <Col></Col>
         </Row>
         <Row>
@@ -208,33 +231,28 @@ const ExhibitionInfo = () => {
                 textAlign: 'left',
               }}
             >
-              <Container style={{ width: '80%' }}>
-                <Container
-                  style={{ width: '90%', marginLeft: '0px', padding: '0px' }}
-                >
-                  <div style={{ float: 'right' }}>{commentLength}/400</div>
-                </Container>
-              </Container>
+
             </Row>
             <Row>
-              <Container style={{ width: '80%' }}>
+              <Container style={{ width: '80%', marginTop: '100px', marginBottom: '100px' }}>
                 {isLogin() ? (
                   <textarea
                     id="commentArea"
                     maxLength={400}
                     placeholder="댓글을 남겨보세요"
-                    style={{ width: '90%', height: '70px' }}
+                    style={{ width: '100%', height: '70px' }}
                     onChange={commentChange}
                   ></textarea>
                 ) : (
                   <textarea
                     maxLength={400}
                     placeholder="로그인을 해주세요"
-                    style={{ width: '90%', height: '70px' }}
+                    style={{ width: '100%', height: '70px' }}
                     onChange={commentChange}
                     disabled={true}
                   ></textarea>
                 )}
+                <div style={{ float: 'right', textAlign: "right" }}>{commentLength}/400</div>
                 <Button
                   style={{
                     background: '#daa520',
@@ -252,7 +270,7 @@ const ExhibitionInfo = () => {
             </Row>
           </Container>
         </Row>
-        <Container className="recommend-container">
+        <Container className="recommend-container2">
           <FormLabel style={{ fontSize: '25px' }}>추천하는 전시회</FormLabel>
           {recommend ? (
             <OfflineExhibition
