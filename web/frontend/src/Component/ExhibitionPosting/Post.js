@@ -58,7 +58,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
     <Container className="add-content-container">
       <Container className="upload-container">
         <Figure className="image-container" style={{ height: '80%' }}>
-          <Figure.Image src={picture}></Figure.Image>
+          <Figure.Image className="img" src={picture}></Figure.Image>
         </Figure>
         <Button style={button_theme_long} onClick={handleShow}>
           Post upload
@@ -70,7 +70,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
           <Modal.Body style={{ margin: 'Auto' }}>
             <Container>
               <Figure className="image-container">
-                <Figure.Image
+                <img
                   className="img"
                   src={curImage ? curImage : './logo192.png'}
                 />
