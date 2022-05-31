@@ -66,7 +66,7 @@ const UserInfoPage = () => {
             <Figure className="image-container">
               <Figure.Image
                 className="img"
-                src={profile ? profile : './logo192.png'}
+                src={profile ? profile : './profile.png'}
               />
             </Figure>
             <ModalButtonImage

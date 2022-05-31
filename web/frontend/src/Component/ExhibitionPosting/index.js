@@ -33,7 +33,7 @@ const ExhibitionPosting = ({ postList, func, id, delete_func }) => {
   const addPost = () => {
     setPostList([
       ...newPostList,
-      { id: addId + 1, link: './logo192.png', description: '' },
+      { id: addId + 1, link: './no_image.png', description: '' },
     ])
     setIDList([...IDList, addId + 1])
     setFileList([...fileList, undefined])

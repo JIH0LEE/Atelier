@@ -48,7 +48,7 @@ const ModalButtonImage = props => {
             <Figure className="image-container">
               <Figure.Image
                 className="img"
-                src={curImage ? curImage : './logo192.png'}
+                src={curImage ? curImage : './profile.png'}
               />
             </Figure>
           </Container>

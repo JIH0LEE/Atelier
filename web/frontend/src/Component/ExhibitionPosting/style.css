@@ -1,6 +1,6 @@
 .add-content-container {
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   border: solid;
   border-color: #daa520;
   height: 350px;
@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .add-content-container .descript-container {
   height: 100%;
   width: 60%;

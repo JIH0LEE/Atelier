@@ -21,9 +21,9 @@ import {
 
 const Post = ({ id, post, des, func, deleteFun }) => {
   const [show, setShow] = useState(false)
-  const [curImage, setcurImage] = useState(post ? post : './logo192.png')
+  const [curImage, setcurImage] = useState(post ? post : './no_image.png')
   const [uploadFile, setuploadFile] = useState()
-  const [picture, setPicture] = useState(post ? post : './logo192.png')
+  const [picture, setPicture] = useState(post ? post : './no_image.png')
   const [description, setDescription] = useState(des)
   const handleClose = () => setShow(false)
   const handleShow = () => {
@@ -72,7 +72,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
               <Figure className="image-container">
                 <img
                   className="img"
-                  src={curImage ? curImage : './logo192.png'}
+                  src={curImage ? curImage : './no_image.png'}
                 />
               </Figure>
             </Container>
