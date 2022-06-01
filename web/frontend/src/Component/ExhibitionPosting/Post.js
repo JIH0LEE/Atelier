@@ -70,7 +70,7 @@ const Post = ({ id, post, des, func, deleteFun }) => {
           <Modal.Body style={{ margin: 'Auto' }}>
             <Container>
               <Figure className="image-container">
-                <img
+                <Figure.Image
                   className="img"
                   src={curImage ? curImage : './no_image.png'}
                 />
@@ -83,7 +83,12 @@ const Post = ({ id, post, des, func, deleteFun }) => {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={submit}>Save Changes</Button>
+            <Button
+              onClick={submit}
+              style={{ backgroundColor: '#daa520', borderColor: '#daa520' }}
+            >
+              Save Changes
+            </Button>
           </Modal.Footer>
         </Modal>
       </Container>

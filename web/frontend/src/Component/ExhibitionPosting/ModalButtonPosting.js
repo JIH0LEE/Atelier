@@ -45,7 +45,12 @@ const ModalButtonPosting = props => {
           <Form.Control type="file" accept="image/*" onChange={saveFileImage} />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={submit}>Save Changes</Button>
+          <Button
+            onClick={submit}
+            style={{ backgroundColor: '#daa520', borderColor: '#daa520' }}
+          >
+            Save Changes
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
