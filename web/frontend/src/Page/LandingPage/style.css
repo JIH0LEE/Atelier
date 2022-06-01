@@ -18,6 +18,7 @@
   margin-bottom: 40px;
 }
 .recommend-container .title {
+  display: flex;
   height: 10%;
   font-size: 30px;
   color: #dd9700;
@@ -26,6 +27,12 @@
 }
 .recommend-container .search {
   height: 10%;
+
+  justify-content: center;
+  align-items: center;
+}
+.recommend-container .recommend {
+  height: 70%;
 
   justify-content: center;
   align-items: center;
@@ -51,6 +58,22 @@
   border-radius: 50px;
   margin-right: 10px;
 }
+.explain-container .header {
+  width: 100%;
+  height: 10%;
+  color: #dd9700;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  align-items: center;
+}
+.explain-container .body {
+  width: 100%;
+  height: 90%;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
 .top5-container {
   background-color: rgba(255, 255, 255, 0.8);
   width: 50%;
@@ -65,7 +88,10 @@
 .top5-container .title {
   height: 10%;
   font-size: 30px;
+  display: flex;
   color: #dd9700;
+  justify-content: center;
+  align-items: center;
 }
 .top5-container .inner {
   width: 100%;

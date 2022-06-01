@@ -57,19 +57,15 @@ const LandingPage = () => {
       <Container className="landing-container">
         <Container className="top-container">
           <Container className="explain-container">
-            페이지 설명 들어가는 부분
+            <Container className="header"> Atelier는?</Container>
+            <Container className="body">
+              Atelier는 올인원 전시회 플랫폼 입니다
+            </Container>
           </Container>
 
           <Container className="top5-container">
             <Container className="title">Top5</Container>
-            {id == '' ? null : (
-              <OfflineExhibition
-                id={id}
-                title={title}
-                poaster={poster}
-                description={description}
-              ></OfflineExhibition>
-            )}
+
             <PosterShow></PosterShow>
           </Container>
         </Container>
@@ -105,6 +101,16 @@ const LandingPage = () => {
                 </Button>
               </InputGroup>
             </Row>
+          </Container>
+          <Container className="recommend">
+            {id == '' ? null : (
+              <OfflineExhibition
+                id={id}
+                title={title}
+                poaster={poster}
+                description={description}
+              ></OfflineExhibition>
+            )}
           </Container>
         </Container>
       </Container>

@@ -38,7 +38,7 @@ const ModalPosterButton = props => {
             <Figure className="image-container">
               <Figure.Image
                 className="img"
-                src={curImage ? curImage : './logo192.png'}
+                src={curImage ? curImage : './no_image.png'}
               />
             </Figure>
           </Container>

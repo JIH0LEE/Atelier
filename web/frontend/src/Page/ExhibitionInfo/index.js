@@ -106,17 +106,17 @@ const ExhibitionInfo = () => {
       setRecommend(res.data)
     })
 
-    axios
-      .post('/api/get-recommended-exhibition-without-db', {
-        //id, title, poaster, description
-        tag1: keyword[0],
-        tag2: keyword[1],
-        tag3: keyword[2],
-      })
-      .then(res => {
-        console.log(res.data)
-        setRecommend(res.data) // id, title, poster, descript
-      })
+    // axios
+    //   .post('/api/get-recommended-exhibition-without-db', {
+    //     //id, title, poaster, description
+    //     tag1: keyword[0],
+    //     tag2: keyword[1],
+    //     tag3: keyword[2],
+    //   })
+    //   .then(res => {
+    //     console.log(res.data)
+    //     setRecommend(res.data) // id, title, poster, descript
+    //   })
   }, [])
 
   useEffect(() => {
