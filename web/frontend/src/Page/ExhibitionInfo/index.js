@@ -46,7 +46,6 @@ const ExhibitionInfo = () => {
     } else {
       setLikecount(likecount + 1)
     }
-
   }
 
   const addComment = newComment => {
@@ -101,12 +100,12 @@ const ExhibitionInfo = () => {
     axios.get('/api/comment', { params: { id: id } }).then(res => {
       setCommentList(res.data)
     })
-    /*
+
     axios.get(`/api/recommend/get-recommend?onlineid=${id}`).then(res => {
       console.log(res.data)
       setRecommend(res.data)
     })
-    */
+
     axios
       .post('/api/get-recommended-exhibition-without-db', {
         //id, title, poaster, description
@@ -133,7 +132,9 @@ const ExhibitionInfo = () => {
       //console.log(body)
 
       async function post() {
-        axios.post('/api/user/likes', body, header).then(res => { console.log(res.data) })
+        axios.post('/api/user/likes', body, header).then(res => {
+          console.log(res.data)
+        })
       }
 
       post()
@@ -184,13 +185,22 @@ const ExhibitionInfo = () => {
               </Container>
 
               <Container className="heart-container">
-                <Button style={{
-                  width: "70%", justifyContent: "left", marginRight: "30px", background: '#f3ca4d',
-                  border: '#f3ca4d 2px solid', color: "dimgray",
-                }} onClick={moveToExhibition}>전시회 바로 가기</Button>
+                <Button
+                  style={{
+                    width: '70%',
+                    justifyContent: 'left',
+                    marginRight: '30px',
+                    background: '#f3ca4d',
+                    border: '#f3ca4d 2px solid',
+                    color: 'dimgray',
+                  }}
+                  onClick={moveToExhibition}
+                >
+                  전시회 바로 가기
+                </Button>
                 <img
                   src={favorite ? HeartImg : EmptyHeartImg}
-                  style={{ width: '20px', marginRight: "10px" }}
+                  style={{ width: '20px', marginRight: '10px' }}
                   onClick={onHeartClick}
                 ></img>
                 {likecount} likes
@@ -230,11 +240,15 @@ const ExhibitionInfo = () => {
                 fontWeight: 'bold',
                 textAlign: 'left',
               }}
-            >
-
-            </Row>
+            ></Row>
             <Row>
-              <Container style={{ width: '80%', marginTop: '100px', marginBottom: '100px' }}>
+              <Container
+                style={{
+                  width: '80%',
+                  marginTop: '100px',
+                  marginBottom: '100px',
+                }}
+              >
                 {isLogin() ? (
                   <textarea
                     id="commentArea"
@@ -252,7 +266,9 @@ const ExhibitionInfo = () => {
                     disabled={true}
                   ></textarea>
                 )}
-                <div style={{ float: 'right', textAlign: "right" }}>{commentLength}/400</div>
+                <div style={{ float: 'right', textAlign: 'right' }}>
+                  {commentLength}/400
+                </div>
                 <Button
                   style={{
                     background: '#daa520',
