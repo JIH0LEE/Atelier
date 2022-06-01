@@ -56,20 +56,22 @@ const ExhibitionInfo = () => {
 
   //댓글 등록
   const onCommentClick = () => {
-    var body = {
-      description: comment,
-      online_exhibition_id: id,
+    if (comment != '') {
+      var body = {
+        description: comment,
+        online_exhibition_id: id,
+      }
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.post('/api/user/comment', body).then(res => {
+        console.log(res.data)
+        addComment(res.data)
+      })
+      //적었던 댓글 초기화
+      document.getElementById('commentArea').value = ''
+      setComment('')
+      setCommentLength(0)
     }
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/comment', body).then(res => {
-      console.log(res.data)
-      addComment(res.data)
-    })
-    //적었던 댓글 초기화
-    document.getElementById('commentArea').value = ''
-    setComment('')
-    setCommentLength(0)
   }
   const deleteComment = target => {
     var _commentList = [...commentList]
@@ -244,9 +246,6 @@ const ExhibitionInfo = () => {
                     disabled={true}
                   ></textarea>
                 )}
-                <div style={{ float: 'right', textAlign: 'right' }}>
-                  {commentLength}/400
-                </div>
                 <Button
                   style={{
                     background: '#daa520',
