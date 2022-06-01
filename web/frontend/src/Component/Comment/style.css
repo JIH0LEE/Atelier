@@ -6,7 +6,8 @@
   border-radius: 10px;
   border-width: 1px;
   overflow: hidden;
-  margin-bottom: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .comment-img-container .img {
   display: inline-block;

@@ -209,29 +209,7 @@ const ExhibitionInfo = () => {
             </Col>
           </Row>
         </Container>
-        <Row>
-          <Col></Col>
-          {/*<Button
-            style={{
-              width: '80%',
-              marginTop: '40px',
-              marginBottom: '40px',
-              background: '#f3ca4d',
-              border: '#f3ca4d 2px solid',
-              color: "dimgray",
-              fontSize: "x-large"
-            }}
-            onClick={moveToExhibition}
-          >
-            전시회 바로 이동
-          </Button>*/}
-          <Col></Col>
-        </Row>
-        <Row>
-          {commentList.map(comment => (
-            <Comment comment={comment} deleteFunc={deleteComment}></Comment>
-          ))}
-        </Row>
+
         <Row style={{ marginTop: '20px' }}>
           <Container>
             <Row
@@ -285,6 +263,11 @@ const ExhibitionInfo = () => {
               </Container>
             </Row>
           </Container>
+
+          {commentList.map(comment => (
+            <Comment comment={comment} deleteFunc={deleteComment}></Comment>
+          ))}
+
         </Row>
         <Container className="recommend-container2">
           <FormLabel style={{ fontSize: '25px' }}>추천하는 전시회</FormLabel>
