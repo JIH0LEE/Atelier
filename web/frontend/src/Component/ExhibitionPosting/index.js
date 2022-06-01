@@ -31,6 +31,7 @@ const ExhibitionPosting = ({ postList, func, id, delete_func }) => {
   const [deleteList, setDeleteList] = useState([])
   const [addId, setAddId] = useState(0)
   const addPost = () => {
+    console.log(addId)
     setPostList([
       ...newPostList,
       { id: addId + 1, link: './no_image.png', description: '' },
@@ -121,12 +122,14 @@ const ExhibitionPosting = ({ postList, func, id, delete_func }) => {
     axios
       .get(`/api/user/make-exhibition-step2?id=${id}`) //, { params: { id: ID } }
       .then(({ data }) => {
-        console.log(data)
         setPostList(data.contentDtoList)
         setIDList(data.idlist)
         setFileList(data.fileList)
         setDescriptionList(data.descriptionList)
-        setAddId(Math.max(...data.idlist))
+        if (data.idlist.length != 0) {
+          setAddId(Math.max(...data.idlist))
+        }
+
         //setData(data.contentDtoList)
         //console.log(postList)
       })
