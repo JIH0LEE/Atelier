@@ -212,15 +212,12 @@ const ExhibitionInfo = () => {
           </Row>
         </Container>
 
-        <Row style={{ marginTop: '20px' }}>
+        <Row style={{ marginTop: '80px' }}>
           <Container>
-            <Row
-              style={{
-                fontStyle: 'oblique',
-                fontWeight: 'bold',
-                textAlign: 'left',
-              }}
-            ></Row>
+
+            {commentList.map(comment => (
+              <Comment comment={comment} deleteFunc={deleteComment}></Comment>
+            ))}
             <Row>
               <Container
                 style={{
@@ -263,9 +260,7 @@ const ExhibitionInfo = () => {
             </Row>
           </Container>
 
-          {commentList.map(comment => (
-            <Comment comment={comment} deleteFunc={deleteComment}></Comment>
-          ))}
+          {/* here */}
 
         </Row>
         <Container className="recommend-container2">
