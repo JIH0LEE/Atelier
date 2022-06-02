@@ -7,7 +7,7 @@ class Uploader():
     def __init__(self):
         self.host     = 'atelier.caejnedfdhpl.ap-northeast-2.rds.amazonaws.com'
         self.user     = 'admin'
-        self.password = 'dltmddusqkqh12'
+        self.password = ''
         self.db       = 'atelier1'
         self.connection, self.cursor = self.connect_db()
         
@@ -49,7 +49,8 @@ class Uploader():
     # 추천 결과 업로드
     def upload_recommend(self, onlineid, recommended):
         # 추천된 전시회 정보
-        onlineid   = onlineid     # 해당 온라인 전시회 id 
+        onlineid   = onlineid              # 해당 온라인 전시회 id 
+        offlineid  = recommended['id']     # 추천된 오프라인 전시회 id
         title      = recommended['title']
         link       = recommended['link']
         start_date = recommended['start_date']
@@ -59,17 +60,16 @@ class Uploader():
         poster     = recommended['poster']
         descript   = recommended['descript']
         keywords   = recommended['keyword']
-        offlineid  = recommended['id']
+     
         # SQL 작성으로 업로드
-        sql = "INSERT INTO recommended (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords,offlineid)\
-               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
-        self.cursor.execute(sql, (onlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords,offlineid))
+        sql = "INSERT INTO recommended (onlineid, offlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords)\
+               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        self.cursor.execute(sql, (onlineid, offlineid, title, link, start_date, end_date, locate, place, poster, descript, keywords))
         self.connection.commit()
         
         
     # 모든 전시회 불러오기
     def get_all_info(self, table):      
-        # SQL 작성으로 불러옴
         sql = f"SELECT * FROM {table}"
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
