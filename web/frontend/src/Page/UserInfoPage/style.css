@@ -30,7 +30,8 @@
   border-color: black;
   border-width: 2px;
   overflow: hidden;
-
+  display: flex;
+  justify-content: center;
 }
 .image-container .img {
   display: inline-block;

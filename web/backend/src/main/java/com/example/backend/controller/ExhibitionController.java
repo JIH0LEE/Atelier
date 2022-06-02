@@ -43,6 +43,7 @@ public class ExhibitionController {
             OnlineExhibition onlineExhibition = onlineExhibitionService.makeOnlineExhibition(onlineExhibitionDto, principal);
             return IdDto.builder().id(onlineExhibition.getId()).success(true).build();
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return IdDto.builder().id(null).success(false).build();
         }
     }
