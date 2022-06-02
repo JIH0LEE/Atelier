@@ -40,14 +40,14 @@
   border-radius: 5px;
 }
 .offline-exhibition-container .title-label-container {
-  height: 60;
-  border-bottom: solid;
-}
-.title-badge {
+  /* border-bottom: solid; */
   font-size: 30px;
-  font-weight: bold;
-  background-color: #daa520;
+  color: #daa520;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .tag-badge {
   font-size: 20px;
   font-weight: bold;
@@ -55,15 +55,13 @@
 }
 .author-label-container {
   height: 30px;
-  border-bottom: solid 1px;
 }
 .offline-exhibition-container .description-label-container {
+  padding: 2%;
   height: 200px;
   justify-content: center;
-  border-bottom: solid 1px;
 }
 .tag-label-container {
   height: 50px;
   justify-content: center;
-  border-bottom: solid 1px;
 }

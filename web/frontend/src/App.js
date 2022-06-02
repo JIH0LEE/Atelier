@@ -41,11 +41,11 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundImage: `url(${background3})`,
+        backgroundImage: `url(${background})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        width: '100vw',
+        // width: '100vw',
         height: '3000px',
         justifyContent: 'center',
         alignItems: 'center',

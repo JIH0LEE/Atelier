@@ -115,13 +115,13 @@ const ExhibitionMakePage = () => {
           console.log(res.data)
           if (res.data.success) {
             setId(res.data.id)
-            navigate(`/make-exhibition-2step`, {
-              state: {
-                id: res.data.id,
-              },
-            })
           }
         })
+      navigate(`/make-exhibition-2step`, {
+        state: {
+          id: id,
+        },
+      })
     }
   }
 
@@ -231,11 +231,7 @@ const ExhibitionMakePage = () => {
               value={description}
               style={{ width: '80%', height: '80%' }}
             ></textarea>
-            <Container
-              style={{ textAlign: 'right', width: '80%', fontSize: '20px' }}
-            >
-              0/400
-            </Container>
+
           </Col>
         </Container>
         <Container id="elem4">

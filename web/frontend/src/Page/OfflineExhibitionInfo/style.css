@@ -1,7 +1,7 @@
 .offline-exhibitionInfo-container {
   background-color: rgba(255, 255, 255, 0.8);
   height: 50%;
-  width: 90%;
+  width: 80%;
   max-width: 3000px;
 
   justify-content: center;
@@ -13,19 +13,13 @@
   height: 20%;
   width: 100%;
   max-width: 3000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.offline-exhibitionInfo-container .title .title-badge {
-  height: 50%;
-  max-width: 3000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 40px;
-  border-radius: 20px;
+  color: #daa520;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .offline-exhibitionInfo-container .body {
   height: 70%;
   width: 100%;
@@ -36,15 +30,15 @@
 }
 .offline-exhibitionInfo-container .body .poaster {
   height: 100%;
-  width: 100%;
+  width: 40%;
   max-width: 3000px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 .offline-exhibitionInfo-container .body .poaster .img {
   display: inline-block;
-  height: 100%;
+  /* height: 100%; */
   overflow: hidden;
   object-fit: cover;
   border: solid;
@@ -52,8 +46,8 @@
 }
 .offline-exhibitionInfo-container .body .descript {
   height: 100%;
-  width: 100%;
-  padding: 5%;
+  width: 60%;
+
   max-width: 3000px;
   display: flex;
   justify-content: center;

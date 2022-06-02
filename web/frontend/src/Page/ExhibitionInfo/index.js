@@ -30,12 +30,12 @@ const ExhibitionInfo = () => {
   const [likecount, setLikecount] = useState(like)
   const [recommend, setRecommend] = useState(null)
   const navigate = useNavigate()
+
   const commentChange = e => {
     setComment(e.target.value)
     setCommentLength(e.target.value.length)
   }
   const onHeartClick = () => {
-    setFavorite(!favorite)
     if (favorite === true) {
       if (likecount - 1 < 0) {
         setLikecount(0)
@@ -45,7 +45,22 @@ const ExhibitionInfo = () => {
     } else {
       setLikecount(likecount + 1)
     }
+    var body = {
+      id: id,
+      clicked: !favorite,
+      likeCount: likecount,
+    }
+    //console.log(body)
+
+    async function post() {
+      axios.post('/api/user/likes', body, header).then(res => {
+        setFavorite(!favorite)
+      })
+    }
+
+    post()
   }
+
   const addComment = newComment => {
     var _commentList = [...commentList]
     _commentList.push(newComment)
@@ -54,20 +69,22 @@ const ExhibitionInfo = () => {
 
   //댓글 등록
   const onCommentClick = () => {
-    var body = {
-      description: comment,
-      online_exhibition_id: id,
+    if (comment != '') {
+      var body = {
+        description: comment,
+        online_exhibition_id: id,
+      }
+      axios.defaults.headers.common['Authorization'] =
+        window.localStorage.getItem('token')
+      axios.post('/api/user/comment', body).then(res => {
+        console.log(res.data)
+        addComment(res.data)
+      })
+      //적었던 댓글 초기화
+      document.getElementById('commentArea').value = ''
+      setComment('')
+      setCommentLength(0)
     }
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    axios.post('/api/user/comment', body).then(res => {
-      console.log(res.data)
-      addComment(res.data)
-    })
-    //적었던 댓글 초기화
-    document.getElementById('commentArea').value = ''
-    setComment('')
-    setCommentLength(0)
   }
   const deleteComment = target => {
     var _commentList = [...commentList]
@@ -98,30 +115,21 @@ const ExhibitionInfo = () => {
     axios.get('/api/comment', { params: { id: id } }).then(res => {
       setCommentList(res.data)
     })
+
     axios.get(`/api/recommend/get-recommend?onlineid=${id}`).then(res => {
+      console.log(res.data)
       setRecommend(res.data)
     })
   }, [])
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    if (isLogin()) {
-      //console.log(favorite)
-      var body = {
-        id: id,
-        clicked: favorite,
-        likeCount: likecount,
-      }
-      //console.log(body)
+  // useEffect(() => {
+  //   axios.defaults.headers.common['Authorization'] =
+  //     window.localStorage.getItem('token')
+  //   if (isLogin()) {
+  //     //console.log(favorite)
 
-      async function post() {
-        axios.post('/api/user/likes', body, header).then(res => {})
-      }
-
-      post()
-    }
-  }, [favorite])
+  //   }
+  // }, [favorite, likecount])
 
   return (
     //console.log(parms.key)
@@ -152,13 +160,13 @@ const ExhibitionInfo = () => {
               </Container>
 
               <Container className="tag-label-container1">
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[0]}
                 </Badge>
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[1]}
                 </Badge>
-                <Badge className="tag-badge" bg="None" pill>
+                <Badge className="tag-badge1" bg="None" pill>
                   #{keyword[2]}
                 </Badge>
               </Container>
@@ -167,9 +175,22 @@ const ExhibitionInfo = () => {
               </Container>
 
               <Container className="heart-container">
+                <Button
+                  style={{
+                    width: '70%',
+                    justifyContent: 'left',
+                    marginRight: '30px',
+                    background: '#f3ca4d',
+                    border: '#f3ca4d 2px solid',
+                    color: 'dimgray',
+                  }}
+                  onClick={moveToExhibition}
+                >
+                  전시회 바로 가기
+                </Button>
                 <img
                   src={favorite ? HeartImg : EmptyHeartImg}
-                  style={{ width: '20px' }}
+                  style={{ width: '20px', marginRight: '10px' }}
                   onClick={onHeartClick}
                 ></img>
                 {likecount} likes
@@ -178,59 +199,33 @@ const ExhibitionInfo = () => {
             </Col>
           </Row>
         </Container>
-        <Row>
-          <Col></Col>
-          <Button
-            style={{
-              width: '80%',
-              marginTop: '40px',
-              marginBottom: '40px',
-              background: '#daa520',
-              border: '#daa520',
-            }}
-            onClick={moveToExhibition}
-          >
-            전시회 바로 이동
-          </Button>
-          <Col></Col>
-        </Row>
-        <Row>
-          {commentList.map(comment => (
-            <Comment comment={comment} deleteFunc={deleteComment}></Comment>
-          ))}
-        </Row>
-        <Row style={{ marginTop: '20px' }}>
+
+        <Row style={{ marginTop: '80px' }}>
           <Container>
-            <Row
-              style={{
-                fontStyle: 'oblique',
-                fontWeight: 'bold',
-                textAlign: 'left',
-              }}
-            >
-              <Container style={{ width: '80%' }}>
-                <Container
-                  style={{ width: '90%', marginLeft: '0px', padding: '0px' }}
-                >
-                  <div style={{ float: 'right' }}>{commentLength}/400</div>
-                </Container>
-              </Container>
-            </Row>
+            {commentList.map(comment => (
+              <Comment comment={comment} deleteFunc={deleteComment}></Comment>
+            ))}
             <Row>
-              <Container style={{ width: '80%' }}>
+              <Container
+                style={{
+                  width: '80%',
+                  marginTop: '100px',
+                  marginBottom: '100px',
+                }}
+              >
                 {isLogin() ? (
                   <textarea
                     id="commentArea"
                     maxLength={400}
                     placeholder="댓글을 남겨보세요"
-                    style={{ width: '90%', height: '70px' }}
+                    style={{ width: '100%', height: '70px' }}
                     onChange={commentChange}
                   ></textarea>
                 ) : (
                   <textarea
                     maxLength={400}
                     placeholder="로그인을 해주세요"
-                    style={{ width: '90%', height: '70px' }}
+                    style={{ width: '100%', height: '70px' }}
                     onChange={commentChange}
                     disabled={true}
                   ></textarea>
@@ -251,8 +246,10 @@ const ExhibitionInfo = () => {
               </Container>
             </Row>
           </Container>
+
+          {/* here */}
         </Row>
-        <Container className="recommend-container">
+        <Container className="recommend-container2">
           <FormLabel style={{ fontSize: '25px' }}>추천하는 전시회</FormLabel>
           {recommend ? (
             <OfflineExhibition

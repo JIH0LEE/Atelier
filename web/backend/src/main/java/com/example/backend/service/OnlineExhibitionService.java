@@ -88,19 +88,27 @@ public class OnlineExhibitionService {
         try {
             OnlineExhibition onlineExhibition = onlineExhibitionRepository.findOnlineExhibitionById(onlineExhibitionId);
             List<Good> goods = onlineExhibition.getLikes();
+            System.out.println(goods);
             if (heartCondition == true) {
+                System.out.println(1);
                 User user=userRepository.findUserByUsername(principal.getName()).get();
-                onlineExhibition.getLikes().add(new Good(onlineExhibitionId, true, onlineExhibition, user));
-                onlineExhibition.setLikeCount(likeCount);
+                Good goodt = new Good(onlineExhibitionId, true, onlineExhibition, user);
+                goods.add(goodt);
+                onlineExhibition.setLikes(goods);
+                onlineExhibition.setLikeCount(onlineExhibition.getLikeCount()+1);
                 onlineExhibitionRepository.save(onlineExhibition);
+
                 return true;
             } else {
                 for (Good good : goods) {
+                    System.out.println(2);
                     if (good.getUser().getUsername().equals( principal.getName())) {
+                        System.out.println(3);
                         goods.remove(good);
                         likeRepository.delete(good);
-                        onlineExhibition.setLikeCount(likeCount);
+                        onlineExhibition.setLikeCount(onlineExhibition.getLikeCount()-1);
                         onlineExhibitionRepository.save(onlineExhibition);
+
                         return true;
                     }
                 }

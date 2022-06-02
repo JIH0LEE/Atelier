@@ -1,11 +1,14 @@
 export const header_theme = {
-  backgroundColor: 'black',
+  backgroundColor: 'transparent',
 }
 export const button_theme = {
-  backgroundColor: '#F3CA4D',
+  // backgroundColor: '#F3CA4D',
+  backgroundColor: 'transparent',
   borderColor: '#F3CA4D',
-  width: '120px',
-  color: 'black',
+  borderWidth: '3px ',
+  width: '100px',
+  fontSize: '15px',
+  color: '#F3CA4D',
   margin: '10px',
 }
 

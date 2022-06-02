@@ -39,14 +39,12 @@ const ExhibitionMake2stepPage = ({ id }) => {
   formData.append('contentType', '0')
 
   const getPostList = (newPostList, list1, list2, list3) => {
-    console.log(newPostList)
     setPostList(newPostList)
     setIDList(list1)
     setFileList(list2)
     setDescriptionList(list3)
   }
   const getDeletePostList = deleteList => {
-    console.log(deleteList)
     setDeleteList(deleteList)
   }
   const save = () => {

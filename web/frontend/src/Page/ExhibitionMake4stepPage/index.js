@@ -118,7 +118,7 @@ const ExhibitionMake4stepPage = () => {
           </Col>
           <Col></Col>
         </Container>
-        <Container style={{ margin: '10px', display: 'flex' }}>
+        <Container id="elem2" style={{ margin: '10px', display: 'flex' }}>
           <Button
             style={{
               marginRight: 'auto',
@@ -144,11 +144,13 @@ const ExhibitionMake4stepPage = () => {
           </Button>
         </Container>
         <Container id="elem3">
-          <Background
-            backgroundSrc={backgroundList[index].imgSrc}
-            classNameParm={backgroundList[index].classNameParm}
-            content={null}
-          ></Background>
+          <Container className="inner2">
+            <Background
+              backgroundSrc={backgroundList[index].imgSrc}
+              classNameParm={backgroundList[index].classNameParm}
+              content={null}
+            ></Background>
+          </Container>
         </Container>
 
         <Container id="elem4">

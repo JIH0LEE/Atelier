@@ -20,11 +20,7 @@ const OfflineExhibition = ({ id, title, poaster, description }) => {
           </Figure>
         </Col>
         <Col className="row1-col2" xs={8}>
-          <Container className="title-label-container">
-            <Badge className="title-badge" bg="None">
-              {title}
-            </Badge>
-          </Container>
+          <Container className="title-label-container">{title}</Container>
 
           <Container className="description-label-container">
             <FormLabel

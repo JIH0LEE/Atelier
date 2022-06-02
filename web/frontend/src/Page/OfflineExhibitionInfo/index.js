@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom'
 import './style.css'
 const OfflineExhibitionInfo = () => {
   const { id } = useParams()
+  console.log(id)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')
@@ -34,11 +35,7 @@ const OfflineExhibitionInfo = () => {
 
   return (
     <Container className="offline-exhibitionInfo-container">
-      <Container className="title">
-        <Badge className="title-badge" bg="None">
-          {title}
-        </Badge>
-      </Container>
+      <Container className="title">{title}</Container>
       <Container className="body">
         <Container className="poaster">
           <img src={poster} className="img"></img>
