@@ -29,7 +29,7 @@ const ExhibitionMake4stepPage = () => {
   const [id, setId] = useState(location.state.id)
   console.log(id)
   const maxId = 4
-
+  const navigate = useNavigate()
   const backgroundList = [
     {
       id: 0,
@@ -98,9 +98,11 @@ const ExhibitionMake4stepPage = () => {
       .then(res => {
         alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
       })
+    navigate(`/community-home`)
+
   }
 
-  const changeBackground = () => {}
+  const changeBackground = () => { }
   return (
     <Container className="exhibition_make-container4">
       <Container className="inner">
