@@ -36,7 +36,6 @@ const ExhibitionInfo = () => {
     setCommentLength(e.target.value.length)
   }
   const onHeartClick = () => {
-    setFavorite(!favorite)
     if (favorite === true) {
       if (likecount - 1 < 0) {
         setLikecount(0)
@@ -46,6 +45,20 @@ const ExhibitionInfo = () => {
     } else {
       setLikecount(likecount + 1)
     }
+    var body = {
+      id: id,
+      clicked: !favorite,
+      likeCount: likecount,
+    }
+    //console.log(body)
+
+    async function post() {
+      axios.post('/api/user/likes', body, header).then(res => {
+        setFavorite(!favorite)
+      })
+    }
+
+    post()
   }
 
   const addComment = newComment => {
@@ -107,41 +120,16 @@ const ExhibitionInfo = () => {
       console.log(res.data)
       setRecommend(res.data)
     })
-
-    // axios
-    //   .post('/api/get-recommended-exhibition-without-db', {
-    //     //id, title, poaster, description
-    //     tag1: keyword[0],
-    //     tag2: keyword[1],
-    //     tag3: keyword[2],
-    //   })
-    //   .then(res => {
-    //     console.log(res.data)
-    //     setRecommend(res.data) // id, title, poster, descript
-    //   })
   }, [])
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] =
-      window.localStorage.getItem('token')
-    if (isLogin()) {
-      //console.log(favorite)
-      var body = {
-        id: id,
-        clicked: favorite,
-        likeCount: likecount,
-      }
-      //console.log(body)
+  // useEffect(() => {
+  //   axios.defaults.headers.common['Authorization'] =
+  //     window.localStorage.getItem('token')
+  //   if (isLogin()) {
+  //     //console.log(favorite)
 
-      async function post() {
-        axios.post('/api/user/likes', body, header).then(res => {
-          console.log(res.data)
-        })
-      }
-
-      post()
-    }
-  }, [favorite, likecount])
+  //   }
+  // }, [favorite, likecount])
 
   return (
     //console.log(parms.key)
@@ -214,7 +202,6 @@ const ExhibitionInfo = () => {
 
         <Row style={{ marginTop: '80px' }}>
           <Container>
-
             {commentList.map(comment => (
               <Comment comment={comment} deleteFunc={deleteComment}></Comment>
             ))}
@@ -261,7 +248,6 @@ const ExhibitionInfo = () => {
           </Container>
 
           {/* here */}
-
         </Row>
         <Container className="recommend-container2">
           <FormLabel style={{ fontSize: '25px' }}>추천하는 전시회</FormLabel>

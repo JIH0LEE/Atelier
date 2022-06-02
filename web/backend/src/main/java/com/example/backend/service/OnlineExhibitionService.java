@@ -95,7 +95,7 @@ public class OnlineExhibitionService {
                 Good goodt = new Good(onlineExhibitionId, true, onlineExhibition, user);
                 goods.add(goodt);
                 onlineExhibition.setLikes(goods);
-                onlineExhibition.setLikeCount(likeCount);
+                onlineExhibition.setLikeCount(onlineExhibition.getLikeCount()+1);
                 onlineExhibitionRepository.save(onlineExhibition);
 
                 return true;
@@ -106,7 +106,7 @@ public class OnlineExhibitionService {
                         System.out.println(3);
                         goods.remove(good);
                         likeRepository.delete(good);
-                        onlineExhibition.setLikeCount(likeCount);
+                        onlineExhibition.setLikeCount(onlineExhibition.getLikeCount()-1);
                         onlineExhibitionRepository.save(onlineExhibition);
 
                         return true;
