@@ -184,5 +184,5 @@ if __name__ == "__main__":
 
 
     # 인터파크 전시회 저장
-    exhibition_interpark.to_csv(f'./인터파크_{today}_크롤링.csv', encoding='utf-8-sig')
+    exhibition_interpark.to_csv(f'./인터파크_{today}_크롤링.csv', encoding='utf-8-sig', index=False)
     print(f' 인터파크 {today} 크롤링이 완료되었습니다!')
