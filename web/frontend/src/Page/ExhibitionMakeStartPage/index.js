@@ -81,8 +81,6 @@ const ExhibitionMakePage = () => {
       alert('태그를 입력해주세요')
     } else if (poster === '') {
       alert('포스터를 등록해주세요!')
-    } else {
-      alert('good')
     }
 
     const formData = new FormData()

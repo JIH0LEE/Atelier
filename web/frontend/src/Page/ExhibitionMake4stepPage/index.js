@@ -98,7 +98,7 @@ const ExhibitionMake4stepPage = () => {
       .then(res => {
         alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
       })
-    navigate(`/community-home`)
+    navigate(`/`)
 
   }
 
