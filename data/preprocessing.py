@@ -91,20 +91,22 @@ class Denoiser():
     
     # 텍스트(날짜) 전처리
     def denoise_date(self, text):
-        if pd.isna(text): return '999998'       # 미정
-        if text == '런': return '999997'        # 오픈런 
+        text = re.sub(r'~', '', text)
+        if pd.isna(text) or text == '미정': return '999998'           # 미정
+        if text == '런': return '999997'                              # 오픈런
+        if text == '10101' or text == '상시운영': text = '999999'     # 상시운영
         text = int(text)
         text = str(text)
         if len(text) == 8: text = text[2:]
-        if text == '10101': text = '999999'     # 상시운영
         return text
         
     
     # 텍스트(위치) 전처리
     def denoise_locate(self, text):
         if pd.isna(text): return text
-        text = re.sub(r'\([^)]*\)', '', text) 
-        return text
+        text = re.sub(r'\([^)]*\)', '', text)
+        text = re.sub(r'지도 보기  ⓘ', '', text)
+        return text.strip()
     
     
     # 텍스트(장소) 전처리: 인터파크
@@ -146,7 +148,7 @@ class Denoiser():
 if __name__ == "__main__":
     # 전시회 정보 불러오기
     filename = ''
-    data = pd.read_csv(f'./{filename}').drop(['Unnamed: 0'], axis=1)
+    data = pd.read_csv(f'./{filename}')
     
     
     # 설명 결측값 제목으로 대체
