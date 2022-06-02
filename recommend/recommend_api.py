@@ -15,8 +15,7 @@ def recommend_exhibition():
     tag1     = args['tag1']         # 해당 온라인 전시회 태그 3개
     tag2     = args['tag2']
     tag3     = args['tag3']
-    print(args)
-    
+        
     # 사용자 태그에 따른 전시회 추천
     user_tags = [tag1, tag2, tag3]
     
@@ -42,24 +41,20 @@ def recommend_exhibition():
         data['glove'] = data['glove'].apply(recommender.compare_glove)
         recommended = recommender.recommend_exhibition(data, data['glove'])
     '''
-    
 
     # 추천된 전시회 DB 업로드
     recommended['keyword'] = re.sub(r'[\[\]\']', '', recommended['keyword'])
     uploader.upload_recommend(onlineid, recommended)
     return '플라스크로 추천된 전시회를 DB에 업로드하였습니다.'
 
-
 @app.route('/recommended-exhibition-without-db', methods=['POST'])
 def recommend_exhibition_without_db():
     # 온라인 전시회 정보 가져오기
     args = request.get_json()
-    #onlineid = args['onlineid']     # 해당 온라인 전시회 id
     tag1     = args['tag1']         # 해당 온라인 전시회 태그 3개
     tag2     = args['tag2']
     tag3     = args['tag3']
-    
-    
+        
     # 사용자 태그에 따른 전시회 추천
     user_tags = [tag1, tag2, tag3]
     
@@ -85,8 +80,6 @@ def recommend_exhibition_without_db():
         data['glove'] = data['glove'].apply(recommender.compare_glove)
         recommended = recommender.recommend_exhibition(data, data['glove'])
     '''
-    
-    
     return recommended.to_dict()
 
 
