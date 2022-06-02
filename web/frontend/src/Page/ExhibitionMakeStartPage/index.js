@@ -226,7 +226,7 @@ const ExhibitionMakePage = () => {
           <Col>
             <textarea
               onChange={descriptionChange}
-              maxLength={400}
+              maxLength={255}
               placeholder="Description"
               value={description}
               style={{ width: '80%', height: '80%' }}
