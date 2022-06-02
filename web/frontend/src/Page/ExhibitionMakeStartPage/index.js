@@ -81,8 +81,6 @@ const ExhibitionMakePage = () => {
       alert('태그를 입력해주세요')
     } else if (poster === '') {
       alert('포스터를 등록해주세요!')
-    } else {
-      alert('good')
     }
 
     const formData = new FormData()
@@ -94,9 +92,11 @@ const ExhibitionMakePage = () => {
     formData.append('poster', poster)
     formData.append('description', description)
     if (id === null) {
+      console.log('hi')
       axios.defaults.headers.common['Authorization'] =
         window.localStorage.getItem('token')
       axios.post('/api/user/make-exhibition', formData).then(res => {
+        console.log(res)
         if (res.data.success) {
           setId(res.data.id)
           navigate(`/make-exhibition-2step`, {
@@ -226,12 +226,11 @@ const ExhibitionMakePage = () => {
           <Col>
             <textarea
               onChange={descriptionChange}
-              maxLength={400}
+              maxLength={255}
               placeholder="Description"
               value={description}
               style={{ width: '80%', height: '80%' }}
             ></textarea>
-
           </Col>
         </Container>
         <Container id="elem4">

@@ -23,19 +23,28 @@
 }
 
 .image-container {
+  
   width: 300px;
   height: 300px;
   border-style: solid;
   border-color: black;
   border-width: 2px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 .image-container .img {
   display: inline-block;
   height: 100%;
   overflow: hidden;
-  /* object-fit: cover; */
+  object-fit: contain;
   object-position: center center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-self: center;
+  align-content: center;
+
   border-radius: 5px;
 }
 .UserInfo .inner1 .row .col2 {

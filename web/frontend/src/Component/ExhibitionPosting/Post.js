@@ -93,13 +93,13 @@ const Post = ({ id, post, des, func, deleteFun }) => {
         </Modal>
       </Container>
       <Container className="descript-container">
-        <input
+        <textarea
           maxLength={255}
           placeholder="Description"
           style={{ width: '100%', height: '80%' }}
           value={description}
           onChange={onChangeDes}
-        ></input>
+        ></textarea>
         <Container style={{ display: 'flex', padding: '0px' }}>
           <Button
             style={{

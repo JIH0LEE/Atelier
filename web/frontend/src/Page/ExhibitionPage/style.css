@@ -1,6 +1,6 @@
 .exhibition-show-container {
   /* background-color: rgba(255, 255, 255, 0.8); */
-  height: 50%;
+  height: 40%;
   width: 80%;
   max-width: 3000px;
   justify-content: center;
@@ -22,10 +22,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 .exhibition-show-container .inner .content {
   border-radius: 10%;
   border: solid 20px;
+  border-color: #dd9700;
   height: 1000px;
   width: 1200px;
   display: flex;

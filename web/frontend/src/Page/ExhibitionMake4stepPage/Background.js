@@ -8,7 +8,7 @@ import background3 from '../../images/exhibitionBackground/background3.jpg'
 import background4 from '../../images/exhibitionBackground/background4.jpg'
 
 const Background = ({ backgroundSrc, classNameParm, content }) => {
-  const imgSrc = content ? content.link : './loopy.png'
+  const imgSrc = content ? content.link : './example.jpg'
   const [modal, setModal] = useState(false)
   const openModal = () => {
     setModal(true)

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -290,6 +291,8 @@ public class OnlineExhibitionService {
         OnlineExhibition onlineExhibition=onlineExhibitionRepository.findById(id).get();
         onlineExhibition.setTheme(Integer.toString(theme));
         onlineExhibition.setStep(step);
+        onlineExhibition.setStartDate(LocalDateTime.now());
+        onlineExhibition.setEndDate(LocalDateTime.now());
 
         return onlineExhibitionRepository.save(onlineExhibition);
     }

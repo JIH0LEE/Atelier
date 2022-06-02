@@ -29,15 +29,13 @@
   font-size: 100%;
   font-weight: bold;
   color: dimgray;
-
 }
 .exhibitionInfo-container .tag-badge1 {
   font-size: x-large;
   font-weight: bold;
-  color :dimgray;
+  color: dimgray;
   border: dimgray 2px solid;
-  margin:10px;
-  
+  margin: 10px;
 }
 .exhibitionInfo-container .tag-label-container1 {
   height: 10%;
@@ -49,7 +47,7 @@
   text-align: left;
   height: 50%;
   padding: 2px;
-  margin:30px;
+  margin: 30px;
 }
 .exhibitionInfo-container .heart-container {
   height: 10%;
@@ -66,19 +64,26 @@
   border-radius: 10px;
   border-width: 1px;
   overflow: hidden;
+  display: flex;
   margin-bottom: 0px;
   padding: 0px;
 }
-.exhibition-img-container.img {
+.exhibition-img-container .img {
   display: inline-block;
   width: 100%;
   height: 300px;
   overflow: hidden;
-  object-fit: cover;
+  object-fit: contain;
   margin-bottom: 0px;
+  object-position: center center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-self: center;
+  align-content: center;
 }
 
-.recommend-container2 {  
+.recommend-container2 {
   width: 85%;
   height: 50%;
   /* max-width: 3000px; */
