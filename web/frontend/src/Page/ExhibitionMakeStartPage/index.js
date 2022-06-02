@@ -115,13 +115,13 @@ const ExhibitionMakePage = () => {
           console.log(res.data)
           if (res.data.success) {
             setId(res.data.id)
-            navigate(`/make-exhibition-2step`, {
-              state: {
-                id: res.data.id,
-              },
-            })
           }
         })
+      navigate(`/make-exhibition-2step`, {
+        state: {
+          id: id,
+        },
+      })
     }
   }
 
