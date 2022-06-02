@@ -1,6 +1,6 @@
 import re
-import pandas as pd
 import time
+import pandas as pd
 from datetime import date
 from selenium import webdriver
 
@@ -152,5 +152,5 @@ if __name__ == "__main__":
 
 
     # 아트허브 전시회 저장
-    exhibition_arthub.to_csv(f'./아트허브_{today}_크롤링.csv', encoding='utf-8-sig')
+    exhibition_arthub.to_csv(f'./아트허브_{today}_크롤링.csv', encoding='utf-8-sig', index=False)
     print(f' 아트허브 {today} 크롤링이 완료되었습니다!')
