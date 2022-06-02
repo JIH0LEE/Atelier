@@ -59,7 +59,7 @@ const LandingPage = () => {
           <Container className="explain-container">
             <Container className="header"> Atelier는?</Container>
             <Container className="body">
-              Atelier는 올인원 전시회 플랫폼 입니다
+              올인원 전시회 플랫폼, 아뜰리에(이하 Atelier)는 본인만의 전시회를 온라인에서 개최하고, 다른 사람들과 공유할 수 있는 커뮤니티를 제공한다. 나만의 스타일대로 온라인 전시를 기획하고 타인과 교류하는 장을 통해 코로나로 인해 지속되는 언택트(untact) 상황에서도 개성 넘치는 문화생활을 Atelier에서 온전히 즐길 수 있다. Atelier는 ‘예술가가 작업하는 공간이나 건물’이라는 뜻으로, 서비스를 사용하는 유저라면 그 순간만큼은 예술가가 되어 본인만의 공간을 마음껏 꾸며보라는 의미를 담았다.
             </Container>
           </Container>
 

@@ -73,6 +73,8 @@
   font-size: 20px;
   justify-content: center;
   align-items: center;
+  display: flex;
+  text-align: justify;
 }
 .top5-container {
   background-color: rgba(255, 255, 255, 0.8);
