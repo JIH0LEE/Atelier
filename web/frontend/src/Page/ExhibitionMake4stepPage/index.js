@@ -89,6 +89,7 @@ const ExhibitionMake4stepPage = () => {
       .post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${4}`)
       .then(res => {
         alert('저장되었습니다')
+        navigate(`/`)
       })
   }
 
@@ -97,8 +98,8 @@ const ExhibitionMake4stepPage = () => {
       .post(`/api/user/make-exhibition-step4?id=${id}&theme=${index}&step=${5}`)
       .then(res => {
         alert('당신만의 전시가 만들어졌습니다! 지금 확인하세요.')
+        navigate(`/`)
       })
-    navigate(`/`)
 
   }
 
