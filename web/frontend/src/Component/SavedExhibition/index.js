@@ -45,6 +45,11 @@ const SavedExhibition = ({
         },
       })
     } else if (step == 4) {
+      navigate(`/make-exhibition-4step`, {
+        state: {
+          id: id,
+        },
+      })
     } else {
     }
   }
