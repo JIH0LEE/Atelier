@@ -1,8 +1,17 @@
 import React from 'react'
-import { Container, Figure, Row, Col, FormLabel, Badge } from 'react-bootstrap'
+import {
+  Container,
+  Figure,
+  Row,
+  Col,
+  FormLabel,
+  Badge,
+  CloseButton,
+} from 'react-bootstrap'
 import './style.css'
 import { useNavigate, Link } from 'react-router-dom'
 import { testColor } from '../../Style/theme'
+import isLogin from '../../utils/isLogin'
 import axios from 'axios'
 import './style.css'
 
@@ -17,6 +26,7 @@ const Exhibition = ({
   description,
 }) => {
   const navigate = useNavigate()
+
   const onClick = () => {
     navigate(`/exhibition/${id}`, {
       state: {
@@ -31,6 +41,15 @@ const Exhibition = ({
       },
     }) // { state: title }
   }
+  const isMyContent = author === localStorage.getItem('nickname')
+  const onDelete = () => {
+    axios.defaults.headers.common['Authorization'] =
+      window.localStorage.getItem('token')
+    axios.delete(`/api/user/delete-online?id=${id}`).then(res => {
+      alert('삭제되었습니다!')
+      navigate('/')
+    })
+  }
 
   return (
     <Container className="exhibition-container" onClick={onClick}>
@@ -41,7 +60,17 @@ const Exhibition = ({
           </Figure>
         </Col>
         <Col className="row1-col2" xs={8}>
-          <Container className="title-label-container">{title}</Container>
+          <Container className="title-label-container">
+            {title}
+            {isMyContent ? (
+              <CloseButton
+                style={{ float: 'right' }}
+                onClick={onDelete}
+              ></CloseButton>
+            ) : (
+              <></>
+            )}
+          </Container>
           <Container className="author-label-container">
             <FormLabel
               style={{

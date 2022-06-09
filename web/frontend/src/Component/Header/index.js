@@ -11,6 +11,7 @@ const Header = () => {
     window.localStorage.setItem('isLogin', false)
     window.localStorage.removeItem('token')
     window.localStorage.removeItem('username')
+    window.localStorage.removeItem('nickname')
     removeToken()
     navigate('/')
   }
