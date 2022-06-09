@@ -61,6 +61,7 @@
   padding: 2%;
   height: 100px;
   justify-content: center;
+  text-align: justify;
 }
 .exhibition-container .tag-label-container {
   height: 50px;
