@@ -187,13 +187,16 @@ public class ExhibitionController {
     @PostMapping(value="/user/make-exhibition-step4")
     private OnlineExhibition makeOnlineExhibitionStep4(@RequestParam Long id, @RequestParam int theme, @RequestParam int step, Principal principal){
         OnlineExhibition onlineExhibition=onlineExhibitionService.saveStep4(id, theme, step);
-        RecommendRequestDto recommendDto=RecommendRequestDto.builder()
-                .onlineid(onlineExhibition.getId())
-                .tag1(onlineExhibition.getTag1())
-                .tag2(onlineExhibition.getTag2())
-                .tag3(onlineExhibition.getTag3())
-                .build();
-        recommendService.recommendSave(recommendDto);
+        if(step==5){
+            RecommendRequestDto recommendDto=RecommendRequestDto.builder()
+                    .onlineid(onlineExhibition.getId())
+                    .tag1(onlineExhibition.getTag1())
+                    .tag2(onlineExhibition.getTag2())
+                    .tag3(onlineExhibition.getTag3())
+                    .build();
+            recommendService.recommendSave(recommendDto);
+        }
+
         return onlineExhibition;
     }
 

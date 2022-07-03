@@ -23,6 +23,7 @@ const LoginPage = props => {
             `Bearer ${res.headers.auth_token}`
           )
           window.localStorage.setItem('username', res.data.user.username)
+          window.localStorage.setItem('nickname', res.data.user.nickname)
           setCookie(`Bearer ${res.headers.auth_token}`)
           navigate('/')
         } else {

@@ -39,7 +39,7 @@ const CommunityHomePage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(5)
   const [sortMethod, setSortMethod] = useState('최신순')
-  const totalPage = onlineExhibition.length / postPerPage
+  const totalPage = Math.ceil(onlineExhibition.length / postPerPage)
   const indexOfLastPost = currentPage * postPerPage //1*10 = 10번 포스트
   const indexOfFirstPost = indexOfLastPost - postPerPage //10-10 = 0번 포스트
   const currentPosts = onlineExhibition.slice(indexOfFirstPost, indexOfLastPost) //0~10번까지 포스트
@@ -97,9 +97,7 @@ const CommunityHomePage = () => {
     <>
       <Container className="communityPage">
         <Container className="community-main">
-
           <Container>
-
             <Row>
               <Col></Col>
               <Col>
