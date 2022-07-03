@@ -1,7 +1,7 @@
 # Atelier
 CAU 2022-1 Capstone Design Project Repository   
-Check more Detail at [Link](https://www.swaicau.com/bbs/board.php?bo_table=program8&wr_id=&wr_id=146)   
-Check out Presentation at [Link](https://youtu.be/UCG1PdC69aM)
+[Detail](https://github.com/JIH0LEE/Atelier/blob/main/docs/%EC%BA%A1%EC%8A%A4%ED%86%A4%EB%94%94%EC%9E%90%EC%9D%B8(2)%20Atelier%20%EC%B5%9C%EC%A2%85%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf)   
+[Manual](https://github.com/JIH0LEE/Atelier/blob/main/docs/Atelier%20%EB%A9%94%EB%89%B4%EC%96%BC.pdf)
 
 ## 👪 Teammates
 - Team name: **올인원 전시회 플랫폼, 아뜰리에(Atelier)**
