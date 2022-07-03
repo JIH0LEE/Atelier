@@ -41,3 +41,18 @@ Step 3: Select exhibition BGM
 Step 4: Select exhibition photo templates
 ### 4. Check completed exhibitions and recommended offline exhibitions
 by KR-WordRank, Konlpy, Gensim with Word2vec, Numpy
+
+## 📝Implementaion
+### Web FE
+React
+### Web BE
+Spring Boot
+Spriong JPA
+Spring Security
+### Recomendation API
+Flask
+### AI Modeling
+Python
+### Infra
+AWS RDS
+MySQL
